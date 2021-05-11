@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1620749034 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+	<iostream>
+	<string.h>
+	"Usuario.h"
+	<fstream>
+	<vector>
+	<utility>
+	<stdexcept>
+	<sstream>
+	<bits/stdc++.h>
+
+1620748862 source:c:\users\iker\documents\github\progc-\skapaclothes\usuario.cpp
+	"Usuario.h"
+	<iostream>
+	<string.h>
+
+1620748832 c:\users\iker\documents\github\progc-\skapaclothes\usuario.h
+
