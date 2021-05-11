@@ -17,3 +17,21 @@
 
 1620748832 c:\users\iker\documents\github\progc-\skapaclothes\usuario.h
 
+1620749109 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\main.cpp
+	<iostream>
+	<string.h>
+	"Usuario.h"
+	<fstream>
+	<vector>
+	<utility>
+	<stdexcept>
+	<sstream>
+	<bits/stdc++.h>
+
+1620749109 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\usuario.h
+
+1620749109 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\usuario.cpp
+	"Usuario.h"
+	<iostream>
+	<string.h>
+
