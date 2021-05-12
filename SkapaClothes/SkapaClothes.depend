@@ -62,3 +62,30 @@
 	<sstream>
 	<bits/stdc++.h>
 
+1620841618 source:c:\users\koldo\onedrive\documentos\temp\progc-\skapaclothes\main.cpp
+	<iostream>
+	<string.h>
+	"Usuario.h"
+	<fstream>
+	<vector>
+	<utility>
+	<stdexcept>
+	<sstream>
+	<bits/stdc++.h>
+
+1620841618 c:\users\koldo\onedrive\documentos\temp\progc-\skapaclothes\usuario.h
+
+1620841618 source:c:\users\koldo\onedrive\documentos\temp\progc-\skapaclothes\producto.cpp
+	"iostream"
+	<stdlib.h>
+	<string>
+	<cstring>
+	"Producto.h"
+
+1620841618 c:\users\koldo\onedrive\documentos\temp\progc-\skapaclothes\producto.h
+
+1620841618 source:c:\users\koldo\onedrive\documentos\temp\progc-\skapaclothes\usuario.cpp
+	"Usuario.h"
+	<iostream>
+	<string.h>
+

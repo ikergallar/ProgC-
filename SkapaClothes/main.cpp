@@ -161,6 +161,8 @@ int iniciarSesion() {
 				break;
 			case 3: {
 				if (intermediate.c_str() == contrasenya) {
+                    cout << "Inicio de sesion realizado con exito" << endl;
+
 				}
 			}
 				break;
@@ -171,7 +173,7 @@ int iniciarSesion() {
 		}
 	}
 	cout << "Lo sentimos pero su usuario o contrasenya son incorrectos" << endl;
-	iniciarSesion();
+	menuInicio();
 	return 0;
 }
 void cerrarApp(){
