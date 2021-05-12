@@ -10,15 +10,57 @@
 
 using namespace std;
 
+
+void menuInicio();
 int calcularId();
 void registrarUsuario();
 int iniciarSesion();
 
 int main()
 {
-    int iniciarSesion();
+     menuInicio();
     return 0;
 }
+
+void menuInicio() {
+
+	int eleccion;
+
+	cout << "Bienvenido a la aplicación de Skapa Clothes" << endl;
+	cout
+			<< "Elija una opción e introduzca el numero que se encuentre a la izquierda"
+			<< endl;
+	cout << "1.  Iniciar sesión" << endl;
+	cout << "2.  Registrarme como nuevo usuario" << endl;
+	cout << "3.  Salir de la aplicación" << endl;
+
+	do {
+		cin >> eleccion;
+
+		switch (eleccion) {
+		case 1: {
+			iniciarSesion();
+		}
+			break;
+		case 2: {
+			registrarUsuario();
+		}
+			break;
+		case 3: {
+			//cerrarApp();
+		}
+			break;
+		default: {
+			cout
+					<< "Seleccion invalida, porfavor introduzca uno de los numeros de la derecha"
+					<< endl;
+		}
+			break;
+		}
+	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4);
+}
+
+
 int calcularId() {
 
 	ifstream fin;
@@ -81,6 +123,8 @@ void registrarUsuario() {
 	fusuarios.close();
 
 	cout << "Usuario creado correctamente\n" << endl;
+
+	menuInicio();
 }
 
 int iniciarSesion() {

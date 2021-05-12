@@ -35,3 +35,30 @@
 	<iostream>
 	<string.h>
 
+1620753207 source:c:\users\koldo\git\skapaclothes\skapaclothes\producto.cpp
+	"iostream"
+	<stdlib.h>
+	<string>
+	<cstring>
+	"Producto.h"
+
+1620753207 c:\users\koldo\git\skapaclothes\skapaclothes\producto.h
+
+1620753207 source:c:\users\koldo\git\skapaclothes\skapaclothes\usuario.cpp
+	"Usuario.h"
+	<iostream>
+	<string.h>
+
+1620753207 c:\users\koldo\git\skapaclothes\skapaclothes\usuario.h
+
+1620840793 source:c:\users\koldo\git\skapaclothes\skapaclothes\main.cpp
+	<iostream>
+	<string.h>
+	"Usuario.h"
+	<fstream>
+	<vector>
+	<utility>
+	<stdexcept>
+	<sstream>
+	<bits/stdc++.h>
+
