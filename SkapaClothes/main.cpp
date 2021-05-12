@@ -3,8 +3,8 @@
 #include "Usuario.h"
 #include <fstream>
 #include <vector>
-#include <utility>	 // std::pair
-#include <stdexcept> // std::runtime_error
+#include <utility>
+#include <stdexcept>
 #include <sstream>
 #include <bits/stdc++.h>
 
@@ -15,6 +15,7 @@ void menuInicio();
 int calcularId();
 void registrarUsuario();
 int iniciarSesion();
+void cerrarApp();
 
 int main()
 {
@@ -47,7 +48,7 @@ void menuInicio() {
 		}
 			break;
 		case 3: {
-			//cerrarApp();
+			cerrarApp();
 		}
 			break;
 		default: {
@@ -172,4 +173,34 @@ int iniciarSesion() {
 	cout << "Lo sentimos pero su usuario o contrasenya son incorrectos" << endl;
 	iniciarSesion();
 	return 0;
+}
+void cerrarApp(){
+	//A ésta parte se accede cuando deseas salir de la aplicación
+
+	int eleccion;
+
+	cout << "¿Está seguro de que desea salir de la aplicación?" << endl;
+	cout << "1.  Si, estoy seguro" << endl;
+	cout << "2.  No, no deseo salir" << endl;
+
+	do {
+		cin >> eleccion;
+
+
+		switch (eleccion) {
+		case 1:{
+			cout << "La aplicación ha sido cerrada correctamente" << endl;
+			exit(0);
+		}
+		break;
+		case 2:{
+			menuInicio();
+		}
+		break;
+		default:{
+			cout << "Por favor, introduza 1 o 2" << endl;
+		}
+		break;
+		}
+	} while (eleccion != 1 && eleccion != 2);
 }
