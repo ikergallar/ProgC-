@@ -92,4 +92,32 @@ archivo.close();
 
 }
 
+int importarStock(Producto * stock){
+
+    ifstream archivo;
+    string texto;
+    archivo.open();
+
+    if(archivo.fail()){
+            cout<<"No se puede abrir el archivo";
+    exit(1);
+    }
+
+    int cont=0;
+
+    while (!archivo.eof()){
+        getline(archivo, texto);
+
+        Producto *p = new Producto();
+        string s = texto;
+
+        int id;
+        float precio;
+
+        string idS;
+
+
+    }
+
+}
 
