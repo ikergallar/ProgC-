@@ -16,6 +16,9 @@ public:
 	char* getNomUsuario() const;
 	char* getCorreo() const;
 	char* getContrasenya() const;
+	char* setNomUsuario() const;
+	char* setCorreo() const;
+	char* setContrasenya() const;
 };
 
 #endif // USUARIO_H_INCLUDED

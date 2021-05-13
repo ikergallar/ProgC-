@@ -50,7 +50,8 @@ while(!archivo.eof()){
 		}
 
 
-       // u->setNombre(nombre);
+        u->setNomUsuario(nombre);
+
 
 
 
@@ -62,7 +63,5 @@ while(!archivo.eof()){
 }
 
 
-
-}
 
 
