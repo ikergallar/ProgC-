@@ -53,7 +53,14 @@ char* Usuario::getContrasenya() const{
 	return this->contrasenya;
 }
 
-char* Usuario::setNomUsuario const{
+char* Usuario::setNomUsuario() const{
  this->nombre;
+}
+
+char* Usuario::setContrasenya() const{
+this->contrasenya;
+}
+char* Usuario::setCorreo() const{
+this->correo;
 }
 

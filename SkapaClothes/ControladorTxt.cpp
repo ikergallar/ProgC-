@@ -51,17 +51,45 @@ while(!archivo.eof()){
 
 
         u->setNomUsuario(nombre);
+        u->setCorreo(correo);
+        u->setContrasenya(contrasenya);
 
-
-
+        usuarios[contador]= *u;
+        contador++;
 
     }
 
+archivo.close();
 
-
+return contador;
 
 }
 
+void exportarUsuarios(Usuario * usuarios, int cantUsuarios){
+ofstream archivo;
+archivo.open("../SkapaClothes/Usuarios.csv", ios::in);
 
+if(!archivo.fail()){
+    cout<<"No se puede abrir el archivo";
+    exit(1);
+}
+
+for(int i=0; i<cantUsuarios; i++){
+
+        char* nombre = usuarios[i].getNomUsuario();
+        char* correo = usuarios[i].getCorreo();
+        char* contrasenya = usuarios[i].getContrasenya();
+
+       if(i == cantUsuarios-1) {
+        archivo << correo << "," << nombre << "," << contrasenya;
+
+       }else{
+           archivo << correo << "," << nombre << "," << contrasenya << endl;
+       }
+
+}
+archivo.close();
+
+}
 
 
