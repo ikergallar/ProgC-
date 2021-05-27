@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1620749034 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+1622123666 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
 	<iostream>
 	<string.h>
 	"Usuario.h"
@@ -10,12 +10,12 @@
 	<sstream>
 	<bits/stdc++.h>
 
-1620748862 source:c:\users\iker\documents\github\progc-\skapaclothes\usuario.cpp
+1622123666 source:c:\users\iker\documents\github\progc-\skapaclothes\usuario.cpp
 	"Usuario.h"
 	<iostream>
 	<string.h>
 
-1620748832 c:\users\iker\documents\github\progc-\skapaclothes\usuario.h
+1622123666 c:\users\iker\documents\github\progc-\skapaclothes\usuario.h
 
 1620899178 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\main.cpp
 	<iostream>
@@ -115,4 +115,13 @@
 	"Usuario.h"
 	<iostream>
 	<string.h>
+
+1622123666 source:c:\users\iker\documents\github\progc-\skapaclothes\producto.cpp
+	"iostream"
+	<stdlib.h>
+	<string>
+	<cstring>
+	"Producto.h"
+
+1622123666 c:\users\iker\documents\github\progc-\skapaclothes\producto.h
 
