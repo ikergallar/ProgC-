@@ -1,25 +1,19 @@
-#include <iostream>
-#include <string.h>
-#include "Usuario.h"
 #include "BD.h"
-#include <fstream>
-#include <vector>
-#include <utility>
-#include <stdexcept>
-#include <sstream>
-#include <bits/stdc++.h>
+#include "Usuario.h"
+#include <iostream>
 
 using namespace std;
 
 void menuInicio();
-void insertarUsuario();
-int comprobarLogin();
+void registrarUsuario();
 void cerrarApp();
-BD bd("BaseDeDatos.db");
+BD bd("db.db");
 
 int main()
 {
-     menuInicio();
+    bd.crearBD();
+    bd.abrirBD();
+    menuInicio();
     return 0;
 }
 
@@ -38,71 +32,9 @@ void menuInicio() {
 
 		switch (eleccion) {
 		case 1: {
-			//iniciarSesion();
-		}
-			break;
-		case 2: {
-			insertarUsuario();
-		}
-			break;
-		case 3: {
-			cerrarApp();
-		}
-			break;
-		default: {
-			cout
-					<< "Seleccion invalida, porfavor introduzca uno de los numeros de la derecha"
-					<< endl;
-		}
-			break;
-		}
-	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4);
-}
-
-/*void registrarUsuario() {
-	string dni, nombre, contrasenya;
-	cout << "Introduzca su dni" << endl;
-	cin >> dni;
-	cout << "Introduzca su nombre" << endl;
-	cin >> nombre;
-	cout << "Introduzca su contrasenya" << endl;
-	cin >> contrasenya;
-
-
-	std::ofstream fusuarios;
-
-	fusuarios.open("Usuarios.csv", std::ios::app);
-
-	fusuarios << nombre << "," << idUsu << "," << contrasenya << "\n";
-
-	fusuarios.close();
-
-	cout << "Usuario creado correctamente\n" << endl;
-
-	menuInicio();
-}
-*/
-void insertarUsuario(){
-    char dni[10],nombre[10],pass[10];
-
-	cout << "Introduzca su dni" << endl;
-	cin >> dni;
-	cout << "Introduzca su nombre" << endl;
-	cin >> nombre;
-	cout << "Introduzca su contrasenya" << endl;
-	cin >> pass;
-    bd.insertarUsuario(dni,nombre,pass);
-
-    cout << "Usuario creado correctamente\n" << endl;
-
-	menuInicio();
-}
-
-int comprobarLogin()
-{
-    char nombre[10],pass[10];
-    int intentos = 0, resultado ;
-    do{
+		    char nombre[10],pass[10];
+		    int intentos = 0, resultado ;
+			 do{
         cout<<"Introduce nombre de usuario: ";
         cin>>nombre;
         cout<<"Introduce la contraseña: ";
@@ -116,59 +48,40 @@ int comprobarLogin()
         else
             cout<<"Usuario log"<<endl;
     }while(resultado!=2 && intentos<3);
-
-    return 0;
+		}
+			break;
+		case 2: {
+			registrarUsuario();
+		}
+			break;
+		case 3: {
+			cerrarApp();
+		}
+			break;
+		default: {
+			cout<<"Seleccion invalida, porfavor introduzca uno de los numeros de la derecha"<< endl;
+		}
+			break;
+		}
+	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4);
 }
 
-/*int iniciarSesion() {
+void registrarUsuario(){
+    char dni[10],nombre[10],pass[10];
 
-	ifstream fin;
-	string nombre, contrasenya;
-	vector<string> tokens;
-	string intermediate;
-	string line;
+	cout << "Introduzca su dni" << endl;
+	cin >> dni;
 	cout << "Introduzca su nombre" << endl;
 	cin >> nombre;
 	cout << "Introduzca su contrasenya" << endl;
-	cin >> contrasenya;
-	fin.open("Usuarios.csv");
-	while (!fin.eof()) {
-		int i = 1;
-		fin >> line;
-		stringstream check1(line);
-		while (getline(check1, intermediate, ',')) {
-			tokens.push_back(intermediate);
-			switch (i) {
-			case 1: {
+	cin >> pass;
 
-				if (intermediate.c_str() == nombre) {
-					i++;
-				}
-			}
-				break;
-			case 2: {
+    bd.insertarUsuario(dni,nombre,pass);
 
-				i++;
-			}
-				break;
-			case 3: {
-				if (intermediate.c_str() == contrasenya) {
-                    cout << "Inicio de sesion realizado con exito" << endl;
+    cout << "Usuario creado correctamente\n" << endl;
 
-				}
-			}
-				break;
-			default: {
-			}
-				break;
-			}
-		}
-	}
-	cout << "Lo sentimos pero su usuario o contrasenya son incorrectos" << endl;
 	menuInicio();
-	return 0;
 }
-*/
 void cerrarApp(){
 	//A ésta parte se accede cuando deseas salir de la aplicación
 
@@ -199,3 +112,5 @@ void cerrarApp(){
 		}
 	} while (eleccion != 1 && eleccion != 2);
 }
+
+

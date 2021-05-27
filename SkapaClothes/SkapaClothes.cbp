@@ -34,6 +34,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="BaseDeDatos.db" />
 		<Unit filename="include/BD.h" />
 		<Unit filename="include/ControladorTxt.h" />
 		<Unit filename="include/Log.h" />
@@ -49,9 +50,6 @@
 		<Unit filename="src/Producto.cpp" />
 		<Unit filename="src/Usuario.cpp" />
 		<Unit filename="src/gestionProductos.cpp" />
-		<Unit filename="src/shell.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="src/sqlite3.c">
 			<Option compilerVar="CC" />
 		</Unit>

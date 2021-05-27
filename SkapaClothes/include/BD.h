@@ -1,6 +1,7 @@
 #ifndef BD_H_
 #define BD_H_
 #include "sqlite3.h"
+#include "usuario.h"
 
 class BD
 {
@@ -13,7 +14,7 @@ public :
     BD(char *nbd);
     //Métodos que tiene que haber en la base de datos
     void crearBD();
-    void insertarUsuario(const char *dni, char *nombre, char *pass);
+    void insertarUsuario(char *dni, char *nombre, char *pass);
     int abrirBD();
     int existeUsuario(const char *dni);
     int comprobarLogin(const char *nombre, const char *pass);

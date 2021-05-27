@@ -3,22 +3,20 @@
 
 class Usuario{
 public:
-	int idUsuario;
+    char *dni;
 	char *nombre;
-	char *correo;
 	char *contrasenya;
 
-	Usuario(const int idUsuario, const char *nombre, const char *correo, const char *contrasenya);
+	Usuario(char *dni, char *nombre,char* contrasenya);
 	Usuario(Usuario &u);
 	virtual ~Usuario();
 
-	int getIdUsuario() const;
-	char* getNomUsuario() const;
-	char* getCorreo() const;
-	char* getContrasenya() const;
-	char* setNomUsuario() const;
-	char* setCorreo() const;
-	char* setContrasenya() const;
+	char *getNomUsuario();
+	char *getDni();
+	char *getContrasenya();
+	char *setNomUsuario();
+	char *setDni();
+	char *setContrasenya();
 };
 
 #endif // USUARIO_H_INCLUDED

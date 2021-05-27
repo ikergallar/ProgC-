@@ -48,7 +48,7 @@ int BD::existeUsuario(const char * dni)
 	return resultado;
 }
 
-void BD::insertarUsuario(const char *dni, char *nombre, char *pass)
+void BD::insertarUsuario(char *dni, char *nombre, char *pass)
 {
 	char query[20];
 	int resultado;

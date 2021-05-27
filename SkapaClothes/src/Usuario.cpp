@@ -4,15 +4,13 @@
 
 using namespace std;
 
-Usuario::Usuario(const int idUsuario, const char *nombre, const char* correo, const char* contrasenya){
+Usuario::Usuario(char *dni,char *nombre,char* contrasenya){
 
-	this->idUsuario=idUsuario;
+	this->dni = new char [strlen(dni) + 1];
+	strcpy(this->dni, dni);
 
 	this->nombre = new char [strlen(nombre) + 1];
 	strcpy(this->nombre, nombre);
-
-	this->correo = new char [strlen(correo) + 1];
-	strcpy(this->correo, correo);
 
 	this->contrasenya = new char [strlen(contrasenya) + 1];
 	strcpy(this->contrasenya, contrasenya);
@@ -20,14 +18,11 @@ Usuario::Usuario(const int idUsuario, const char *nombre, const char* correo, co
 }
 Usuario::Usuario(Usuario &u){
 
-
-	this->idUsuario=u.idUsuario;
+	this->dni = new char [strlen(u.dni) + 1];
+	strcpy(this->dni, u.dni);
 
 	this->nombre = new char [strlen(u.nombre) + 1];
 	strcpy(this->nombre, u.nombre);
-
-	this->correo = new char [strlen(correo) + 1];
-	strcpy(this->correo, correo);
 
 	this->contrasenya = new char [strlen(u.contrasenya) + 1];
 	strcpy(this->contrasenya, u.contrasenya);
@@ -35,32 +30,28 @@ Usuario::Usuario(Usuario &u){
 
 Usuario::~Usuario(){
 	delete[] nombre;
-	delete[] correo;
+	delete[] dni;
 	delete[] contrasenya;
 }
 
-int Usuario::getIdUsuario() const{
-	return this->idUsuario;
-}
-
-char* Usuario::getNomUsuario() const{
+char *Usuario::getNomUsuario(){
 	return this->nombre;
 }
-char* Usuario::getCorreo() const{
-	return this->correo;
+char *Usuario::getDni(){
+	return this->dni;
 }
-char* Usuario::getContrasenya() const{
+char *Usuario::getContrasenya() {
 	return this->contrasenya;
 }
 
-char* Usuario::setNomUsuario() const{
+char *Usuario::setNomUsuario() {
  this->nombre;
 }
 
-char* Usuario::setContrasenya() const{
+char *Usuario::setContrasenya() {
 this->contrasenya;
 }
-char* Usuario::setCorreo() const{
-this->correo;
+char *Usuario::setDni() {
+this->dni;
 }
 
