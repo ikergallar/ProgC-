@@ -141,16 +141,17 @@
 	<iostream>
 	<string.h>
 
-1622126164 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
-	"sqlite3.h"
+1622145589 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
 	"BD.h"
 	<string.h>
+	<stdlib.h>
 	<iostream>
+	"sqlite3.h"
 
 1618858593 c:\users\iker\documents\github\progc-\skapaclothes\include\sqlite3.h
 	<stdarg.h>
 
-1622126959 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
+1622145608 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
 	"sqlite3.h"
 
 1622126267 source:c:\users\iker\documents\github\progc-\skapaclothes\src\gestionproductos.cpp

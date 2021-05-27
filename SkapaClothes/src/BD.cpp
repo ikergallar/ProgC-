@@ -1,13 +1,11 @@
-#ifdef __cplusplus
-extern "C" {
-#include "sqlite3.h"
-}
-#endif
+
 #include "BD.h"
 #include <string.h>
 #include <stdlib.h>
 #include <iostream>
+#include "sqlite3.h"
 using namespace std;
+
 BD::BD(char *nbd){
 	nombreBD = new char[strlen(nbd)+1];
 	strcpy(nombreBD, nbd);
@@ -36,31 +34,58 @@ int BD::abrirBD()
 	return resultado;
 }
 
-void BD::insertarUsuario(char *dni, char* nombre, char* pass)
+int BD::existeUsuario(const char * dni)
+{
+	int resultado;
+	char query[200];
+
+	sprintf(query, "SELECT COUNT(*) FROM Usuario WHERE DNI = '%s'", dni);
+	sqlite3_prepare_v2(db, query, strlen(query)+1, &stmt, NULL);//Preparar la sentencia
+	sqlite3_step(stmt);//Ejecutar la sentencia
+	resultado  = sqlite3_column_int(stmt, 0);//0 es el numero de la columna del dni.
+	sqlite3_finalize(stmt); //Finalizar la sentencia
+
+	return resultado;
+}
+
+void BD::insertarUsuario(const char *dni, char *nombre, char *pass)
 {
 	char query[20];
 	int resultado;
+
 	resultado = existeUsuario(dni);
 
 	if(resultado == 0)
 	{
-		sprintf(query,"INSERT INTO Usuario VALUES('%s', '%s' , '%s')", dni, nombre, pass);//Las cadenas de caracteres van entre comillas simples
-		sqlite3_prepare_V2(db, query, strlen(query)+1, &stmt, NULL);//Preparar la sentencia
+        sprintf(query,"INSERT INTO Usuario VALUES('%s', '%s' , '%s')", dni, nombre, pass);//Las cadenas de caracteres van entre comillas simples
+		sqlite3_prepare_v2(db, query, strlen(query)+1, &stmt, NULL);//Preparar la sentencia
 		sqlite3_step(stmt);//Ejecutar la sentencia
 		sqlite3_finalize(stmt); //Finalizar la sentencia asi porque no devuelve nada
 	}
+	else cout<<"ERROR! Ya existe una persona con ese DNI"<<endl;
 }
 
-int BD::existeUsuario(char * dni)
+int BD::comprobarLogin(const char *nombre, const char *pass)
 {
-	int resultado;
-	char query[200];
-	sprintf(query, "SELECT COUNT(*) FROM Usuario WHERE DNI = '%s'", dni);
-	sqlite3_prepare_V2(db, query, strlen(query)+1, &stmt, NULL);//Preparar la sentencia
-	sqlite3_step(stmt);//Ejecutar la sentencia
-	resultado  = sqlite3_column_int(stmt, 0);//0 es el numero de la columna del dni.
-	sqlite3_finalize(stmt); //Finalizar la sentencia
-	return resultado;
+    /*Devuelve 0 si el nick es incorrecto
+    Devuelve 1 si el nick es correcto pero la contraseña no
+    Devuelve 2 si nick y contraseña son correctos*/
+
+    int resultado = 2,r;
+    char query[100];
+    sprintf(query,"SELECT * FROM Usuario WHERE nombre='%s'",nombre);
+    sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+    r=sqlite3_step(stmt);
+    if (r == SQLITE_ROW){
+        char* con = (char*) sqlite3_column_text(stmt, 1);
+        if(strcmp(con,pass)!=0){
+            resultado = 1;
+        }
+    }else{
+        resultado = 0;
+    }
+    sqlite3_finalize(stmt);
+    return resultado;
 }
 
 /*void BD::borrarUsuario(char *dni)

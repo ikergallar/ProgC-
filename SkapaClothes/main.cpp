@@ -13,6 +13,7 @@ using namespace std;
 
 void menuInicio();
 void insertarUsuario();
+int comprobarLogin();
 void cerrarApp();
 BD bd("BaseDeDatos.db");
 
@@ -27,9 +28,7 @@ void menuInicio() {
 	int eleccion;
 
 	cout << "Bienvenido a la aplicación de Skapa Clothes" << endl;
-	cout
-			<< "Elija una opción e introduzca el numero que se encuentre a la izquierda"
-			<< endl;
+	cout << "Elija una opción e introduzca el numero que se encuentre a la izquierda"<< endl;
 	cout << "1.  Iniciar sesión" << endl;
 	cout << "2.  Registrarme como nuevo usuario" << endl;
 	cout << "3.  Salir de la aplicación" << endl;
@@ -84,18 +83,41 @@ void menuInicio() {
 }
 */
 void insertarUsuario(){
-    string dni, nombre, contrasenya;
+    char dni[10],nombre[10],pass[10];
+
 	cout << "Introduzca su dni" << endl;
 	cin >> dni;
 	cout << "Introduzca su nombre" << endl;
 	cin >> nombre;
 	cout << "Introduzca su contrasenya" << endl;
-	cin >> contrasenya;
-    bd.insertarUsuario(dni,nombre,contrasenya);
+	cin >> pass;
+    bd.insertarUsuario(dni,nombre,pass);
 
     cout << "Usuario creado correctamente\n" << endl;
 
 	menuInicio();
+}
+
+int comprobarLogin()
+{
+    char nombre[10],pass[10];
+    int intentos = 0, resultado ;
+    do{
+        cout<<"Introduce nombre de usuario: ";
+        cin>>nombre;
+        cout<<"Introduce la contraseña: ";
+        cin>>pass;
+        intentos++;
+        resultado = bd.comprobarLogin(nombre,pass);
+        if(resultado == 0)
+            cout<<"El nick no es correcto"<<endl;
+        else if(resultado==1)
+            cout<<"Contreña incorrecta"<<endl;
+        else
+            cout<<"Usuario log"<<endl;
+    }while(resultado!=2 && intentos<3);
+
+    return 0;
 }
 
 /*int iniciarSesion() {
