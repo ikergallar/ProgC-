@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include "Usuario.h"
+#include "BD.h"
 #include <fstream>
 #include <vector>
 #include <utility>
@@ -10,12 +11,10 @@
 
 using namespace std;
 
-
 void menuInicio();
-int calcularId();
-void registrarUsuario();
-int iniciarSesion();
+void insertarUsuario();
 void cerrarApp();
+BD bd("BaseDeDatos.db");
 
 int main()
 {
@@ -40,11 +39,11 @@ void menuInicio() {
 
 		switch (eleccion) {
 		case 1: {
-			iniciarSesion();
+			//iniciarSesion();
 		}
 			break;
 		case 2: {
-			registrarUsuario();
+			insertarUsuario();
 		}
 			break;
 		case 3: {
@@ -61,59 +60,15 @@ void menuInicio() {
 	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4);
 }
 
-
-int calcularId() {
-
-	ifstream fin;
-	int id;
-	vector<string> tokens;
-	string intermediate;
-	string line;
-	fin.open("Usuarios.csv");
-	while (!fin.eof()) {
-		int i = 1;
-		fin >> line;
-		stringstream check1(line);
-		while (getline(check1, intermediate, ',')) {
-			tokens.push_back(intermediate);
-			switch (i) {
-			case 1: {
-				i++;
-			}
-				break;
-			case 2: {
-				i++;
-				stringstream parseid;
-				parseid << intermediate;
-				parseid >> id;
-			}
-				break;
-			case 3: {
-			}
-				break;
-			default: {
-			}
-				break;
-			}
-		}
-	}
-	id++;
-	return id;
-}
-
-void registrarUsuario() {
-	string nombre, correo, contrasenya, idUsu;
-	int id;
+/*void registrarUsuario() {
+	string dni, nombre, contrasenya;
+	cout << "Introduzca su dni" << endl;
+	cin >> dni;
 	cout << "Introduzca su nombre" << endl;
 	cin >> nombre;
-	cout << "Introduzca su correo" << endl;
-	cin >> correo;
 	cout << "Introduzca su contrasenya" << endl;
 	cin >> contrasenya;
-	id = calcularId();
-	stringstream parseid;
-	parseid << id;
-	parseid >> idUsu;
+
 
 	std::ofstream fusuarios;
 
@@ -127,8 +82,23 @@ void registrarUsuario() {
 
 	menuInicio();
 }
+*/
+void insertarUsuario(){
+    string dni, nombre, contrasenya;
+	cout << "Introduzca su dni" << endl;
+	cin >> dni;
+	cout << "Introduzca su nombre" << endl;
+	cin >> nombre;
+	cout << "Introduzca su contrasenya" << endl;
+	cin >> contrasenya;
+    bd.insertarUsuario(dni,nombre,contrasenya);
 
-int iniciarSesion() {
+    cout << "Usuario creado correctamente\n" << endl;
+
+	menuInicio();
+}
+
+/*int iniciarSesion() {
 
 	ifstream fin;
 	string nombre, contrasenya;
@@ -176,6 +146,7 @@ int iniciarSesion() {
 	menuInicio();
 	return 0;
 }
+*/
 void cerrarApp(){
 	//A ésta parte se accede cuando deseas salir de la aplicación
 

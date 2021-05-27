@@ -4,11 +4,11 @@
 class Log {
 
 private:
-	static string Log [10];
+	static char* log [10];
 public:
-	Log(string[]);
+	Log(char*[]);
 	~Log();				//DESTRUCTOR
-	void insertarLog (string Log);
+	void insertarLog (char* Log);
 	void imprimirLog();
 };
 

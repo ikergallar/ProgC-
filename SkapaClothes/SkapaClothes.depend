@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1622123666 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+1622125475 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
 	<iostream>
 	<string.h>
 	"Usuario.h"
@@ -10,12 +10,12 @@
 	<sstream>
 	<bits/stdc++.h>
 
-1622123666 source:c:\users\iker\documents\github\progc-\skapaclothes\usuario.cpp
+1622125475 source:c:\users\iker\documents\github\progc-\skapaclothes\usuario.cpp
 	"Usuario.h"
 	<iostream>
 	<string.h>
 
-1622123666 c:\users\iker\documents\github\progc-\skapaclothes\usuario.h
+1622125475 c:\users\iker\documents\github\progc-\skapaclothes\usuario.h
 
 1620899178 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\main.cpp
 	<iostream>
@@ -116,12 +116,207 @@
 	<iostream>
 	<string.h>
 
-1622123666 source:c:\users\iker\documents\github\progc-\skapaclothes\producto.cpp
+1622125475 source:c:\users\iker\documents\github\progc-\skapaclothes\producto.cpp
 	"iostream"
 	<stdlib.h>
 	<string>
 	<cstring>
 	"Producto.h"
 
-1622123666 c:\users\iker\documents\github\progc-\skapaclothes\producto.h
+1622125475 c:\users\iker\documents\github\progc-\skapaclothes\producto.h
+
+1622125475 c:\users\iker\documents\github\progc-\skapaclothes\include\usuario.h
+
+1622125475 source:c:\users\iker\documents\github\progc-\skapaclothes\src\producto.cpp
+	"iostream"
+	<stdlib.h>
+	<string>
+	<cstring>
+	"Producto.h"
+
+1622125475 c:\users\iker\documents\github\progc-\skapaclothes\include\producto.h
+
+1622125475 source:c:\users\iker\documents\github\progc-\skapaclothes\src\usuario.cpp
+	"Usuario.h"
+	<iostream>
+	<string.h>
+
+1622126164 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
+	"sqlite3.h"
+	"BD.h"
+	<string.h>
+	<iostream>
+
+1618858593 c:\users\iker\documents\github\progc-\skapaclothes\include\sqlite3.h
+	<stdarg.h>
+
+1622126959 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
+	"sqlite3.h"
+
+1622126267 source:c:\users\iker\documents\github\progc-\skapaclothes\src\gestionproductos.cpp
+	"iostream"
+	<stdlib.h>
+	"Producto.h"
+	"Usuario.h"
+	"gestionProductos.h"
+
+1622125475 c:\users\iker\documents\github\progc-\skapaclothes\include\gestionproductos.h
+
+1622126438 source:c:\users\iker\documents\github\progc-\skapaclothes\src\log.cpp
+	"Log.h"
+	<iostream>
+	<string.h>
+	<stdio.h>
+
+1622126131 c:\users\iker\documents\github\progc-\skapaclothes\include\log.h
+
+1622126517 source:c:\users\iker\documents\github\progc-\skapaclothes\src\controladortxt.cpp
+	<iostream>
+	<fstream>
+	<sstream>
+	<stdlib.h>
+	<string>
+	"Producto.h"
+	"Usuario.h"
+
+1618858593 source:c:\users\iker\documents\github\progc-\skapaclothes\src\shell.c
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<assert.h>
+	"sqlite3.h"
+	"sqlite3userauth.h"
+	<ctype.h>
+	<stdarg.h>
+	<signal.h>
+	<pwd.h>
+	<unistd.h>
+	<dirent.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<editline/readline.h>
+	"linenoise.h"
+	<io.h>
+	<fcntl.h>
+	<intrin.h>
+	<windows.h>
+	<sys/time.h>
+	<sys/resource.h>
+	"windows.h"
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+	<io.h>
+	<limits.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<assert.h>
+	<string.h>
+	<stdarg.h>
+	<stdio.h>
+	<string.h>
+	<assert.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<dirent.h>
+	<utime.h>
+	<sys/time.h>
+	"windows.h"
+	<io.h>
+	<direct.h>
+	<time.h>
+	<errno.h>
+	<assert.h>
+	<string.h>
+	<ctype.h>
+	<string.h>
+	<assert.h>
+	<assert.h>
+	<string.h>
+	<stdio.h>
+	<assert.h>
+	<string.h>
+	<ctype.h>
+	<assert.h>
+	<string.h>
+	<ctype.h>
+	<stdlib.h>
+	<assert.h>
+	<string.h>
+	<assert.h>
+	<string.h>
+	<stdio.h>
+	<string.h>
+	<assert.h>
+	<zlib.h>
+	<zlib.h>
+	<assert.h>
+	<assert.h>
+	<string.h>
+	<stdio.h>
+	<string.h>
+	<assert.h>
+
+1618858593 source:c:\users\iker\documents\github\progc-\skapaclothes\src\sqlite3.c
+	"config.h"
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	<stdint.h>
+	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<sys/ioctl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	"sqlite_tcl.h"
+	"tcl.h"
+	<ctype.h>
+	"sqlite3rtree.h"
+	<ctype.h>
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+	<math.h>
 
