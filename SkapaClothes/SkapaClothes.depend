@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1622157367 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+1622196520 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+	<iostream>
 	"BD.h"
 	"Usuario.h"
-	<iostream>
 
 1622125475 source:c:\users\iker\documents\github\progc-\skapaclothes\usuario.cpp
 	"Usuario.h"
@@ -119,7 +119,8 @@
 
 1622125475 c:\users\iker\documents\github\progc-\skapaclothes\producto.h
 
-1622153823 c:\users\iker\documents\github\progc-\skapaclothes\include\usuario.h
+1622194013 c:\users\iker\documents\github\progc-\skapaclothes\include\usuario.h
+	<iostream>
 
 1622125475 source:c:\users\iker\documents\github\progc-\skapaclothes\src\producto.cpp
 	"iostream"
@@ -130,22 +131,20 @@
 
 1622125475 c:\users\iker\documents\github\progc-\skapaclothes\include\producto.h
 
-1622153823 source:c:\users\iker\documents\github\progc-\skapaclothes\src\usuario.cpp
+1622194013 source:c:\users\iker\documents\github\progc-\skapaclothes\src\usuario.cpp
 	"Usuario.h"
 	<iostream>
 	<string.h>
 
-1622156666 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
+1622196804 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
+	"sqlite3.h"
 	"BD.h"
 	<string.h>
-	<stdlib.h>
-	<iostream>
-	"sqlite3.h"
 
 1618858593 c:\users\iker\documents\github\progc-\skapaclothes\include\sqlite3.h
 	<stdarg.h>
 
-1622155882 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
+1622196464 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
 	"sqlite3.h"
 	"usuario.h"
 

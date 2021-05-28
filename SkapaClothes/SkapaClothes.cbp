@@ -34,7 +34,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="BaseDeDatos.db" />
 		<Unit filename="include/BD.h" />
 		<Unit filename="include/ControladorTxt.h" />
 		<Unit filename="include/Log.h" />

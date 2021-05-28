@@ -1,37 +1,39 @@
-
+#ifdef __cplusplus
+extern "C" {
+#include "sqlite3.h"
+}
+#endif
 #include "BD.h"
 #include <string.h>
-#include <stdlib.h>
-#include <iostream>
-#include "sqlite3.h"
+
 using namespace std;
 
-BD::BD(char *nbd){
-	nombreBD = new char[strlen(nbd)+1];
-	strcpy(nombreBD, nbd);
+BD::BD(char *n){
+	nbd = new char[strlen(n)+1];
+	strcpy(nbd, n);
 }
 
 void BD::crearBD()
 {
-	if(sqlite3_open(nombreBD, &db))
+	if(sqlite3_open(nbd, &db))
 	{
-		cout<<"ERROR"<<endl;
+		cout<<"ERROR CREANDO LAS TABLAS DE BD"<<endl;
 
 	}else
 	{
 		//Por cada tabla que quiera crear hago estas dos líneas de código
-		char * sentencia = "CREATE TABLE USUARIO(DNI CHAR(10),NOMBRE CHAR(20), PASS CHAR(20);";
+		char * sentencia = "CREATE TABLE USUARIO(dni CHAR(10),nombre CHAR(20), pass CHAR(20);";
 		sqlite3_exec(db, sentencia, NULL, 0, 0);//Para ejecutar una sentencia, NULL y 0, 0 siempre
-
 	}
 }
-int BD::abrirBD()
+void BD::abrirBD()
 {
-	int resultado = sqlite3_open(nombreBD, &db);
-	if(resultado!= SQLITE_OK)
-		cout<<"ERROR"<<endl;
+	if(sqlite3_open(nbd, &db)!= SQLITE_OK)
+    {
+		cout<<"ERROR AL INTENTAR ABRIR LA BD"<<endl;
+	}
 
-	return resultado;
+	cout<<"BD CONECTADA"<<endl;
 }
 
 int BD::existeUsuario(const char * dni)
@@ -39,30 +41,37 @@ int BD::existeUsuario(const char * dni)
 	int resultado;
 	char query[200];
 
-	sprintf(query, "SELECT COUNT(*) FROM Usuario WHERE DNI = '%s'", dni);
+	sprintf(query, "SELECT COUNT(*) FROM Usuario WHERE dni = '%s'", dni);
 	sqlite3_prepare_v2(db, query, strlen(query)+1, &stmt, NULL);//Preparar la sentencia
 	sqlite3_step(stmt);//Ejecutar la sentencia
-	resultado  = sqlite3_column_int(stmt, 0);//0 es el numero de la columna del dni.
+	resultado = sqlite3_column_int(stmt, 0);//0 es el numero de la columna del dni.
 	sqlite3_finalize(stmt); //Finalizar la sentencia
 
 	return resultado;
 }
 
-void BD::insertarUsuario(char *dni, char *nombre, char *pass)
+void BD::insertarUsuario(const Usuario &u)
 {
-	char query[20];
+	char query[200];
 	int resultado;
 
-	resultado = existeUsuario(dni);
+	resultado = existeUsuario(u.getDni());
 
 	if(resultado == 0)
 	{
-        sprintf(query,"INSERT INTO Usuario VALUES('%s', '%s' , '%s')", dni, nombre, pass);//Las cadenas de caracteres van entre comillas simples
-		sqlite3_prepare_v2(db, query, strlen(query)+1, &stmt, NULL);//Preparar la sentencia
+        sprintf(query,"INSERT INTO Usuario (dni,nombre,pass) VALUES('%s', '%s' , '%s')", u.getDni(), u.getNombre(), u.getPass());
+		if(sqlite3_prepare_v2(db,query,strlen(query)+1,&stmt,NULL)!=SQLITE_OK)
+        {
+            cout<<"Error sqlite_prepare_v2\n"<<endl;
+        }else{
 		sqlite3_step(stmt);//Ejecutar la sentencia
 		sqlite3_finalize(stmt); //Finalizar la sentencia asi porque no devuelve nada
+        cout << "Usuario creado correctamente\n" << endl;
+        }
+
+	}else {cout<<"ERROR! Ya existe una persona con ese DNI"<<endl;
 	}
-	else cout<<"ERROR! Ya existe una persona con ese DNI"<<endl;
+
 }
 
 int BD::comprobarLogin(const char *nombre, const char *pass)
@@ -132,5 +141,5 @@ int BD::comprobarLogin(const char *nombre, const char *pass)
 } */
 
 BD::~BD() {
-    delete[] nombreBD;
+    delete[] nbd;
 }

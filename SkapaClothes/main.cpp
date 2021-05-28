@@ -1,31 +1,31 @@
+#include <iostream>
 #include "BD.h"
 #include "Usuario.h"
-#include <iostream>
 
 using namespace std;
 
-void menuInicio();
-void registrarUsuario();
-void cerrarApp();
-BD bd("db.db");
+void menuInicio(BD *bd);
+void registrarUsuario(BD *bd);
+void cerrarApp(BD *bd);
 
 int main()
 {
-    bd.crearBD();
-    bd.abrirBD();
-    menuInicio();
+    BD *bd = new BD("Skaa.db");
+    bd->crearBD();
+    bd->abrirBD();
+    menuInicio(bd);
     return 0;
 }
 
-void menuInicio() {
+void menuInicio(BD *bd) {
 
 	int eleccion;
 
-	cout << "Bienvenido a la aplicación de Skapa Clothes" << endl;
-	cout << "Elija una opción e introduzca el numero que se encuentre a la izquierda"<< endl;
-	cout << "1.  Iniciar sesión" << endl;
-	cout << "2.  Registrarme como nuevo usuario" << endl;
-	cout << "3.  Salir de la aplicación" << endl;
+	cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
+	cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
+	cout << "1. Iniciar sesion" << endl;
+	cout << "2. Registrarme como nuevo usuario" << endl;
+	cout << "3. Salir de la aplicacion" << endl;
 
 	do {
 		cin >> eleccion;
@@ -40,7 +40,7 @@ void menuInicio() {
         cout<<"Introduce la contraseña: ";
         cin>>pass;
         intentos++;
-        resultado = bd.comprobarLogin(nombre,pass);
+        resultado = bd->comprobarLogin(nombre,pass);
         if(resultado == 0)
             cout<<"El nick no es correcto"<<endl;
         else if(resultado==1)
@@ -51,11 +51,12 @@ void menuInicio() {
 		}
 			break;
 		case 2: {
-			registrarUsuario();
+			registrarUsuario(bd);
+
 		}
 			break;
 		case 3: {
-			cerrarApp();
+			cerrarApp(bd);
 		}
 			break;
 		default: {
@@ -66,7 +67,7 @@ void menuInicio() {
 	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4);
 }
 
-void registrarUsuario(){
+void registrarUsuario(BD *bd){
     char dni[10],nombre[10],pass[10];
 
 	cout << "Introduzca su dni" << endl;
@@ -76,13 +77,13 @@ void registrarUsuario(){
 	cout << "Introduzca su contrasenya" << endl;
 	cin >> pass;
 
-    bd.insertarUsuario(dni,nombre,pass);
+	Usuario u(dni,nombre,pass);
+    bd->insertarUsuario(u);
 
-    cout << "Usuario creado correctamente\n" << endl;
 
-	menuInicio();
+	menuInicio(bd);
 }
-void cerrarApp(){
+void cerrarApp(BD *bd){
 	//A ésta parte se accede cuando deseas salir de la aplicación
 
 	int eleccion;
@@ -102,7 +103,7 @@ void cerrarApp(){
 		}
 		break;
 		case 2:{
-			menuInicio();
+			menuInicio(bd);
 		}
 		break;
 		default:{

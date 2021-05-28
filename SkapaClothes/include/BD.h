@@ -1,21 +1,28 @@
 #ifndef BD_H_
 #define BD_H_
+#ifdef __cplusplus
+extern "C" {
 #include "sqlite3.h"
+}
+#endif
+
 #include "usuario.h"
+
+using namespace std;
 
 class BD
 {
+private:
 
+    char *nbd;
     sqlite3 *db;
     sqlite3_stmt *stmt;
-    char *nombreBD;
 
 public :
     BD(char *nbd);
-    //Métodos que tiene que haber en la base de datos
     void crearBD();
-    void insertarUsuario(char *dni, char *nombre, char *pass);
-    int abrirBD();
+    void insertarUsuario(const Usuario &u);
+    void abrirBD();
     int existeUsuario(const char *dni);
     int comprobarLogin(const char *nombre, const char *pass);
   //  void borrarUsuario(char *dni);//Opción de borrar usuario o producto

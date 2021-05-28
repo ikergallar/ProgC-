@@ -4,7 +4,12 @@
 
 using namespace std;
 
-Usuario::Usuario(char *dni,char *nombre,char* contrasenya){
+Usuario::Usuario(){
+    dni =new char[10];
+	nombre =new char[20];
+	pass = new char[20];
+}
+Usuario::Usuario(char *dni,char *nombre,char* pass){
 
 	this->dni = new char [strlen(dni) + 1];
 	strcpy(this->dni, dni);
@@ -12,8 +17,8 @@ Usuario::Usuario(char *dni,char *nombre,char* contrasenya){
 	this->nombre = new char [strlen(nombre) + 1];
 	strcpy(this->nombre, nombre);
 
-	this->contrasenya = new char [strlen(contrasenya) + 1];
-	strcpy(this->contrasenya, contrasenya);
+	this->pass = new char [strlen(pass) + 1];
+	strcpy(this->pass, pass);
 
 }
 Usuario::Usuario(Usuario &u){
@@ -24,34 +29,37 @@ Usuario::Usuario(Usuario &u){
 	this->nombre = new char [strlen(u.nombre) + 1];
 	strcpy(this->nombre, u.nombre);
 
-	this->contrasenya = new char [strlen(u.contrasenya) + 1];
-	strcpy(this->contrasenya, u.contrasenya);
+	this->pass = new char [strlen(u.pass) + 1];
+	strcpy(this->pass, u.pass);
 }
 
 Usuario::~Usuario(){
 	delete[] nombre;
 	delete[] dni;
-	delete[] contrasenya;
+	delete[] pass;
 }
 
-char *Usuario::getNomUsuario(){
-	return this->nombre;
+void Usuario::setNombre(char *n) {
+ this->nombre = new char[strlen(n)+1];
+ strcpy(nombre,n);
 }
-char *Usuario::getDni(){
-	return this->dni;
+void Usuario::setPass(char *p) {
+this->pass = new char[strlen(p)+1];
+ strcpy(pass,p);
 }
-char *Usuario::getContrasenya() {
-	return this->contrasenya;
+void Usuario::setDni(char *d) {
+this->dni = new char[strlen(d)+1];
+ strcpy(dni,d);
 }
 
-char *Usuario::setNomUsuario() {
- this->nombre;
+istream & operator>>(istream &entrada, Usuario &u){
+	entrada>>u.dni;
+	entrada>>u.nombre;
+	entrada>>u.pass;
+	return entrada;
 }
-
-char *Usuario::setContrasenya() {
-this->contrasenya;
-}
-char *Usuario::setDni() {
-this->dni;
+ostream & operator<<(ostream &salida, const Usuario &u){
+    salida<<u.dni<<" "<<u.nombre<<" "<<u.pass<<endl;
+    return salida;
 }
 
