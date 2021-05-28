@@ -25,6 +25,7 @@ public :
     void abrirBD();
     int existeUsuario(const char *dni);
     int comprobarLogin(const char *nombre, const char *pass);
+    Usuario seleccionarUsuario(Usuario u);
   //  void borrarUsuario(char *dni);//Opción de borrar usuario o producto
    // void mostrarTodasLasPersonas();//Opción de mostrar  todos los usuarios
     //void modificarEdad(char *d, int nuevaEdad);//Opción de hacerla con modificarPrecio

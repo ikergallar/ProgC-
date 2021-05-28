@@ -46,7 +46,7 @@ void menuInicio(BD *bd) {
         else if(resultado==1)
             cout<<"Contreña incorrecta"<<endl;
         else
-            cout<<"Usuario log"<<endl;
+            cout<<"Sesion iniciada"<<endl;
     }while(resultado!=2 && intentos<3);
 		}
 			break;
@@ -67,6 +67,44 @@ void menuInicio(BD *bd) {
 	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4);
 }
 
+void menuPrincipal(BD *bd) {
+
+	int eleccion;
+
+	cout << "Buenos dias " << endl;
+	cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
+	cout << "1. " << endl;
+	cout << "2. " << endl;
+	cout << "3. " << endl;
+	cout << "4. Eliminar cuenta" << endl;
+
+
+	do {
+		cin >> eleccion;
+
+		switch (eleccion) {
+		case 1: {
+
+		}
+			break;
+		case 2: {
+
+
+		}
+			break;
+		case 3: {
+
+		}
+			break;
+		default: {
+			cout<<"Seleccion invalida, porfavor introduzca uno de los numeros de la derecha"<< endl;
+		}
+			break;
+		}
+	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4);
+}
+
+
 void registrarUsuario(BD *bd){
     char dni[10],nombre[10],pass[10];
 
@@ -79,7 +117,6 @@ void registrarUsuario(BD *bd){
 
 	Usuario u(dni,nombre,pass);
     bd->insertarUsuario(u);
-
 
 	menuInicio(bd);
 }

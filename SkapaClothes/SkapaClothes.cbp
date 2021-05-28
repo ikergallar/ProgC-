@@ -34,6 +34,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Skaa.db" />
 		<Unit filename="include/BD.h" />
 		<Unit filename="include/ControladorTxt.h" />
 		<Unit filename="include/Log.h" />
@@ -41,7 +42,6 @@
 		<Unit filename="include/Usuario.h" />
 		<Unit filename="include/gestionProductos.h" />
 		<Unit filename="include/sqlite3.h" />
-		<Unit filename="include/sqlite3ext.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BD.cpp" />
 		<Unit filename="src/ControladorTxt.cpp" />
