@@ -3,6 +3,9 @@ extern "C" {
 #include "sqlite3.h"
 }
 #endif
+#include <stdio.h>
+#include <iostream>
+#include <stdlib.h>
 #include "BD.h"
 #include <string.h>
 #include "Usuario.h"
@@ -90,18 +93,24 @@ int BD::comprobarLogin(const char *nombre, const char *pass)
     int resultado = 2,r;
     char query[100];
 
-    sprintf(query,"SELECT * FROM Usuario WHERE nombre='%s'",nombre);
-    sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
-    r=sqlite3_step(stmt);
-    if(r == SQLITE_ROW){
-        char* con = (char*) sqlite3_column_text(stmt, 1);
-        if(strcmp(con,pass)!=0){
-            resultado = 1;
+    if(strcmp(nombre,"admin") == 0 && strcmp(pass,"admin") == 0)
+    {
+        resultado = 4;
+    }else
+    {
+        sprintf(query,"SELECT * FROM Usuario WHERE nombre='%s'",nombre);
+        sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+        r=sqlite3_step(stmt);
+        if(r == SQLITE_ROW){
+            char* con = (char*) sqlite3_column_text(stmt, 1);
+            if(strcmp(con,pass)!=0){
+                resultado = 1;
+           }
+        }else{
+            resultado = 0;
         }
-    }else{
-        resultado = 0;
+        sqlite3_finalize(stmt);
     }
-    sqlite3_finalize(stmt);
     return resultado;
 }
 
@@ -145,9 +154,11 @@ void BD::insertarProducto(const Producto &p)
         sqlite3_step(stmt);
         sqlite3_finalize(stmt);
 
+        cout << "\n" << endl;
         cout << "Producto anyadido correctamente\n" << endl;
 
-	}else {cout<<"ERROR! El producto introducido ya existe"<<endl;
+	}else {
+	    cout<<"ERROR! El producto introducido ya existe"<<endl;
 	}
 
 }
@@ -169,15 +180,13 @@ int BD::cantidadProducto()
 	return resultado;
 }
 
-
 void BD::mostrarProductos()
 {
 	char query[200];
 	int resultado;
 	int num = 0;
+	int cont = 0;
 	int cantProducto = cantidadProducto();
-
-   cout<<cantProducto<<endl;
 
 	sprintf(query, "SELECT * FROM Producto");
 	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
@@ -191,14 +200,30 @@ void BD::mostrarProductos()
 			char * tipo = (char *)sqlite3_column_text(stmt, 2);
 			char * descripcion = (char *)sqlite3_column_text(stmt, 3);
 			float precio = (float)sqlite3_column_double(stmt, 4);
-			for (int i = 0; i < cantProducto; i++){
-		        cout<<num<< ". "<<nombre<<", "<<tipo<<", "<<descripcion<<", "<<precio<<endl;
-		        num++;
-			}
+
+            cout<<num<< ". "<<nombre<<", "<<tipo<<", "<<descripcion<<", "<<precio<<endl;
+            num++;
 		}
 	}
 	while(resultado == SQLITE_ROW);
 	sqlite3_finalize(stmt);
+}
+
+void BD::borrarProducto(const Producto &p)
+{
+	char query[200];
+	int resultado = existeProducto(p.getNombre(),p.getTipo(),p.getDescripcion(),p.getPrecio());
+
+	if(resultado != 0)
+    {
+        sprintf(query,"DELETE FROM Producto WHERE nombre='%s' and tipo='%s' and descripcion= '%s' and precio= '%f'",p.getNombre(), p.getTipo(),p.getDescripcion(),p.getPrecio());
+	    sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);
+	    sqlite3_step(stmt);
+	    sqlite3_finalize(stmt);
+	    cout << "\n" << endl;
+        cout << "El producto ha sido eliminado correctamente correctamente\n" << endl;
+    }else
+    cout<<"ERROR! El producto introducido no existe"<<endl;
 
 }
 

@@ -45,36 +45,7 @@ void eliminarProducto (Producto * stock, int cantProducto){
 
 }
 
-void anyadirProducto (Producto*stock, int cantProducto){
 
-	system("cls");
-
-	int id;
-	char *nombre;
-	char *tipo;
-	char *descripcion;
-	float precio;
-
-	cout << "Id: " << endl;
-	cin >> id;
-	cout << "Nombre: " << endl;
-	cin >> nombre;
-	cout << "Tipo :" << endl;
-	cin >> tipo;
-	cout << "Descripcion :" << endl;
-	cin >> descripcion;
-	cout << "Precio :" << endl;
-	cin >> precio;
-
-
-	Producto * p = new Producto (nombre, tipo, descripcion, precio);
-
-	stock[cantProducto] = *p;
-	cantProducto++;
-
-//	exportarStock(stock, cantProducto);
-
-}
 
 void menuGestionarProductos (Producto *stock, int cantProducto){
 
@@ -106,7 +77,6 @@ void menuGestionarProductos (Producto *stock, int cantProducto){
 			break;
 
 		case 2:
-			anyadirProducto(stock, cantProducto);
 			break;
 
 		case 3:

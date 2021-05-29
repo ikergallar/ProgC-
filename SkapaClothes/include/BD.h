@@ -29,10 +29,10 @@ public :
     void borrarUsuario(const Usuario u);
     Usuario seleccionarUsuario(Usuario u);
     int existeProducto(const char *nombre, const char *tipo, const char *descripcion, float precio);
-   // static int callback(void *count, int argc, char **argv, char **azColName);
     int cantidadProducto();
     void insertarProducto(const Producto &p);
     void mostrarProductos();
+    void borrarProducto(const Producto &p);
     //void modificarEdad(char *d, int nuevaEdad);//Opción de hacerla con modificarPrecio
     virtual ~BD();
 };
