@@ -7,6 +7,7 @@ extern "C" {
 #endif
 
 #include "usuario.h"
+#include "Producto.h"
 
 using namespace std;
 
@@ -23,11 +24,15 @@ public :
     void crearBD();
     void insertarUsuario(const Usuario &u);
     void abrirBD();
-    int existeUsuario(const char *dni);
+    int existeUsuario(const char *nombre);
     int comprobarLogin(const char *nombre, const char *pass);
+    void borrarUsuario(const Usuario u);
     Usuario seleccionarUsuario(Usuario u);
-  //  void borrarUsuario(char *dni);//Opción de borrar usuario o producto
-   // void mostrarTodasLasPersonas();//Opción de mostrar  todos los usuarios
+    int existeProducto(const char *nombre, const char *tipo, const char *descripcion, float precio);
+   // static int callback(void *count, int argc, char **argv, char **azColName);
+    int cantidadProducto();
+    void insertarProducto(const Producto &p);
+    void mostrarProductos();
     //void modificarEdad(char *d, int nuevaEdad);//Opción de hacerla con modificarPrecio
     virtual ~BD();
 };

@@ -6,65 +6,63 @@
 using namespace std;
 
 //PRODUCTO
-Producto::Producto(int idPrd, string nombre, string tipo, string descripcion, float precio){
-	this->idPrd = idPrd;
-	this->nombre = nombre;
-	this->tipo = tipo;
-	this->descripcion = descripcion;
+Producto::Producto(){
+    nombre = new char[20];
+    tipo = new char[20];
+    descripcion = new char[20];
+
+}
+Producto::Producto(char *nombre, char *tipo, char *descripcion, float precio){
+	this->nombre = new char [strlen(nombre) + 1];
+	strcpy(this->nombre, nombre);
+
+	this->tipo = new char [strlen(tipo) + 1];
+	strcpy(this->tipo, tipo);
+
+	this->descripcion = new char [strlen(descripcion) + 1];
+	strcpy(this->descripcion, descripcion);
+
 	this->precio = precio;
 }
 
-Producto::Producto(){
-	this->idPrd = 0;
-	this->nombre =  "";
-	this->tipo =  "";
-	this->descripcion = "";
-	this->precio = 0.00;
+Producto::Producto(Producto &p){
+	this->nombre = new char [strlen(p.nombre) + 1];
+	strcpy(this->nombre, p.nombre);
+
+	this->tipo = new char [strlen(p.tipo) + 1];
+	strcpy(this->tipo, p.tipo);
+
+	this->descripcion = new char [strlen(p.descripcion) + 1];
+	strcpy(this->descripcion, p.descripcion);
+
+	this->precio = precio;
 }
+
 
 Producto::~Producto(){
 	delete this;
 }
 
-int Producto::getIdPrd() const{
-	return this->idPrd;
-}
-void Producto::setIdPrd(int idPrd){
-	this->idPrd = idPrd;
+void Producto::setNombre(char *n){
+	this->nombre = n;
 }
 
-string Producto::getNombre() {
-	return this->nombre;
-}
-void Producto::setNombre(string nombre){
-	this->nombre =  nombre;
+void Producto::setTipo(char *t){
+	this->tipo = t;
 }
 
-string Producto::getTipo() {
-	return this->tipo;
-}
-void Producto::setTipo(string tipo){
-	this->tipo = tipo;
+void Producto::setDescripcion(char *d){
+	this->descripcion = d;
 }
 
-string Producto::getDescripcion() {
-	return this->descripcion;
-}
-void Producto::setDescripcion(string descripcion){
-	this->descripcion = descripcion;
+void Producto::setPrecio(float p){
+	this->precio = p;
 }
 
-float Producto::getPrecio() const{
-	return this->precio;
-}
-void Producto::setPrecio(float precio){
-	this->precio = precio;
-}
-
-void Producto::imprimirProducto () const{
+/*void Producto::imprimirProducto () const{
 	cout << "Producto: " << this->idPrd << ", " << this->nombre << ", " << this->tipo << ", "<< this->descripcion << ", " << this->precio ;
 }
-
+*/
 
 //PRODUCTOCANT
 ProductoCant::ProductoCant(Producto *p, int cant){
@@ -92,11 +90,6 @@ int ProductoCant::getCant ()const{
 }
 void ProductoCant::setCant (int cant){
 	this->cant = cant;
-}
-
-void ProductoCant::imprimirProductoCant() const{
-	this->p->imprimirProducto();
-	cout<< " Cantidad: " << this->cant;
 }
 
 

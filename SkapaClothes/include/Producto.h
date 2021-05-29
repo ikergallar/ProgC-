@@ -5,28 +5,28 @@ using namespace std;
 class Producto {
 	private:
 		int idPrd;
-		string nombre ;
-		string tipo ;
-		string descripcion ;
+		char *nombre ;
+		char *tipo ;
+		char *descripcion ;
 		float precio;
 
 	public:
-		Producto(int idPrd, string nombre, string tipo, string descripcion, float precio);
+		Producto(char *nombre, char *tipo, char *descripcion, float precio);
 		Producto();
+		Producto(Producto &p);
 		~Producto();
 
-		int getIdPrd() const;
-		void setIdPrd(int idPrd);
-		string getNombre();
-		void setNombre(string nombre);
-		string getTipo();
-		void setTipo(string tipo);
-		string getDescripcion();
-		void setDescripcion(string descripcion);
-		float getPrecio() const;
-		void setPrecio(float precio);
+		char * getNombre() const {return nombre;}
+        char * getTipo() const {return tipo;}
+        char * getDescripcion() const {return descripcion;}
+        float getPrecio() const {return precio;}
 
-		void imprimirProducto() const;
+		void setNombre(char *n);
+		void setTipo(char *t);
+		void setDescripcion(char *d);
+		void setPrecio(float p);
+
+		//void imprimirProducto() const;
 };
 
 class ProductoCant{

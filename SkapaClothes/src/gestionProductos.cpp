@@ -6,7 +6,7 @@
 
 void imprimirStock (Producto* productos, int cantProductos){
 	for (int i = 0; i < cantProductos; i++){
-		productos[i].imprimirProducto();
+	//	productos[i].imprimirProducto();
 		cout << endl;
 	}
 }
@@ -50,9 +50,9 @@ void anyadirProducto (Producto*stock, int cantProducto){
 	system("cls");
 
 	int id;
-	string nombre;
-	string tipo;
-	string descripcion;
+	char *nombre;
+	char *tipo;
+	char *descripcion;
 	float precio;
 
 	cout << "Id: " << endl;
@@ -67,7 +67,7 @@ void anyadirProducto (Producto*stock, int cantProducto){
 	cin >> precio;
 
 
-	Producto * p = new Producto (id, nombre, tipo, descripcion, precio);
+	Producto * p = new Producto (nombre, tipo, descripcion, precio);
 
 	stock[cantProducto] = *p;
 	cantProducto++;
