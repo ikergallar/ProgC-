@@ -8,7 +8,6 @@
 #include "Cesta.h"
 #include "Carrito.h"
 
-
 using namespace std;
 
 //MENUS
@@ -26,6 +25,11 @@ void anyadirProductosCesta (BD *bd, Carrito *carrito,Cesta *cesta,Usuario* u);
 void mostrarCesta(BD *bd, Carrito *carrito);
 void terminarPedido(BD *bd,Carrito *carrito);
 
+//VARIABLES
+int contInicio = 0;
+int contPrincipal = 0;
+int contAdmin = 0;
+
 int main()
 {
     BD *bd = new BD("Skaa.db");
@@ -40,24 +44,30 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 {
 	int eleccion;
 
-    cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
+	if(contInicio == 0)
+    {
+        cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
+    }
 
 	do {
 
+        cout << "------------------------------------"<< endl;
 	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
 	    cout << "1. Iniciar sesion" << endl;
 	    cout << "2. Registrarme como nuevo usuario" << endl;
 	    cout << "3. Salir de la aplicacion" << endl;
-
 		cin >> eleccion;
+
+		contInicio++;
 
 		switch (eleccion)
 		{
 		case 1:
         {
-		    char nombre[10],pass[10],confPass[10];
+		    char nombre[20],pass[20],confPass[20];
 		    int intentos = 0, resultado ;
-            do{
+            do
+            {
                 cout<<"Introduce nombre de usuario: ";
                 cin>> nombre;
                 cout<<"Introduce la contrasenya: ";
@@ -117,12 +127,15 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 
 	int eleccion;
 
-    system("cls");
-
-    cout << "Buenos dias " << u->getNombre()<<endl;
+	if(contPrincipal == 0)
+    {
+        system("cls");
+        cout << "Buenos dias " << u->getNombre()<<endl;
+	}
 
 	do {
 
+        cout << "----------------------------------------------"<< endl;
 	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
 	    cout << "1. Anyadir productos a la cesta" << endl;
 	    cout << "2. Mostrar mi cesta" << endl;
@@ -182,18 +195,23 @@ void menuAdmin(BD *bd)
     int eleccion;
 	char c;
 
-	do{
-		system("cls");
-
+	if(contAdmin == 0)
+    {
+        system("cls");
 		cout << "BIENVENIDO ADMINISTRADOR" << endl;
-		cout << "_____________________________" << endl;
+	}
+
+	do{
+
+        cout << "----------------------------------" << endl;
 		cout << "1. Mostrar los productos disponibles" << endl;
-		cout << "2. Añadir nuevo producto a la tienda" << endl;
+		cout << "2. Anyadir nuevo producto a la tienda" << endl;
 		cout << "3. Eliminar producto existente" << endl;
 		cout << "4. Eliminar cuenta de usuario" << endl;
 	    cout << "5. Salir" << endl;
-
 		cin >> eleccion;
+
+		contAdmin++;
 
 		switch (eleccion)
 		{
@@ -207,18 +225,20 @@ void menuAdmin(BD *bd)
 
 		case 2:
         {
-		    char nombre[20],tipo[10],descripcion[20];
+		    char nombre[25],tipo[25],marca[15],descripcion[25];
 		    float precio;
             cout<<"Introduzca el nombre del producto: ";
             cin>>nombre;
             cout<<"Introduzca el tipo de producto: ";
             cin>>tipo;
+            cout<<"Introduzca la marca del producto: ";
+            cin>>marca;
             cout<<"Introduzca la descripcion del producto: ";
             cin>>descripcion;
             cout<<"Introduzca el precio del producto: ";
             cin>>precio;
 
-            Producto p(nombre,tipo,descripcion,precio);
+            Producto p(nombre,tipo,marca,descripcion,precio);
 
             bd->insertarProducto(p);
 

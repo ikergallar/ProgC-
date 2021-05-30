@@ -33,7 +33,7 @@ public :
     int cantidadUsuario();
     Usuario* seleccionarUsuario(int posicion);
 
-    int existeProducto(const char *nombre, const char *tipo, const char *descripcion, float precio);
+    int existeProducto(const char *nombre, const char *tipo, const char *marca, const char *descripcion, float precio);
     int cantidadProducto();
     void insertarProducto(const Producto &p);
     void mostrarProductos();

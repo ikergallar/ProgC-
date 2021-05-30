@@ -37,6 +37,7 @@
 		<Unit filename="Skaa.db" />
 		<Unit filename="include/BD.h" />
 		<Unit filename="include/Carrito.h" />
+		<Unit filename="include/Cesta.h" />
 		<Unit filename="include/ControladorTxt.h" />
 		<Unit filename="include/Log.h" />
 		<Unit filename="include/Producto.h" />
@@ -47,7 +48,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BD.cpp" />
 		<Unit filename="src/Carrito.cpp" />
-		<Unit filename="src/ControladorTxt.cpp" />
+		<Unit filename="src/Cesta.cpp" />
 		<Unit filename="src/Log.cpp" />
 		<Unit filename="src/Producto.cpp" />
 		<Unit filename="src/Usuario.cpp" />
