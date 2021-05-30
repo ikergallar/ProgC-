@@ -2,7 +2,8 @@
 #define PRODUCTO_H_
 using namespace std;
 
-class Producto {
+class Producto
+{
 	private:
 		int id;
 		char *nombre ;
@@ -28,5 +29,4 @@ class Producto {
 		void setDescripcion(char *d);
 		void setPrecio(float p);
 };
-
 #endif /* PRODUCTO_H_ */

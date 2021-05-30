@@ -1,3 +1,4 @@
+/*
 #include "iostream"
 #include <stdlib.h>
 #include "Producto.h"
@@ -90,6 +91,5 @@ void menuGestionarProductos (Producto *stock, int cantProducto){
 
 	}while (op != 4);
 
-
-
 }
+*/

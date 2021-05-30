@@ -42,8 +42,4 @@ public :
     //void modificarEdad(char *d, int nuevaEdad);//Opción de hacerla con modificarPrecio
 };
 #endif
-
 /* BD_H_ */
-
-
-

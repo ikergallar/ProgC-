@@ -13,14 +13,18 @@ extern "C" {
 
 using namespace std;
 
-BD::BD(char *n){
+BD::BD(char *n)
+{
 	nbd = new char[strlen(n)+1];
 	strcpy(nbd, n);
 }
-BD::~BD() {
+
+BD::~BD()
+{
     delete[] nbd;
 }
 
+//METODO PARA CREAR LAS TABLAS DE LA BD
 void BD::crearBD()
 {
     char * err;
@@ -30,7 +34,6 @@ void BD::crearBD()
 
 	}else
 	{
-		//Por cada tabla que quiera crear hago estas dos líneas de código
 		char * tablaUsuario = "CREATE TABLE IF NOT EXISTS Usuario(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,nombre VARCHAR(20) UNIQUE NOT NULL, pass VARCHAR(20) NOT NULL);";
 		if(sqlite3_exec(db, tablaUsuario, NULL, NULL, &err)!= SQLITE_OK){
         cout<<"ERROR CREANDO LA TABLA USUARIO "<<err;
@@ -38,21 +41,22 @@ void BD::crearBD()
 
 		char * tablaProducto = "CREATE TABLE IF NOT EXISTS Producto(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,nombre VARCHAR(20) NOT NULL, tipo VARCHAR(20) NOT NULL, descripcion VARCHAR(25), precio FLOAT);";
 		if(sqlite3_exec(db, tablaProducto, NULL, NULL, &err)!= SQLITE_OK){
-        cout<<"ERROR CREANDO LAS TABLA PRODUCTO "<<err;
+        cout<<"ERROR CREANDO LA TABLA PRODUCTO "<<err;
 		}
 
 	}
 }
+
+//METODO PARA CONECTARSE CON LA BD
 void BD::abrirBD()
 {
 	if(sqlite3_open(nbd, &db)!= SQLITE_OK)
     {
 		cout<<"ERROR AL INTENTAR ABRIR LA BD"<<endl;
 	}
-
-	cout<<"BD CONECTADA"<<endl;
 }
 
+//METODOS DE LA TABLA USUARIO
 int BD::existeUsuario(const char *nombre)
 {
     char * err;
@@ -86,8 +90,8 @@ void BD::insertarUsuario(const Usuario* u)
 
 	}else {cout<<"ERROR! Ya existe una persona con ese Nombre de usuario"<<endl;
 	}
-
 }
+
 int BD::comprobarLogin(const char *nombre, const char *pass)
 {
     /*Devuelve 0 si el nick es incorrecto

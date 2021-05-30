@@ -11,12 +11,17 @@
 
 using namespace std;
 
+//MENUS
 void menuInicio(BD *bd, Usuario* u,Carrito *carrito);
 void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito);
 void menuAdmin(BD *bd);
+void cerrarApp(BD *bd, Usuario* u,Carrito *carrito);
+
+//METODOS DE USUARIO
 void registrarUsuario(BD *bd, Usuario* u,Carrito *carrito);
 void eliminarCuenta(BD *bd,Usuario* u,Carrito *carrito);
-void cerrarApp(BD *bd, Usuario* u,Carrito *carrito);
+
+//METODOS DE PRODUCTO/CARRITO/CESTA
 void anyadirProductosCesta (BD *bd, Carrito *carrito,Cesta *cesta,Usuario* u);
 void mostrarCesta(BD *bd, Carrito *carrito);
 void terminarPedido(BD *bd,Carrito *carrito);
@@ -31,14 +36,13 @@ int main()
     menuInicio(bd, u,carrito);
     return 0;
 }
-void menuInicio(BD *bd, Usuario* u,Carrito *carrito) {
-
+void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
+{
 	int eleccion;
 
     cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
 
 	do {
-
 
 	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
 	    cout << "1. Iniciar sesion" << endl;
@@ -47,8 +51,10 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito) {
 
 		cin >> eleccion;
 
-		switch (eleccion) {
-		case 1: {
+		switch (eleccion)
+		{
+		case 1:
+        {
 		    char nombre[10],pass[10],confPass[10];
 		    int intentos = 0, resultado ;
             do{
@@ -59,42 +65,44 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito) {
 
                 intentos++;
 
-                    resultado = bd->comprobarLogin(nombre,pass);
-                    if(intentos >= 3)
-                    {
-                        menuInicio(bd,u,carrito);
-                    }
-                    if(resultado == 0)
-                    {
-                        cout<<"El nick no es correcto"<<endl;
-                    }else if(resultado==1)
-                    {
-                        cout<<"Contrasenya incorrecta"<<endl;
-                    }else if(resultado ==3)
-                    {
-                         cout<<"ERROR! No existe nadie con ese nombre de usuario"<<endl;
-                    }else if(resultado ==4)
-                    {
-                         menuAdmin(bd);
-                    }else
-                    {
-                        cout<<"Sesion iniciada"<<endl;
-                        menuPrincipal(bd, u,carrito);
-                    }
+                resultado = bd->comprobarLogin(nombre,pass);
+                if(intentos >= 3)
+                {
+                    menuInicio(bd,u,carrito);
+                }
+                if(resultado == 0)
+                {
+                    cout<<"El nick no es correcto"<<endl;
+                }else if(resultado==1)
+                {
+                    cout<<"Contrasenya incorrecta"<<endl;
+                }else if(resultado ==3)
+                {
+                    cout<<"ERROR! No existe nadie con ese nombre de usuario"<<endl;
+                }else if(resultado ==4)
+                {
+                    menuAdmin(bd);
+                }else
+                {
+                    cout<<"Sesion iniciada"<<endl;
+                    menuPrincipal(bd, u,carrito);
+                }
 
             }while(resultado!=2 && resultado != 4 && intentos<3);
 		}
 			break;
-		case 2: {
+		case 2:
+        {
 			registrarUsuario(bd,u,carrito);
-
 		}
 			break;
-		case 3: {
+		case 3:
+        {
 			cerrarApp(bd,u,carrito);
 		}
 			break;
-		default: {
+		default:
+        {
 			cout<<"Seleccion invalida, porfavor introduzca uno de los numeros de la derecha"<< endl;
 		}
 			break;
@@ -102,8 +110,8 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito) {
 	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4);
 }
 
-void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito) {
-
+void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
+{
     Producto *productos = new Producto();
     Cesta * cesta = new Cesta();
 
@@ -113,9 +121,7 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito) {
 
     cout << "Buenos dias " << u->getNombre()<<endl;
 
-
 	do {
-
 
 	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
 	    cout << "1. Anyadir productos a la cesta" << endl;
@@ -127,38 +133,43 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito) {
 
 		cin >> eleccion;
 
-		switch (eleccion) {
-		case 1: {
+		switch (eleccion)
+		{
+		case 1:
+        {
 		    cout << "-----PRODUCTOS DISPONIBLES-----" << endl;
 		    bd->mostrarProductos();
 		    anyadirProductosCesta(bd,carrito,cesta,u);
 
 		}
 			break;
-		case 2: {
+		case 2:
+        {
 		    mostrarCesta(bd,carrito);
-
-
 		}
 			break;
-		case 3: {
+		case 3:
+        {
 		    terminarPedido(bd,carrito);
-
 		}
 			break;
-        case 4:{
+        case 4:
+        {
             eliminarCuenta(bd,u,carrito);
         }
 			break;
-        case 5:{
+        case 5:
+        {
             menuInicio(bd,u,carrito);
         }
             break;
-        case 6:{
+        case 6:
+        {
              cerrarApp(bd,u,carrito);
         }
 			break;
-		default: {
+		default:
+        {
 			cout<<"Seleccion invalida, porfavor introduzca uno de los numeros de la derecha"<< endl;
 		}
 			break;
@@ -166,7 +177,8 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito) {
 	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 && eleccion != 6);
 }
 
-void menuAdmin(BD *bd){
+void menuAdmin(BD *bd)
+{
     int eleccion;
 	char c;
 
@@ -183,8 +195,8 @@ void menuAdmin(BD *bd){
 
 		cin >> eleccion;
 
-		switch (eleccion){
-
+		switch (eleccion)
+		{
 		case 1:
         {
 			bd->mostrarProductos();
@@ -237,12 +249,11 @@ void menuAdmin(BD *bd){
             Usuario* u = bd->seleccionarUsuario(resp);
 
             bd->borrarUsuario(u);
-            exit(0);
         }
             break;
         case 5:
         {
-               exit(0);
+            exit(0);
         }
 
 		default:
@@ -253,7 +264,8 @@ void menuAdmin(BD *bd){
 	}while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5);
 }
 
-void registrarUsuario(BD *bd, Usuario* u, Carrito *carrito){
+void registrarUsuario(BD *bd, Usuario* u, Carrito *carrito)
+{
     char nombre[20],pass[20],confPass[20];
 
 	cout << "Introduzca su nombre de usuario" << endl;
@@ -276,8 +288,8 @@ void registrarUsuario(BD *bd, Usuario* u, Carrito *carrito){
 	menuInicio(bd,u,carrito);
 }
 
-void eliminarCuenta(BD *bd, Usuario* u,Carrito *carrito){
-
+void eliminarCuenta(BD *bd, Usuario* u,Carrito *carrito)
+{
     int eleccion;
 
 	cout << "¿Está seguro de que desea eliminar su cuenta de usuario?" << endl;
@@ -287,17 +299,20 @@ void eliminarCuenta(BD *bd, Usuario* u,Carrito *carrito){
 	do {
 		cin >> eleccion;
 
-
-		switch (eleccion) {
-		case 1:{
+		switch (eleccion)
+		{
+		case 1:
+        {
 		    bd->borrarUsuario(u);
 		}
 		break;
-		case 2:{
+		case 2:
+        {
 			menuPrincipal(bd, u,carrito);
 		}
 		break;
-		default:{
+		default:
+        {
 			cout << "Por favor, introduza 1 o 2" << endl;
 		}
 		break;
@@ -305,9 +320,8 @@ void eliminarCuenta(BD *bd, Usuario* u,Carrito *carrito){
 	} while (eleccion != 1 && eleccion != 2);
 
 }
-void cerrarApp(BD *bd, Usuario* u, Carrito *carrito){
-	//A ésta parte se accede cuando deseas salir de la aplicación
-
+void cerrarApp(BD *bd, Usuario* u, Carrito *carrito)
+{
 	int eleccion;
 
 	cout << "¿Está seguro de que desea salir de la aplicación?" << endl;
@@ -317,18 +331,21 @@ void cerrarApp(BD *bd, Usuario* u, Carrito *carrito){
 	do {
 		cin >> eleccion;
 
-
-		switch (eleccion) {
-		case 1:{
+		switch (eleccion)
+		{
+		case 1:
+        {
 			cout << "La aplicación ha sido cerrada correctamente" << endl;
 			exit(0);
 		}
 		break;
-		case 2:{
+		case 2:
+        {
 			menuInicio(bd,u,carrito);
 		}
 		break;
-		default:{
+		default:
+        {
 			cout << "Por favor, introduza 1 o 2" << endl;
 		}
 		break;
@@ -336,8 +353,8 @@ void cerrarApp(BD *bd, Usuario* u, Carrito *carrito){
 	} while (eleccion != 1 && eleccion != 2);
 }
 
-void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta * cesta,Usuario* u){
-
+void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta * cesta,Usuario* u)
+{
 	system ("cls");
 
     bd->mostrarProductos();
@@ -355,50 +372,53 @@ void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta * cesta,Usuario* u){
     cout << endl;
     int s;
 
-		do{
+    do{
 
-			cout << "¿Esta seguro que desea agregarlo a la cesta?" << endl;
-			cout << "1. Si"<< endl;
-			cout << "2. No" << endl;
-			cin >> s;
+        cout << "¿Esta seguro que desea agregarlo a la cesta?" << endl;
+        cout << "1. Si"<< endl;
+        cout << "2. No" << endl;
+        cin >> s;
 
-			if (s == 1){
-                Cesta *c = new Cesta(p,cant);
+        if (s == 1)
+        {
+            Cesta *c = new Cesta(p,cant);
 
-                cesta[carrito->getCantProductos()] = *c;
-				carrito->setCesta(cesta);
-				carrito->setCantProductos(carrito->getCantProductos() + 1);
-                cout << "Producto anyadido correctamente" << endl;
-                menuPrincipal(bd,u,carrito);
+            cesta[carrito->getCantProductos()] = *c;
+            carrito->setCesta(cesta);
+            carrito->setCantProductos(carrito->getCantProductos() + 1);
 
-			}else if (s == 2){
-				cout << "Operacion cancelada" << endl;
+            cout << "Producto anyadido correctamente" << endl;
+            menuPrincipal(bd,u,carrito);
 
-			}else{
-				cout << "Opcion seleccionada incorrecta" << endl;
-			}
-		}while (s != 1 && s!= 2);
+        }else if (s == 2)
+        {
+            cout << "Operacion cancelada" << endl;
 
+        }else
+        {
+            cout << "Opcion seleccionada incorrecta" << endl;
+        }
+    }while (s != 1 && s!= 2);
 }
 
-void mostrarCesta(BD *bd, Carrito *carrito){
-
+void mostrarCesta(BD *bd, Carrito *carrito)
+{
 	system ("cls");
 
-	if (carrito->getCantProductos() == 0){
+	if (carrito->getCantProductos() == 0)
+    {
 		cout << "¡NINGUN PRODUCTO EN SU CESTA!" << endl;
 
-
-	}else{
-
+	}else
+	{
 		cout << "MI CESTA" << endl;
 		cout << "_____________" << endl;
 
 		int num = 1;
 		float total = 0.0;
 
-
-		for (int i = 0; i < carrito->getCantProductos(); i++){
+		for (int i = 0; i < carrito->getCantProductos(); i++)
+        {
 			cout << num << ". " << carrito->getCesta()[i].getProducto()->getNombre() <<
 					 "    x " << carrito->getCesta()[i].getCant() << endl;
 			num++;
@@ -418,8 +438,8 @@ void mostrarCesta(BD *bd, Carrito *carrito){
 	cin >> o;
 }
 
-void imprimirRecibo (Carrito * carrito){
-
+void imprimirRecibo (Carrito * carrito)
+{
 	system("cls");
 
 	cout << "RECIBO DEL PEDIDO" << endl;
@@ -428,8 +448,8 @@ void imprimirRecibo (Carrito * carrito){
 	float total = 0.0;
 	int cant;
 
-	for (int i = 0; i < carrito->getCantProductos(); i++){
-
+	for (int i = 0; i < carrito->getCantProductos(); i++)
+    {
 		float costoP;
 		costoP = carrito->getCesta()[i].getProducto()->getPrecio();
 
@@ -437,31 +457,26 @@ void imprimirRecibo (Carrito * carrito){
 
 		total = total + (cant * costoP);
 
-
-
 		cout << carrito->getCesta()[i].getProducto()->getNombre();
 		cout << "    " << costoP  << " €";
 		cout << "   x" << carrito->getCesta()[i].getCant() << endl;
-
 	}
 	carrito->setImporte(total);
 
 	cout << "__________________________________" << endl;
 	cout << "TOTAL:                      " << total << "  €" << endl;
-
-
-
 }
 
-void terminarPedido(BD *bd,Carrito * carrito){
-
+void terminarPedido(BD *bd,Carrito * carrito)
+{
 	system ("cls");
 
-	if (carrito->getCantProductos() == 0){
+	if (carrito->getCantProductos() == 0)
+    {
 		cout << "¡¡¡ NINGUN PRODUCTO EN SU CARRITO !!!" << endl;
 
-	}else{
-
+	}else
+	{
 		int opcion;
 		char direccion[100];
 
@@ -475,7 +490,8 @@ void terminarPedido(BD *bd,Carrito * carrito){
 		cout << "2. NO" << endl;
 		cin >> opcion;
 
-		switch (opcion){
+		switch (opcion)
+		{
 		case 1:
 			cout <<"Su pedido se ha realizado correctamente" <<endl << endl;
 			imprimirRecibo(carrito);
@@ -492,9 +508,7 @@ void terminarPedido(BD *bd,Carrito * carrito){
 
 		}
 	}
-
 	int o;
 	cout << "Introduce un numero para continuar..." << endl;
 	cin >> o;
-
 }

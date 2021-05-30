@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include <cstring>
 #include "Producto.h"
+
 using namespace std;
 
-//PRODUCTO
-Producto::Producto(char *nombre, char *tipo, char *descripcion, float precio){
+Producto::Producto(char *nombre, char *tipo, char *descripcion, float precio)
+{
 	this->nombre = new char [strlen(nombre) + 1];
 	strcpy(this->nombre, nombre);
 
@@ -18,7 +19,8 @@ Producto::Producto(char *nombre, char *tipo, char *descripcion, float precio){
 	this->precio = precio;
 }
 
-Producto::Producto(){
+Producto::Producto()
+{
     nombre = new char[20];
     tipo = new char[20];
     descripcion = new char[20];
@@ -26,7 +28,8 @@ Producto::Producto(){
 
 }
 
-Producto::Producto(Producto & p){
+Producto::Producto(Producto & p)
+{
 	this->nombre = new char [strlen(p.nombre) + 1];
 	strcpy(this->nombre, p.nombre);
 
@@ -39,29 +42,35 @@ Producto::Producto(Producto & p){
 	this->precio = p.precio;
 }
 
-Producto::~Producto(){
+Producto::~Producto()
+{
 	delete this;
 }
 
-void Producto::setId(int i){
+void Producto::setId(int i)
+{
 	this->id = i;
 }
 
-void Producto::setNombre(char *n){
+void Producto::setNombre(char *n)
+{
 	this->nombre = new char [strlen(nombre) + 1];
 	strcpy(this->nombre, n);
 }
 
-void Producto::setTipo(char *t){
+void Producto::setTipo(char *t)
+{
 	this->tipo = new char [strlen(tipo) + 1];
 	strcpy(this->tipo, t);
 }
 
-void Producto::setDescripcion(char *d){
+void Producto::setDescripcion(char *d)
+{
 	this->descripcion = new char [strlen(descripcion) + 1];
 	strcpy(this->descripcion, d);
 }
 
-void Producto::setPrecio(float p){
+void Producto::setPrecio(float p)
+{
 	this->precio = p;
 }

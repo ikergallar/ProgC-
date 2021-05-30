@@ -2,7 +2,8 @@
 #define CARRITO_H_INCLUDED
 #include "Cesta.h"
 
-class Carrito{
+class Carrito
+{
 	private:
 		Cesta *cesta;
 		int fecha;
@@ -24,12 +25,5 @@ class Carrito{
 		void setFecha (int fecha);
 		void setImporte (float importe);
 		void setCantProductos (int cantProductos);
-
-		void imprimirCesta() const;
-
-
 };
-
-
-
 #endif // CARRITO_H_INCLUDED

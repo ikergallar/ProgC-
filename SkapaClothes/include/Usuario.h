@@ -4,7 +4,8 @@
 
 using namespace std;
 
-class Usuario{
+class Usuario
+{
 private:
 
     friend istream & operator>>(istream &entrada, Usuario &u);
@@ -13,6 +14,7 @@ private:
     int id;
 	char *nombre;
 	char *pass;
+
 public:
     Usuario();
 	Usuario(char *nombre,char* contrasenya);
@@ -27,5 +29,4 @@ public:
 	void setNombre(char *n);
 	void setPass(char *c);
 };
-
 #endif // USUARIO_H_INCLUDED
