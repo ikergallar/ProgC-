@@ -1,25 +1,26 @@
 #ifndef CARRITO_H_INCLUDED
 #define CARRITO_H_INCLUDED
-#include "Producto.h"
+#include "Cesta.h"
 
 class Carrito{
 	private:
-		Producto *cesta;
+		Cesta *cesta;
 		int fecha;
 		float importe;
 		int cantProductos;
 
 	public:
-		Carrito(Producto *cesta, int fecha, float importe);
+		Carrito(Cesta *cesta, int fecha, float importe);
 		Carrito();
-		~Carrito();
+		Carrito(Carrito & p);
+		virtual ~Carrito();
 
-		Producto* getCesta() const{return cesta;}
+		Cesta* getCesta() const{return cesta;}
 		int getFecha () const{return fecha;}
         float getImporte ()const {return importe;}
         int getCantProductos () const{return cantProductos;}
 
-		void setCesta (Producto *cesta);
+		void setCesta (Cesta *cesta);
 		void setFecha (int fecha);
 		void setImporte (float importe);
 		void setCantProductos (int cantProductos);

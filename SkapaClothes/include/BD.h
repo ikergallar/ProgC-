@@ -21,21 +21,25 @@ private:
 
 public :
     BD(char *nbd);
+    virtual ~BD();
     void crearBD();
-    void insertarUsuario(const Usuario &u);
     void abrirBD();
+
     int existeUsuario(const char *nombre);
+    void insertarUsuario(const Usuario* u);
     int comprobarLogin(const char *nombre, const char *pass);
-    void borrarUsuario(const Usuario u);
-    Usuario seleccionarUsuario(Usuario u);
+    void mostrarUsuarios();
+    void borrarUsuario(const Usuario* u);
+    int cantidadUsuario();
+    Usuario* seleccionarUsuario(int posicion);
+
     int existeProducto(const char *nombre, const char *tipo, const char *descripcion, float precio);
     int cantidadProducto();
     void insertarProducto(const Producto &p);
     void mostrarProductos();
-    void borrarProducto(const Producto &p);
-    Producto seleccionarProducto(int posicion);
+    void borrarProducto(const Producto* p);
+    Producto* seleccionarProducto(int posicion);
     //void modificarEdad(char *d, int nuevaEdad);//Opción de hacerla con modificarPrecio
-    virtual ~BD();
 };
 #endif
 

@@ -36,7 +36,7 @@ Producto::Producto(Producto & p){
 	this->descripcion = new char [strlen(p.descripcion) + 1];
 	strcpy(this->descripcion, p.descripcion);
 
-	this->precio = precio;
+	this->precio = p.precio;
 }
 
 Producto::~Producto(){

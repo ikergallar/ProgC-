@@ -17,6 +17,9 @@ BD::BD(char *n){
 	nbd = new char[strlen(n)+1];
 	strcpy(nbd, n);
 }
+BD::~BD() {
+    delete[] nbd;
+}
 
 void BD::crearBD()
 {
@@ -28,7 +31,7 @@ void BD::crearBD()
 	}else
 	{
 		//Por cada tabla que quiera crear hago estas dos líneas de código
-		char * tablaUsuario = "CREATE TABLE IF NOT EXISTS Usuario(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,nombre VARCHAR(20) PRIMARY KEY NOT NULL, pass VARCHAR(20) NOT NULL);";
+		char * tablaUsuario = "CREATE TABLE IF NOT EXISTS Usuario(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,nombre VARCHAR(20) UNIQUE NOT NULL, pass VARCHAR(20) NOT NULL);";
 		if(sqlite3_exec(db, tablaUsuario, NULL, NULL, &err)!= SQLITE_OK){
         cout<<"ERROR CREANDO LA TABLA USUARIO "<<err;
 		}
@@ -64,17 +67,17 @@ int BD::existeUsuario(const char *nombre)
 	return resultado;
 }
 
-void BD::insertarUsuario(const Usuario &u)
+void BD::insertarUsuario(const Usuario* u)
 {
 	char query[200];
 	int resultado;
 	char *err;
 
-	resultado = existeUsuario(u.getNombre());
+	resultado = existeUsuario(u->getNombre());
 
 	if(resultado == 0)
 	{
-        sprintf(query,"INSERT INTO Usuario (nombre,pass) VALUES('%s' , '%s')",u.getNombre(), u.getPass());
+        sprintf(query,"INSERT INTO Usuario (nombre,pass) VALUES('%s' , '%s')",u->getNombre(), u->getPass());
         sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
         sqlite3_step(stmt);
         sqlite3_finalize(stmt);
@@ -89,7 +92,8 @@ int BD::comprobarLogin(const char *nombre, const char *pass)
 {
     /*Devuelve 0 si el nick es incorrecto
     Devuelve 1 si el nick es correcto pero la contraseña no
-    Devuelve 2 si nick y contraseña son correctos*/
+    Devuelve 2 si nick y contraseña son correctos
+    Devuelve 4 si inicia en modo Administrador*/
 
     int resultado = 2,r;
     char query[100];
@@ -115,10 +119,87 @@ int BD::comprobarLogin(const char *nombre, const char *pass)
     return resultado;
 }
 
-void BD::borrarUsuario(const Usuario u)
+void BD::mostrarUsuarios()
 {
 	char query[200];
-    sprintf(query,"DELETE FROM Usuario WHERE nombre='%s'",u.getNombre());
+	int resultado;
+	int num = 0;
+	int cont = 0;
+
+	sprintf(query, "SELECT * FROM Usuario");
+	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
+
+	do
+	{
+		resultado = sqlite3_step(stmt);
+		if(resultado == SQLITE_ROW)
+		{
+			char * nombre = (char *)sqlite3_column_text(stmt, 1);
+			char * pass = (char *)sqlite3_column_text(stmt, 2);
+
+            cout<<num<< ". "<<nombre<<", "<<pass<<endl;
+            num++;
+		}
+	}
+	while(resultado == SQLITE_ROW);
+	sqlite3_finalize(stmt);
+}
+
+int BD::cantidadUsuario()
+{
+	char query[200];
+	int resultado = 0;
+	char *err;
+
+	sprintf(query, "SELECT COUNT(*) FROM Usuario");
+	sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+    if(sqlite3_step(stmt) == SQLITE_ROW){
+        resultado = sqlite3_column_int(stmt,0);
+    }
+
+    sqlite3_finalize(stmt);
+
+	return resultado;
+}
+
+Usuario* BD::seleccionarUsuario(int posicion)
+{
+	char query[200];
+	int resultado;
+	Usuario *usuarios = new Usuario[cantidadUsuario()];
+	int num = 0;
+
+	sprintf(query, "SELECT * FROM Usuario");
+	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
+
+	do
+	{
+		resultado = sqlite3_step(stmt);
+		if(resultado == SQLITE_ROW)
+		{
+            int id = sqlite3_column_int(stmt, 0);
+			char * nombre = (char *)sqlite3_column_text(stmt, 1);
+			char * pass = (char *)sqlite3_column_text(stmt, 2);
+
+            usuarios[num].setId(id);
+            usuarios[num].setNombre(nombre);
+            usuarios[num].setPass(pass);
+
+			num++;
+		}
+	}
+	while(resultado == SQLITE_ROW);
+	sqlite3_finalize(stmt);
+
+	Usuario *u = new Usuario(usuarios[posicion]);
+
+	return u;
+}
+
+void BD::borrarUsuario(const Usuario* u)
+{
+	char query[200];
+    sprintf(query,"DELETE FROM Usuario WHERE nombre='%s'",u->getNombre());
 	sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);
 	sqlite3_step(stmt);
 	sqlite3_finalize(stmt);
@@ -126,6 +207,7 @@ void BD::borrarUsuario(const Usuario u)
 
 }
 
+//METODOS DE LA TABLA PRODUCTO
 int BD::existeProducto(const char *nombre, const char *tipo, const char *descripcion, const float precio)
 {
     char * err;
@@ -209,12 +291,11 @@ void BD::mostrarProductos()
 	sqlite3_finalize(stmt);
 }
 
-Producto BD::seleccionarProducto(int posicion)
+Producto* BD::seleccionarProducto(int posicion)
 {
 	char query[200];
 	int resultado;
 	Producto *productos = new Producto[cantidadProducto()];
-	Producto p ;
 	int num = 0;
 
 	sprintf(query, "SELECT * FROM Producto");
@@ -243,26 +324,22 @@ Producto BD::seleccionarProducto(int posicion)
 	while(resultado == SQLITE_ROW);
 	sqlite3_finalize(stmt);
 
-	p = productos[posicion];
+	Producto *p = new Producto(productos[posicion]);
 
 	return p;
+
 }
 
-void BD::borrarProducto(const Producto &p)
+void BD::borrarProducto(const Producto* p)
 {
 	char query[200];
-	int resultado = existeProducto(p.getNombre(),p.getTipo(),p.getDescripcion(),p.getPrecio());
 
-	if(resultado != 0)
-    {
-        sprintf(query,"DELETE FROM Producto WHERE nombre='%s' and tipo='%s' and descripcion= '%s' and precio= '%f'",p.getNombre(), p.getTipo(),p.getDescripcion(),p.getPrecio());
-	    sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);
-	    sqlite3_step(stmt);
-	    sqlite3_finalize(stmt);
-	    cout << "\n" << endl;
-        cout << "El producto ha sido eliminado correctamente correctamente\n" << endl;
-    }else
-    cout<<"ERROR! El producto introducido no existe"<<endl;
+    sprintf(query,"DELETE FROM Producto WHERE nombre='%s' and tipo='%s' and descripcion= '%s' and precio= '%f'",p->getNombre(), p->getTipo(),p->getDescripcion(),p->getPrecio());
+    sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    cout << "\n" << endl;
+    cout << "El producto ha sido eliminado correctamente correctamente\n" << endl;
 
 }
 
@@ -276,6 +353,3 @@ void BD::borrarProducto(const Producto &p)
 
 } */
 
-BD::~BD() {
-    delete[] nbd;
-}

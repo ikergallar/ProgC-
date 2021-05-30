@@ -27,10 +27,12 @@ Usuario::Usuario(Usuario &u){
 }
 
 Usuario::~Usuario(){
-	delete[] nombre;
-	delete[] pass;
+	delete[] this;
 }
 
+void Usuario::setId(int i){
+	this->id = i;
+}
 void Usuario::setNombre(char *n) {
  this->nombre = new char[strlen(nombre)+1];
  strcpy(nombre,n);

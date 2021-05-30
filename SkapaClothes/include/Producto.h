@@ -9,7 +9,6 @@ class Producto {
 		char *tipo ;
 		char *descripcion ;
 		float precio;
-		Producto *cesta;
 
 	public:
 		Producto(char *nombre, char *tipo, char *descripcion, float precio);
