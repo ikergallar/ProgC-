@@ -32,11 +32,11 @@ Usuario::~Usuario(){
 }
 
 void Usuario::setNombre(char *n) {
- this->nombre = new char[strlen(n)+1];
+ this->nombre = new char[strlen(nombre)+1];
  strcpy(nombre,n);
 }
 void Usuario::setPass(char *p) {
-this->pass = new char[strlen(p)+1];
+this->pass = new char[strlen(pass)+1];
  strcpy(pass,p);
 }
 

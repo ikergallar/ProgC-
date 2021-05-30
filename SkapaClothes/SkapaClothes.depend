@@ -315,16 +315,17 @@
 	<unicode/utf16.h>
 	<math.h>
 
-1622305051 source:c:\users\ikerg\documents\github\progc-\skapaclothes\main.cpp
+1622371514 source:c:\users\ikerg\documents\github\progc-\skapaclothes\main.cpp
 	<stdio.h>
 	<iostream>
 	<stdlib.h>
+	<string.h>
 	"BD.h"
 	"Usuario.h"
 	"Carrito.h"
 	"Producto.h"
 
-1622304230 c:\users\ikerg\documents\github\progc-\skapaclothes\include\bd.h
+1622368655 c:\users\ikerg\documents\github\progc-\skapaclothes\include\bd.h
 	"sqlite3.h"
 	"usuario.h"
 	"Producto.h"
@@ -344,7 +345,7 @@
 	"Producto.h"
 	"Usuario.h"
 
-1622304027 c:\users\ikerg\documents\github\progc-\skapaclothes\include\producto.h
+1622370590 c:\users\ikerg\documents\github\progc-\skapaclothes\include\producto.h
 
 1622296396 source:c:\users\ikerg\documents\github\progc-\skapaclothes\src\gestionproductos.cpp
 	"iostream"
@@ -363,7 +364,7 @@
 
 1622277042 c:\users\ikerg\documents\github\progc-\skapaclothes\include\log.h
 
-1622304181 source:c:\users\ikerg\documents\github\progc-\skapaclothes\src\producto.cpp
+1622370286 source:c:\users\ikerg\documents\github\progc-\skapaclothes\src\producto.cpp
 	"iostream"
 	<stdlib.h>
 	<cstring>
@@ -428,16 +429,17 @@
 	<unicode/utf16.h>
 	<math.h>
 
-1622277721 source:c:\users\ikerg\documents\github\progc-\skapaclothes\src\usuario.cpp
+1622371176 source:c:\users\ikerg\documents\github\progc-\skapaclothes\src\usuario.cpp
 	"Usuario.h"
 	<iostream>
 	<string.h>
 
-1622303008 source:c:\users\ikerg\documents\github\progc-\skapaclothes\src\bd.cpp
+1622370619 source:c:\users\ikerg\documents\github\progc-\skapaclothes\src\bd.cpp
 	"sqlite3.h"
 	<stdio.h>
 	<iostream>
 	<stdlib.h>
+	<bits/stdc++.h>
 	"BD.h"
 	<string.h>
 	"Usuario.h"

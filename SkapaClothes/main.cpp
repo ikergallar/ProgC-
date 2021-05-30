@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
+#include <string.h>
 #include "BD.h"
 #include "Usuario.h"
 #include "Carrito.h"
@@ -15,29 +16,26 @@ void menuAdmin(BD *bd);
 void registrarUsuario(BD *bd, Usuario u);
 void eliminarCuenta(BD *bd, Usuario u);
 void cerrarApp(BD *bd, Usuario u);
-void anyadirProductosCesta (Producto * productos, int cantProductos, BD *bd, Carrito *carrito);
+void anyadirProductosCesta (int cantProductos, BD *bd, Carrito *carrito);
 
 int main()
 {
     BD *bd = new BD("Skaa.db");
     Usuario u;
-    Producto p("b","a", "a", 32);
     bd->crearBD();
     bd->abrirBD();
-    bd->insertarProducto(p);
     menuInicio(bd, u);
     return 0;
 }
-
 void menuInicio(BD *bd, Usuario u) {
 
 	int eleccion;
 
+    cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
+
 	do {
 
-        system("cls");
 
-        cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
 	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
 	    cout << "1. Iniciar sesion" << endl;
 	    cout << "2. Registrarme como nuevo usuario" << endl;
@@ -47,7 +45,7 @@ void menuInicio(BD *bd, Usuario u) {
 
 		switch (eleccion) {
 		case 1: {
-		    char nombre[10],pass[10];
+		    char nombre[10],pass[10],confPass[10];
 		    int intentos = 0, resultado ;
             do{
                 cout<<"Introduce nombre de usuario: ";
@@ -103,16 +101,18 @@ void menuInicio(BD *bd, Usuario u) {
 void menuPrincipal(BD *bd, Usuario u) {
 
     Producto *productos = new Producto();
-    Carrito *carrito = new Carrito();
+    Carrito *carrito;
 
 	int eleccion;
+
+    system("cls");
+
+    cout << "Buenos dias " << u.getNombre()<<endl;
 
 
 	do {
 
-        system("cls");
 
-        cout << "Buenos dias " << endl;
 	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
 	    cout << "1. Anyadir productos a la cesta" << endl;
 	    cout << "2. Mostrar mi cesta" << endl;
@@ -127,7 +127,7 @@ void menuPrincipal(BD *bd, Usuario u) {
 		case 1: {
 		    cout << "-----PRODUCTOS DISPONIBLES-----" << endl;
 		    bd->mostrarProductos();
-		    anyadirProductosCesta(productos, 0, bd, carrito);
+		    anyadirProductosCesta(0, bd, carrito);
 
 		}
 			break;
@@ -244,12 +244,19 @@ void menuAdmin(BD *bd){
 }
 
 void registrarUsuario(BD *bd, Usuario u){
-    char nombre[20],pass[20];
+    char nombre[20],pass[20],confPass[20];
 
 	cout << "Introduzca su nombre de usuario" << endl;
 	cin >> nombre;
 	cout << "Introduzca su contrasenya" << endl;
 	cin >> pass;
+	cout<<"Confirme la contrasenya: "<< endl;
+    cin>> confPass;
+
+    if(strcmp(pass,confPass) != 0)
+    {
+        cout<<"Las contraseñas no coinciden: ";
+    }else
 
 	u.setNombre(nombre);
 	u.setPass(pass);
@@ -320,23 +327,26 @@ void cerrarApp(BD *bd, Usuario u){
 	} while (eleccion != 1 && eleccion != 2);
 }
 
-void anyadirProductosCesta (Producto * productos, int cantProductos, BD *bd, Carrito *carrito){
+void anyadirProductosCesta (int cantProductos, BD *bd, Carrito *carrito){
 
 	system ("cls");
 
     bd->mostrarProductos();
 
-	int p;
+	int eleccion;
 	int cant;
 
 	cout << "NUMERO del producto: ";
-	cin >> p;
-	cout << "CANTIDAD de " << productos[p-1].getTipo() << "s " ;
+	cin >> eleccion;
+	Producto p;
+	p = bd->seleccionarProducto(eleccion);
+	cout<<"sss";
+	cout << "CANTIDAD de " << p.getTipo() << "s " ;
 	cin >> cant;
 
-	if (p <= cantProductos && p> 0 ){
+	if (eleccion <= cantProductos && eleccion> 0 ){
 
-		cout << "INFO: " <<productos[p-1].getDescripcion();
+		cout << "INFO: " <<p.getDescripcion();
 		cout << endl;
 		int s;
 
@@ -348,9 +358,8 @@ void anyadirProductosCesta (Producto * productos, int cantProductos, BD *bd, Car
 			cin >> s;
 
 			if (s == 1){
-				Producto *pc =  new Producto(productos[p-1]);
+				Producto *pc =  new Producto(p);
 
-				pc[carrito->getCantProductos()] = *pc;
 				carrito->setCesta(pc);
 				carrito->setCantProductos(carrito->getCantProductos() + 1);
 

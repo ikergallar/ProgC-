@@ -6,6 +6,7 @@ extern "C" {
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
+#include <bits/stdc++.h>
 #include "BD.h"
 #include <string.h>
 #include "Usuario.h"
@@ -186,7 +187,6 @@ void BD::mostrarProductos()
 	int resultado;
 	int num = 0;
 	int cont = 0;
-	int cantProducto = cantidadProducto();
 
 	sprintf(query, "SELECT * FROM Producto");
 	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
@@ -207,6 +207,45 @@ void BD::mostrarProductos()
 	}
 	while(resultado == SQLITE_ROW);
 	sqlite3_finalize(stmt);
+}
+
+Producto BD::seleccionarProducto(int posicion)
+{
+	char query[200];
+	int resultado;
+	Producto *productos = new Producto[cantidadProducto()];
+	Producto p ;
+	int num = 0;
+
+	sprintf(query, "SELECT * FROM Producto");
+	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
+
+	do
+	{
+		resultado = sqlite3_step(stmt);
+		if(resultado == SQLITE_ROW)
+		{
+            int id = sqlite3_column_int(stmt, 0);
+			char * nombre = (char *)sqlite3_column_text(stmt, 1);
+			char * tipo = (char *)sqlite3_column_text(stmt, 2);
+			char * descripcion = (char *)sqlite3_column_text(stmt, 3);
+			float precio = (float)sqlite3_column_double(stmt, 4);
+
+            productos[num].setId(id);
+            productos[num].setNombre(nombre);
+            productos[num].setTipo(tipo);
+            productos[num].setDescripcion(descripcion);
+            productos[num].setPrecio(precio);
+
+			num++;
+		}
+	}
+	while(resultado == SQLITE_ROW);
+	sqlite3_finalize(stmt);
+
+	p = productos[posicion];
+
+	return p;
 }
 
 void BD::borrarProducto(const Producto &p)

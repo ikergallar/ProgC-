@@ -15,7 +15,7 @@ class Producto {
 		Producto(char *nombre, char *tipo, char *descripcion, float precio);
 		Producto();
 		Producto(Producto &p);
-		~Producto();
+		virtual ~Producto();
 
 		int getId() const {return id;}
 		char * getNombre() const {return nombre;}
@@ -23,6 +23,7 @@ class Producto {
         char * getDescripcion() const {return descripcion;}
         float getPrecio() const {return precio;}
 
+        void setId(int i);
 		void setNombre(char *n);
 		void setTipo(char *t);
 		void setDescripcion(char *d);

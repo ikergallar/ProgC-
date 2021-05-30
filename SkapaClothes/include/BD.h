@@ -33,6 +33,7 @@ public :
     void insertarProducto(const Producto &p);
     void mostrarProductos();
     void borrarProducto(const Producto &p);
+    Producto seleccionarProducto(int posicion);
     //void modificarEdad(char *d, int nuevaEdad);//Opción de hacerla con modificarPrecio
     virtual ~BD();
 };
