@@ -297,8 +297,11 @@ void registrarUsuario(BD *bd, Usuario* u, Carrito *carrito)
 
     if(strcmp(pass,confPass) != 0)
     {
-        cout<<"Las contraseñas no coinciden: ";
+        cout<<"Las contraseñas no coinciden: "<<endl;
+        menuInicio(bd,u,carrito);
+
     }else
+    {
 
 	u->setNombre(nombre);
 	u->setPass(pass);
@@ -306,6 +309,8 @@ void registrarUsuario(BD *bd, Usuario* u, Carrito *carrito)
     bd->insertarUsuario(u);
 
 	menuInicio(bd,u,carrito);
+
+	}
 }
 
 void eliminarCuenta(BD *bd, Usuario* u,Carrito *carrito)
@@ -385,7 +390,7 @@ void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta * cesta,Usuario* u)
 	cout << "NUMERO del producto: ";
 	cin >> eleccion;
     Producto* p = bd->seleccionarProducto(eleccion);
-	cout << "CANTIDAD de " << p->getTipo() << "s " ;
+	cout << "CANTIDAD de " << p->getTipo();
 	cin >> cant;
 
     cout << "INFO: " <<p->getDescripcion();
@@ -501,7 +506,7 @@ void terminarPedido(BD *bd,Carrito * carrito)
 		char direccion[100];
 
 		cout << "Ingrese la direccion a la que desea que se entregue el pedido " << endl;
-		cout <<	"Introducuzca su direccion: " << endl;
+		cout <<	"Introduzca su direccion: " << endl;
 		cin >> direccion;
 		cout << "------------------------------------------" << endl;
 		mostrarCesta(bd,carrito);
