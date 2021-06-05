@@ -2,14 +2,10 @@
 #define USUARIO_H_INCLUDED
 #include <iostream>
 
-using namespace std;
 
 class Usuario
 {
 private:
-
-    friend istream & operator>>(istream &entrada, Usuario &u);
-    friend ostream & operator<<(ostream &salida, const Usuario &u);
 
     int id;
 	char *nombre;

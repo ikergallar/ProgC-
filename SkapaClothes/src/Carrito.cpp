@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "Carrito.h"
 
+using namespace std;
+
 Carrito::Carrito(Cesta *cesta, int fecha, float importe)
 {
 	this->cesta = cesta;
@@ -28,7 +30,7 @@ Carrito::Carrito(Carrito & p)
 
 Carrito::~Carrito()
 {
-	delete this;
+	delete []this->cesta;
 }
 
 void Carrito::setCesta (Cesta *c)

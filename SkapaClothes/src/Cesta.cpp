@@ -1,5 +1,7 @@
 #include "Cesta.h"
 
+using namespace std;
+
 Cesta::Cesta(Producto *p, int cant){
 	this->p = p;
 	this->cant = cant;
@@ -17,7 +19,7 @@ Cesta::Cesta(Cesta & c){
 }
 
 Cesta::~Cesta(){
-	delete this;
+	delete []this->p;
 }
 
 void Cesta::setProducto (Producto* p){

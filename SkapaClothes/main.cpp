@@ -64,7 +64,7 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 		{
 		case 1:
         {
-		    char nombre[20],pass[20],confPass[20];
+		    char nombre[15],pass[15],confPass[15];
 		    int intentos = 0, resultado ;
             do
             {
@@ -227,20 +227,18 @@ void menuAdmin(BD *bd)
 
 		case 2:
         {
-		    char nombre[25],tipo[25],marca[15],descripcion[25];
+		    char nombre[15],marca[15],color[15];
 		    float precio;
             cout<<"Introduzca el nombre del producto: ";
             cin>>nombre;
-            cout<<"Introduzca el tipo de producto: ";
-            cin>>tipo;
             cout<<"Introduzca la marca del producto: ";
             cin>>marca;
-            cout<<"Introduzca la descripcion del producto: ";
-            cin>>descripcion;
+            cout<<"Introduzca el color del producto: ";
+            cin>>color;
             cout<<"Introduzca el precio del producto: ";
             cin>>precio;
 
-            Producto p(nombre,tipo,marca,descripcion,precio);
+            Producto p(nombre,marca,color,precio);
 
             bd->insertarProducto(p);
 
@@ -255,11 +253,10 @@ void menuAdmin(BD *bd)
 		    cout << "Introduzca el numero del producto que desea eliminar" << endl;
             cin>>resp;
 
-            Producto* p = bd->seleccionarProducto(resp);
+            Producto *p = bd->seleccionarProducto(resp);
 
             bd->borrarProducto(p);
-
-
+            menuAdmin(bd);
         }
 			break;
         case 4:
@@ -269,9 +266,10 @@ void menuAdmin(BD *bd)
 		    cout << "Introduzca el numero del usuario que desea eliminar" << endl;
             cin>>resp;
 
-            Usuario* u = bd->seleccionarUsuario(resp);
+            Usuario *u = bd->seleccionarUsuario(resp);
 
             bd->borrarUsuario(u);
+            menuAdmin(bd);
         }
             break;
         case 5:
@@ -392,11 +390,11 @@ void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta * cesta,Usuario* u)
 
 	cout << "NUMERO del producto: ";
 	cin >> eleccion;
-    Producto* p = bd->seleccionarProducto(eleccion);
-	cout << "CANTIDAD de " << p->getTipo();
+    Producto *p = bd->seleccionarProducto(eleccion);
+	cout << "CANTIDAD de " << p->getNombre()<<" : ";
 	cin >> cant;
 
-    cout << "INFO: " <<p->getDescripcion();
+    cout << "INFO: " <<p->getColor();
     cout << endl;
     int s;
 
@@ -413,7 +411,7 @@ void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta * cesta,Usuario* u)
 
             cesta[carrito->getCantProductos()] = *c;
             carrito->setCesta(cesta);
-            carrito->setCantProductos(carrito->getCantProductos() + 1);
+            carrito->setCantProductos(carrito->getCantProductos() +1);
 
             cout << "Producto anyadido correctamente" << endl;
             menuPrincipal(bd,u,carrito);

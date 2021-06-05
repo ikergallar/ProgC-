@@ -5,19 +5,16 @@
 
 using namespace std;
 
-Producto::Producto(char *nombre, char *tipo, char *m, char *descripcion, float precio)
+Producto::Producto(char *nombre, char *m, char *color, float precio)
 {
 	this->nombre = new char [strlen(nombre) + 1];
 	strcpy(this->nombre, nombre);
 
-	this->tipo = new char [strlen(tipo) + 1];
-	strcpy(this->tipo, tipo);
-
 	this->marca = new char [strlen(m) + 1];
 	strcpy(this->marca, m);
 
-	this->descripcion = new char [strlen(descripcion) + 1];
-	strcpy(this->descripcion, descripcion);
+	this->color = new char [strlen(color) + 1];
+	strcpy(this->color, color);
 
 	this->precio = precio;
 }
@@ -25,9 +22,8 @@ Producto::Producto(char *nombre, char *tipo, char *m, char *descripcion, float p
 Producto::Producto()
 {
     nombre = new char[25];
-    tipo = new char[25];
-    marca = new char[15];
-    descripcion = new char[25];
+    marca = new char[25];
+    color = new char[25];
     precio = 0;
 
 }
@@ -37,21 +33,21 @@ Producto::Producto(Producto & p)
 	this->nombre = new char [strlen(p.nombre) + 1];
 	strcpy(this->nombre, p.nombre);
 
-	this->tipo = new char [strlen(p.tipo) + 1];
-	strcpy(this->tipo, p.tipo);
-
 	this->marca = new char [strlen(p.marca) + 1];
 	strcpy(this->marca, p.marca);
 
-	this->descripcion = new char [strlen(p.descripcion) + 1];
-	strcpy(this->descripcion, p.descripcion);
+	this->color = new char [strlen(p.color) + 1];
+	strcpy(this->color, p.color);
 
 	this->precio = p.precio;
 }
 
 Producto::~Producto()
 {
-	delete this;
+	delete [] this->nombre;
+	delete [] this->marca;
+	delete [] this->color;
+
 }
 
 void Producto::setId(int i)
@@ -65,22 +61,16 @@ void Producto::setNombre(char *n)
 	strcpy(this->nombre, n);
 }
 
-void Producto::setTipo(char *t)
-{
-	this->tipo = new char [strlen(tipo) + 1];
-	strcpy(this->tipo, t);
-}
-
 void Producto::setMarca(char *m)
 {
 	this->marca = new char [strlen(marca) + 1];
 	strcpy(this->marca, m);
 }
 
-void Producto::setDescripcion(char *d)
+void Producto::setColor(char *d)
 {
-	this->descripcion = new char [strlen(descripcion) + 1];
-	strcpy(this->descripcion, d);
+	this->color = new char [strlen(color) + 1];
+	strcpy(this->color, d);
 }
 
 void Producto::setPrecio(float p)

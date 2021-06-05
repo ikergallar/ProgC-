@@ -31,7 +31,8 @@ Usuario::Usuario(Usuario &u)
 
 Usuario::~Usuario()
 {
-	delete[] this;
+	delete[] this->nombre;
+	delete[] this->pass;
 }
 
 void Usuario::setId(int i)
@@ -50,16 +51,3 @@ void Usuario::setPass(char *p)
     this->pass = new char[strlen(pass)+1];
     strcpy(pass,p);
 }
-
-istream & operator>>(istream &entrada, Usuario &u)
-{
-	entrada>>u.nombre;
-	entrada>>u.pass;
-	return entrada;
-}
-ostream & operator<<(ostream &salida, const Usuario &u)
-{
-    salida<<u.nombre<<" "<<u.pass<<endl;
-    return salida;
-}
-
