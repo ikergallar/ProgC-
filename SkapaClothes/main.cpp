@@ -159,6 +159,7 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 		case 2:
         {
 		    mostrarCesta(bd,carrito);
+		    menuPrincipal(bd, u, carrito);
 		}
 			break;
 		case 3:
@@ -220,6 +221,7 @@ void menuAdmin(BD *bd)
 			bd->mostrarProductos();
 			cout << "Pusla un numero para continuar..." << endl;
 			cin >> c;
+			menuAdmin(bd);
         }
 			break;
 
@@ -256,6 +258,7 @@ void menuAdmin(BD *bd)
             Producto* p = bd->seleccionarProducto(resp);
 
             bd->borrarProducto(p);
+
 
         }
 			break;
