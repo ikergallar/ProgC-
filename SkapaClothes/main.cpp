@@ -38,6 +38,7 @@ int main()
     bd->crearBD();
     bd->abrirBD();
     menuInicio(bd, u,carrito);
+    bd->cerrarBD();
     return 0;
 }
 void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
@@ -51,7 +52,7 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 
 	do {
 
-        cout << "------------------------------------"<< endl;
+        cout << "------------------------------------------------------"<< endl;
 	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
 	    cout << "1. Iniciar sesion" << endl;
 	    cout << "2. Registrarme como nuevo usuario" << endl;
@@ -64,7 +65,7 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 		{
 		case 1:
         {
-		    char nombre[15],pass[15],confPass[15];
+		    char nombre[20],pass[20],confPass[20];
 		    int intentos = 0, resultado ;
             do
             {
@@ -130,7 +131,7 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 	if(contPrincipal == 0)
     {
         system("cls");
-        cout << "Buenos dias " << u->getNombre()<<endl;
+        cout << "Buenos dias "<<endl;
 	}
 
 	do {
@@ -253,7 +254,10 @@ void menuAdmin(BD *bd)
 		    cout << "Introduzca el numero del producto que desea eliminar" << endl;
             cin>>resp;
 
-            Producto *p = bd->seleccionarProducto(resp);
+            Producto *productos = bd->seleccionarProducto(resp);
+            Producto *p = &productos[resp];
+
+            cout<<p->getNombre();
 
             bd->borrarProducto(p);
             menuAdmin(bd);

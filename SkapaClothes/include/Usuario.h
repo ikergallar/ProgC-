@@ -1,7 +1,5 @@
 #ifndef USUARIO_H_INCLUDED
 #define USUARIO_H_INCLUDED
-#include <iostream>
-
 
 class Usuario
 {
@@ -12,6 +10,7 @@ private:
 	char *pass;
 
 public:
+
     Usuario();
 	Usuario(char *nombre,char* contrasenya);
 	Usuario(Usuario &u);

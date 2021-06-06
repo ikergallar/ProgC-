@@ -12,9 +12,9 @@ class Producto
 		float precio;
 
 	public:
-		Producto(char *nombre, char *marca, char *color, float precio);
+		Producto(const char *nombre, const char *marca, const char *color, const float precio);
 		Producto();
-		Producto(Producto &p);
+		Producto(const Producto &p);
 		virtual ~Producto();
 
 		int getId() const {return id;}

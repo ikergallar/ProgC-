@@ -1,17 +1,23 @@
-#include "iostream"
-#include <stdlib.h>
-#include <cstring>
 #include "Producto.h"
+#include <string.h>
 
 using namespace std;
 
-Producto::Producto(char *nombre, char *m, char *color, float precio)
+Producto::Producto()
+{
+    nombre = new char[20];
+    marca = new char[20];
+    color = new char[20];
+    precio = 0;
+}
+
+Producto::Producto(const char *nombre, const char *marca, const char *color, const float precio)
 {
 	this->nombre = new char [strlen(nombre) + 1];
 	strcpy(this->nombre, nombre);
 
-	this->marca = new char [strlen(m) + 1];
-	strcpy(this->marca, m);
+	this->marca = new char [strlen(marca) + 1];
+	strcpy(this->marca, marca);
 
 	this->color = new char [strlen(color) + 1];
 	strcpy(this->color, color);
@@ -19,16 +25,7 @@ Producto::Producto(char *nombre, char *m, char *color, float precio)
 	this->precio = precio;
 }
 
-Producto::Producto()
-{
-    nombre = new char[25];
-    marca = new char[25];
-    color = new char[25];
-    precio = 0;
-
-}
-
-Producto::Producto(Producto & p)
+Producto::Producto(const Producto & p)
 {
 	this->nombre = new char [strlen(p.nombre) + 1];
 	strcpy(this->nombre, p.nombre);
@@ -42,13 +39,6 @@ Producto::Producto(Producto & p)
 	this->precio = p.precio;
 }
 
-Producto::~Producto()
-{
-	delete [] this->nombre;
-	delete [] this->marca;
-	delete [] this->color;
-
-}
 
 void Producto::setId(int i)
 {
@@ -76,4 +66,11 @@ void Producto::setColor(char *d)
 void Producto::setPrecio(float p)
 {
 	this->precio = p;
+}
+
+Producto::~Producto()
+{
+	delete [] this->nombre;
+	delete [] this->marca;
+	delete [] this->color;
 }

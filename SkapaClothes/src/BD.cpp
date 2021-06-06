@@ -56,6 +56,15 @@ void BD::abrirBD()
 	}
 }
 
+//METODO PARA DESCONECTARSE DE LA BD
+void BD::cerrarBD()
+{
+    if(sqlite3_close(db)!=SQLITE_OK)
+    {
+        cout<<"Error al intentar cerrar la base de datos"<<endl;
+    }
+}
+
 //METODOS DE LA TABLA USUARIO
 int BD::existeUsuario(const char *nombre)
 {
@@ -84,6 +93,7 @@ void BD::insertarUsuario(const Usuario* u)
         sqlite3_step(stmt);
         sqlite3_finalize(stmt);
 
+        cout << "\n" << endl;
         cout << "Usuario creado correctamente\n" << endl;
 
 	}else {cout<<"ERROR! Ya existe una persona con ese Nombre de usuario"<<endl;
@@ -207,36 +217,37 @@ void BD::borrarUsuario(const Usuario* u)
 	sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);
 	sqlite3_step(stmt);
 	sqlite3_finalize(stmt);
+    cout << "\n" << endl;
     cout << "La cuenta ha sido eliminada correctamente\n" << endl;
 
 }
 
 //METODOS DE LA TABLA PRODUCTO
-int BD::existeProducto(const char *nombre, const char *marca,const char *descripcion, const float precio)
+int BD::existeProducto(const char *nombre, const char *marca,const char *color, const float precio)
 {
-	int resultado;
-	char query[100];
+	char query[200];
 
-	sprintf(query, "SELECT COUNT(*) FROM Producto WHERE nombre = '%s' and marca= '%s' and color = '%s' and precio = '%f'", nombre,marca,descripcion,precio);
+	sprintf(query, "SELECT COUNT(*) FROM Producto WHERE nombre = '%s' and marca= '%s' and color = '%s' and precio = '%f'", nombre,marca,color,precio);
     sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
     sqlite3_step(stmt);
-	resultado = sqlite3_column_int(stmt, 0);//0 es el numero de la columna.
+	int resultado = sqlite3_column_int(stmt, 0);//0 es el numero de la columna.
     sqlite3_finalize(stmt);
 	return resultado;
 }
 
 void BD::insertarProducto(const Producto &p)
 {
-	char query[100];
-	int resultado;
-
-	resultado = existeProducto(p.getNombre(),p.getMarca(),p.getColor(),p.getPrecio());
+	char query[200];
+	int resultado = existeProducto(p.getNombre(),p.getMarca(),p.getColor(),p.getPrecio());
 
 	if(resultado == 0)
 	{
+
         sprintf(query,"INSERT INTO Producto (nombre,marca,color,precio) VALUES('%s','%s','%s','%f')",p.getNombre(), p.getMarca(), p.getColor(), p.getPrecio());
+
         sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
         sqlite3_step(stmt);
+
         sqlite3_finalize(stmt);
 
         cout << "\n" << endl;
@@ -266,7 +277,7 @@ int BD::cantidadProducto()
 
 void BD::mostrarProductos()
 {
-	char query[100];
+	char query[200];
 	int resultado;
 	int num = 0;
 
@@ -280,10 +291,10 @@ void BD::mostrarProductos()
 		{
 			char *nombre = (char *)sqlite3_column_text(stmt, 1);
             char *marca = (char *)sqlite3_column_text(stmt, 2);
-			char *descripcion = (char *)sqlite3_column_text(stmt, 3);
+			char *color = (char *)sqlite3_column_text(stmt, 3);
 			float precio = (float)sqlite3_column_double(stmt, 4);
 
-            cout<<num<< ". "<<nombre<<", "<<marca<<", "<<descripcion<<", "<<precio<<endl;
+            cout<<num<< ". "<<nombre<<", "<<marca<<", "<<color<<", "<<precio<<endl;
             num++;
 		}
 	}
@@ -291,12 +302,12 @@ void BD::mostrarProductos()
 	sqlite3_finalize(stmt);
 }
 
-Producto *BD::seleccionarProducto(int posicion)
+Producto* BD::seleccionarProducto(int posicion)
 {
-	char query[100];
+	char query[200];
 	int resultado;
-	Producto *productos = new Producto[cantidadProducto()];
-
+	int numProducto = cantidadProducto();
+	Producto *productos = new Producto[numProducto];
 	int num = 0;
 
 	sprintf(query, "SELECT * FROM Producto");
@@ -307,36 +318,31 @@ Producto *BD::seleccionarProducto(int posicion)
 		resultado = sqlite3_step(stmt);
 		if(resultado == SQLITE_ROW)
 		{
-            int id = sqlite3_column_int(stmt, 0);
 			char *nombre = (char *)sqlite3_column_text(stmt, 1);
 			char *marca = (char *)sqlite3_column_text(stmt, 2);
 			char *color = (char *)sqlite3_column_text(stmt, 3);
 			float precio = (float)sqlite3_column_double(stmt, 4);
 
-            productos[num].setId(id);
-            productos[num].setNombre(nombre);
-            productos[num].setMarca(marca);
-            productos[num].setColor(color);
-            productos[num].setPrecio(precio);
+			Producto p(nombre,marca,color,precio);
+
+			productos[num] = p;
 
 			num++;
+
+			cout<<"a"<<endl;
 
 		}
 	}
 	while(resultado == SQLITE_ROW);
 	sqlite3_finalize(stmt);
 
-	Producto *p = new Producto(productos[posicion]);
-
-	delete [] productos;
-
-	return p;
+	return productos;
 
 }
 
-void BD::borrarProducto(const Producto* p)
+void BD::borrarProducto(Producto* p)
 {
-	char query[100];
+	char query[200];
 
     sprintf(query,"DELETE FROM Producto WHERE nombre='%s' and marca ='%s' and color= '%s' and precio= '%f'",p->getNombre(),p->getMarca(),p->getColor(),p->getPrecio());
     sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);

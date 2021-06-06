@@ -19,9 +19,11 @@ private:
 
 public :
     BD(char *nbd);
-    virtual ~BD();
     void crearBD();
     void abrirBD();
+    void cerrarBD();
+    virtual ~BD();
+
 
     int existeUsuario(const char *nombre);
     void insertarUsuario(const Usuario* u);
@@ -35,7 +37,7 @@ public :
     int cantidadProducto();
     void insertarProducto(const Producto &p);
     void mostrarProductos();
-    void borrarProducto(const Producto* p);
+    void borrarProducto(Producto* p);
     Producto* seleccionarProducto(int posicion);
 };
 #endif

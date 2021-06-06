@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1622912547 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+1622974596 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
 	<stdio.h>
 	<iostream>
 	<stdlib.h>
@@ -125,23 +125,19 @@
 
 1622125475 c:\users\iker\documents\github\progc-\skapaclothes\producto.h
 
-1622912413 c:\users\iker\documents\github\progc-\skapaclothes\include\usuario.h
-	<iostream>
+1622972568 c:\users\iker\documents\github\progc-\skapaclothes\include\usuario.h
 
-1622911120 source:c:\users\iker\documents\github\progc-\skapaclothes\src\producto.cpp
-	"iostream"
-	<stdlib.h>
-	<cstring>
+1622972019 source:c:\users\iker\documents\github\progc-\skapaclothes\src\producto.cpp
 	"Producto.h"
-
-1622912428 c:\users\iker\documents\github\progc-\skapaclothes\include\producto.h
-
-1622912428 source:c:\users\iker\documents\github\progc-\skapaclothes\src\usuario.cpp
-	"Usuario.h"
-	<iostream>
 	<string.h>
 
-1622912875 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
+1622972019 c:\users\iker\documents\github\progc-\skapaclothes\include\producto.h
+
+1622969789 source:c:\users\iker\documents\github\progc-\skapaclothes\src\usuario.cpp
+	"Usuario.h"
+	<string.h>
+
+1622974247 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
 	"sqlite3.h"
 	<stdio.h>
 	<iostream>
@@ -154,7 +150,7 @@
 1622413849 c:\users\iker\documents\github\progc-\skapaclothes\include\sqlite3.h
 	<stdarg.h>
 
-1622912373 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
+1622973368 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
 	"sqlite3.h"
 	"usuario.h"
 	"Producto.h"

@@ -1,5 +1,4 @@
 #include "Usuario.h"
-#include <iostream>
 #include <string.h>
 
 using namespace std;
@@ -29,12 +28,6 @@ Usuario::Usuario(Usuario &u)
 	strcpy(this->pass, u.pass);
 }
 
-Usuario::~Usuario()
-{
-	delete[] this->nombre;
-	delete[] this->pass;
-}
-
 void Usuario::setId(int i)
 {
 	this->id = i;
@@ -50,4 +43,10 @@ void Usuario::setPass(char *p)
 {
     this->pass = new char[strlen(pass)+1];
     strcpy(pass,p);
+}
+
+Usuario::~Usuario()
+{
+	delete[] this->nombre;
+	delete[] this->pass;
 }
