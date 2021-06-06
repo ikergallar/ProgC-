@@ -1,16 +1,17 @@
 #include "Cesta.h"
+#include <iostream>
+#include <string.h>
 
 using namespace std;
 
-Cesta::Cesta(Producto *p, int cant){
-	this->p = p;
-	this->cant = cant;
-}
-
 Cesta::Cesta(){
-	Producto *p = new Producto ();
 	this->p = p;
 	this->cant = 0;
+}
+
+Cesta::Cesta(Producto* p, int cant){
+	this->p = p;
+	this->cant = cant;
 }
 
 Cesta::Cesta(Cesta & c){

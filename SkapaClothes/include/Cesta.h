@@ -3,26 +3,22 @@
 #include "Producto.h"
 
 class Cesta{
-    private:
-		Producto* p;
-		int cant;
 
-	public:
-		Cesta(Producto *p, int cant);
-		Cesta();
-		Cesta(Cesta & c);
-		virtual ~Cesta();
+private:
+    Producto* p;
+    int cant;
 
-		Producto* getProducto () const{return p;}
-        int getCant ()const{return cant;}
+public:
+    Cesta();
+    Cesta(Producto *p, int cant);
+    Cesta(Cesta &c);
+    virtual ~Cesta();
 
-		void setProducto (Producto* p);
-		void setCant (int cant);
+    Producto* getProducto () const{return p;}
+    int getCant ()const{return cant;}
 
-		void imprimirProductoCant() const;
+    void setProducto (Producto* p);
+    void setCant (int cant);
 
 };
-
-
-
 #endif // CESTA_H_INCLUDED

@@ -327,7 +327,6 @@ Producto* BD::seleccionarProducto(int posicion)
 
 			num++;
 
-
 		}
 	}
 	while(resultado == SQLITE_ROW);
@@ -349,14 +348,3 @@ void BD::borrarProducto(Producto* p)
     cout << "El producto ha sido eliminado correctamente correctamente\n" << endl;
 
 }
-
-/* BD::modificarEdad(char * dni, int nuevaEdad)
-{
-	char query[200];
-	sprintf(query, "UPDATE Persona SET EDAD %d WHERE DNI = '%s'", nuevaEdad, dni);
-	sqlite3_prepare_V2(db, query, strlen(query)+1, &stmt, NULL);//Preparar la sentencia
-	sqlite3_step(stmt);//Ejecutar la sentencia
-	sqlite3_finalize(stmt); //Finalizar la sentencia asi porque no devuelve nada
-
-} */
-

@@ -40,7 +40,7 @@ int main()
     menuInicio(bd, u,carrito);
     bd->cerrarBD();
 
-    cout<<"HOLS"<<endl;return 0;
+    return 0;
 }
 void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 {
@@ -257,8 +257,6 @@ void menuAdmin(BD *bd)
 
             Producto *p = bd->seleccionarProducto(resp);
 
-            cout<<p->getNombre();
-
             bd->borrarProducto(p);
             menuAdmin(bd);
         }
@@ -383,7 +381,7 @@ void cerrarApp(BD *bd, Usuario* u, Carrito *carrito)
 	} while (eleccion != 1 && eleccion != 2);
 }
 
-void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta * cesta,Usuario* u)
+void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta *cesta,Usuario* u)
 {
 	system ("cls");
 
@@ -417,7 +415,7 @@ void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta * cesta,Usuario* u)
             carrito->setCesta(cesta);
             carrito->setCantProductos(carrito->getCantProductos() +1);
 
-            cout << "Producto anyadido correctamente" << endl;
+            cout << "Producto agregado correctamente" << endl;
             menuPrincipal(bd,u,carrito);
 
         }else if (s == 2)
@@ -456,6 +454,7 @@ void mostrarCesta(BD *bd, Carrito *carrito)
 			int cantPr = carrito->getCesta()->getCant();
 			float valorPr = carrito->getCesta()->getProducto()->getPrecio();
 
+
 			total = total + (cantPr * valorPr);
 		}
 
@@ -488,13 +487,13 @@ void imprimirRecibo (Carrito * carrito)
 		total = total + (cant * costoP);
 
 		cout << carrito->getCesta()[i].getProducto()->getNombre();
-		cout << "    " << costoP  << " €";
+		cout << "    " << costoP  << " Euros";
 		cout << "   x" << carrito->getCesta()[i].getCant() << endl;
 	}
 	carrito->setImporte(total);
 
 	cout << "__________________________________" << endl;
-	cout << "TOTAL:                      " << total << "  €" << endl;
+	cout << "TOTAL: " << total << "  Euros" << endl;
 }
 
 void terminarPedido(BD *bd,Carrito * carrito)
