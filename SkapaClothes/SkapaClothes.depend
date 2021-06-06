@@ -89,7 +89,7 @@
 	<iostream>
 	<string.h>
 
-1622890762 source:c:\users\gaizka\documents\github\progc-\skapaclothes\main.cpp
+1623014319 source:c:\users\gaizka\documents\github\progc-\skapaclothes\main.cpp
 	<stdio.h>
 	<iostream>
 	<stdlib.h>
@@ -562,7 +562,7 @@
 1622912290 source:c:\users\iker\documents\github\progc-\skapaclothes\src\cesta.cpp
 	"Cesta.h"
 
-1622889740 c:\users\gaizka\documents\github\progc-\skapaclothes\include\bd.h
+1623014345 c:\users\gaizka\documents\github\progc-\skapaclothes\include\bd.h
 	"sqlite3.h"
 	"usuario.h"
 	"Producto.h"
@@ -570,10 +570,9 @@
 1622889740 c:\users\gaizka\documents\github\progc-\skapaclothes\include\sqlite3.h
 	<stdarg.h>
 
-1622889740 c:\users\gaizka\documents\github\progc-\skapaclothes\include\usuario.h
-	<iostream>
+1622975064 c:\users\gaizka\documents\github\progc-\skapaclothes\include\usuario.h
 
-1622889740 c:\users\gaizka\documents\github\progc-\skapaclothes\include\producto.h
+1622975064 c:\users\gaizka\documents\github\progc-\skapaclothes\include\producto.h
 
 1622889740 c:\users\gaizka\documents\github\progc-\skapaclothes\include\cesta.h
 	"Producto.h"
@@ -581,7 +580,7 @@
 1622889740 c:\users\gaizka\documents\github\progc-\skapaclothes\include\carrito.h
 	"Cesta.h"
 
-1622889740 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\bd.cpp
+1623014381 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\bd.cpp
 	"sqlite3.h"
 	<stdio.h>
 	<iostream>
@@ -591,12 +590,12 @@
 	<string.h>
 	"Usuario.h"
 
-1622889740 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\carrito.cpp
+1622975065 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\carrito.cpp
 	"iostream"
 	<stdlib.h>
 	"Carrito.h"
 
-1622889740 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\cesta.cpp
+1622975065 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\cesta.cpp
 	"Cesta.h"
 
 1622889740 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\gestionproductos.cpp
@@ -616,11 +615,9 @@
 
 1622889740 c:\users\gaizka\documents\github\progc-\skapaclothes\include\log.h
 
-1622889740 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\producto.cpp
-	"iostream"
-	<stdlib.h>
-	<cstring>
+1622975065 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\producto.cpp
 	"Producto.h"
+	<string.h>
 
 1622889740 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\sqlite3.c
 	"config.h"
@@ -681,8 +678,7 @@
 	<unicode/utf16.h>
 	<math.h>
 
-1622889740 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\usuario.cpp
+1622975065 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\usuario.cpp
 	"Usuario.h"
-	<iostream>
 	<string.h>
 

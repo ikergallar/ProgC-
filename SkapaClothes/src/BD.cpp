@@ -307,7 +307,7 @@ Producto* BD::seleccionarProducto(int posicion)
 	char query[200];
 	int resultado;
 	int numProducto = cantidadProducto();
-	Producto *productos = new Producto[numProducto];
+	Producto **productos = new Producto*[numProducto];
 	int num = 0;
 
 	sprintf(query, "SELECT * FROM Producto");
@@ -323,28 +323,25 @@ Producto* BD::seleccionarProducto(int posicion)
 			char *color = (char *)sqlite3_column_text(stmt, 3);
 			float precio = (float)sqlite3_column_double(stmt, 4);
 
-			Producto p(nombre,marca,color,precio);
-
-			productos[num] = p;
+			productos[num] = new Producto(nombre,marca,color,precio);
 
 			num++;
 
-			cout<<"a"<<endl;
 
 		}
 	}
 	while(resultado == SQLITE_ROW);
 	sqlite3_finalize(stmt);
 
-	return productos;
+	return productos[posicion];
 
 }
 
 void BD::borrarProducto(Producto* p)
 {
 	char query[200];
-
-    sprintf(query,"DELETE FROM Producto WHERE nombre='%s' and marca ='%s' and color= '%s' and precio= '%f'",p->getNombre(),p->getMarca(),p->getColor(),p->getPrecio());
+    cout<<p->getNombre()<<", "<<p->getMarca()<<", "<<p->getColor()<<", "<<p->getPrecio()<<endl;
+    sprintf(query,"DELETE FROM Producto WHERE nombre='%s' and marca ='%s' and color= '%s' and precio= %f",p->getNombre(),p->getMarca(),p->getColor(),p->getPrecio());
     sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);
     sqlite3_step(stmt);
     sqlite3_finalize(stmt);

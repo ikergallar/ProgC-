@@ -39,7 +39,8 @@ int main()
     bd->abrirBD();
     menuInicio(bd, u,carrito);
     bd->cerrarBD();
-    return 0;
+
+    cout<<"HOLS"<<endl;return 0;
 }
 void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 {
@@ -254,8 +255,7 @@ void menuAdmin(BD *bd)
 		    cout << "Introduzca el numero del producto que desea eliminar" << endl;
             cin>>resp;
 
-            Producto *productos = bd->seleccionarProducto(resp);
-            Producto *p = &productos[resp];
+            Producto *p = bd->seleccionarProducto(resp);
 
             cout<<p->getNombre();
 
