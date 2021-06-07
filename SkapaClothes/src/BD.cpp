@@ -136,7 +136,6 @@ void BD::mostrarUsuarios()
 	char query[100];
 	int resultado;
 	int num = 0;
-	int cont = 0;
 
 	sprintf(query, "SELECT * FROM Usuario");
 	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
@@ -161,7 +160,6 @@ int BD::cantidadUsuario()
 {
 	char query[100];
 	int resultado = 0;
-	char *err;
 
 	sprintf(query, "SELECT COUNT(*) FROM Usuario");
 	sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);

@@ -42,6 +42,7 @@ int main()
 
     return 0;
 }
+
 void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 {
 	int eleccion;
@@ -66,7 +67,7 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 		{
 		case 1:
         {
-		    char nombre[20],pass[20],confPass[20];
+		    char nombre[20],pass[20];
 		    int intentos = 0, resultado ;
             do
             {
@@ -124,7 +125,6 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 
 void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 {
-    Producto *productos = new Producto();
     Cesta * cesta = new Cesta();
 
 	int eleccion;
@@ -348,6 +348,7 @@ void eliminarCuenta(BD *bd, Usuario* u,Carrito *carrito)
 	} while (eleccion != 1 && eleccion != 2);
 
 }
+
 void cerrarApp(BD *bd, Usuario* u, Carrito *carrito)
 {
 	int eleccion;
