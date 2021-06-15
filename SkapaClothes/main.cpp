@@ -210,8 +210,9 @@ void menuAdmin(BD *bd)
 		cout << "1. Mostrar los productos disponibles" << endl;
 		cout << "2. Anyadir nuevo producto a la tienda" << endl;
 		cout << "3. Eliminar producto existente" << endl;
-		cout << "4. Eliminar cuenta de usuario" << endl;
-	    cout << "5. Salir" << endl;
+		cout << "4. Editar producto existente" << endl;
+		cout << "5. Eliminar cuenta de usuario" << endl;
+	    cout << "6. Salir" << endl;
 		cin >> eleccion;
 
 		contAdmin++;
@@ -261,7 +262,34 @@ void menuAdmin(BD *bd)
             menuAdmin(bd);
         }
 			break;
-        case 4:
+
+			case 4:
+        {
+            int resp;
+		    bd->mostrarProductos();
+		    cout << "Introduzca el numero del producto que desea editar" << endl;
+            cin>>resp;
+
+            Producto *p = bd->seleccionarProducto(resp);
+
+            char nombre[15],marca[15],color[15];
+		    float precio;
+            cout<<"Introduzca el nombre del producto: ";
+            cin>>nombre;
+            cout<<"Introduzca la marca del producto: ";
+            cin>>marca;
+            cout<<"Introduzca el color del producto: ";
+            cin>>color;
+            cout<<"Introduzca el precio del producto: ";
+            cin>>precio;
+            int id = p->getId();
+
+            p = new Producto(id,nombre,marca,color,precio);
+            bd->editarProducto(p);
+            menuAdmin(bd);
+        }
+			break;
+        case 5:
         {
             int resp;
 		    bd->mostrarUsuarios();
@@ -274,7 +302,7 @@ void menuAdmin(BD *bd)
             menuAdmin(bd);
         }
             break;
-        case 5:
+        case 6:
         {
             exit(0);
         }
@@ -284,7 +312,7 @@ void menuAdmin(BD *bd)
 			break;
 		}
 
-	}while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5);
+	}while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 && eleccion != 6);
 }
 
 void registrarUsuario(BD *bd, Usuario* u, Carrito *carrito)

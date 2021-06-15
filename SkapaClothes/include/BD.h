@@ -39,6 +39,7 @@ public :
     void insertarProducto(const Producto &p);
     void mostrarProductos();
     void borrarProducto(Producto* p);
+    void editarProducto(Producto* p);
     Producto* seleccionarProducto(int posicion);
 };
 #endif

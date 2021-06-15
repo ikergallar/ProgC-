@@ -316,12 +316,13 @@ Producto* BD::seleccionarProducto(int posicion)
 		resultado = sqlite3_step(stmt);
 		if(resultado == SQLITE_ROW)
 		{
+            int id = sqlite3_column_int(stmt, 0);
 			char *nombre = (char *)sqlite3_column_text(stmt, 1);
 			char *marca = (char *)sqlite3_column_text(stmt, 2);
 			char *color = (char *)sqlite3_column_text(stmt, 3);
 			float precio = (float)sqlite3_column_double(stmt, 4);
 
-			productos[num] = new Producto(nombre,marca,color,precio);
+			productos[num] = new Producto(id,nombre,marca,color,precio);
 
 			num++;
 
@@ -337,12 +338,23 @@ Producto* BD::seleccionarProducto(int posicion)
 void BD::borrarProducto(Producto* p)
 {
 	char query[200];
-    cout<<p->getNombre()<<", "<<p->getMarca()<<", "<<p->getColor()<<", "<<p->getPrecio()<<endl;
     sprintf(query,"DELETE FROM Producto WHERE nombre='%s' and marca ='%s' and color= '%s' and precio= %f",p->getNombre(),p->getMarca(),p->getColor(),p->getPrecio());
     sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);
     sqlite3_step(stmt);
     sqlite3_finalize(stmt);
     cout << "\n" << endl;
     cout << "El producto ha sido eliminado correctamente correctamente\n" << endl;
+
+}
+
+void BD::editarProducto(Producto* p)
+{
+	char query[200];
+    sprintf(query,"UPDATE producto SET nombre='%s', marca='%s', color='%s',precio=%f WHERE id = %d",p->getNombre(),p->getMarca(),p->getColor(),p->getPrecio(),p->getId());
+    sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    cout << "\n" << endl;
+    cout << "El producto ha sido editado correctamente correctamente\n" << endl;
 
 }

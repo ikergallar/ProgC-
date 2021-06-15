@@ -13,6 +13,7 @@ private:
 
 public:
     Producto(const char *nombre, const char *marca, const char *color, const float precio);
+    Producto(int id, const char *nombre, const char *marca, const char *color, const float precio);
     Producto();
     Producto(const Producto &p);
     virtual ~Producto();
