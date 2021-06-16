@@ -142,9 +142,10 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 	    cout << "1. Anyadir productos a la cesta" << endl;
 	    cout << "2. Mostrar mi cesta" << endl;
 	    cout << "3. Finalizar compra" << endl;
-	    cout << "4. Eliminar cuenta" << endl;
-	    cout << "5. Cerrar Sesion" << endl;
-	    cout << "6. Salir" << endl;
+        cout << "4. Editar perfil" << endl;
+	    cout << "5. Eliminar cuenta" << endl;
+	    cout << "6. Cerrar Sesion" << endl;
+	    cout << "7. Salir" << endl;
 
 		cin >> eleccion;
 
@@ -169,17 +170,50 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 		    terminarPedido(bd,carrito);
 		}
 			break;
+
         case 4:
+        {
+            int a = 0;
+            char pass[20],confPass[20];
+            char *passActual;
+            passActual = new char [strlen(u->getNombre()) + 1];
+	        strcpy(passActual, u->getNombre());
+
+
+                cout<<"Contrasenya actual: "<<passActual<<endl;
+                 cout<<"Nueva contrasenya: "<<endl;
+                 cin>>pass;
+                 cout<<"Confirmar contrasenya: "<<endl;
+                 cin>>confPass;
+
+
+
+            if(strcmp(pass,confPass) != 0)
+            {
+                cout<<"Las contraseñas no coinciden: "<<endl;
+                a = 0;
+
+            }else
+
+            a = 1;
+
+	            u->setPass(pass);
+                bd->editarUsuario(u);
+		        menuPrincipal(bd, u, carrito);
+
+        }
+            break;
+        case 5:
         {
             eliminarCuenta(bd,u,carrito);
         }
 			break;
-        case 5:
+        case 6:
         {
             menuInicio(bd,u,carrito);
         }
             break;
-        case 6:
+        case 7:
         {
              cerrarApp(bd,u,carrito);
         }
@@ -190,7 +224,7 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 		}
 			break;
 		}
-	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 && eleccion != 6);
+	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 && eleccion != 6 && eleccion != 7);
 }
 
 void menuAdmin(BD *bd)

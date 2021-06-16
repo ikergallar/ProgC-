@@ -220,6 +220,18 @@ void BD::borrarUsuario(const Usuario* u)
 
 }
 
+void BD::editarUsuario(const Usuario* u)
+{
+	char query[100];
+    sprintf(query,"UPDATE Usuario SET pass='%s' WHERE nombre = %d",u->getPass(),u->getNombre());
+	sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);
+	sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+    cout << "\n" << endl;
+    cout << "La cuenta ha sido editada correctamente\n" << endl;
+
+}
+
 //METODOS DE LA TABLA PRODUCTO
 int BD::existeProducto(const char *nombre, const char *marca,const char *color, const float precio)
 {

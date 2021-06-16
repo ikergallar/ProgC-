@@ -40,6 +40,7 @@
 		<Unit filename="include/Cesta.h" />
 		<Unit filename="include/Producto.h" />
 		<Unit filename="include/Usuario.h" />
+		<Unit filename="include/UsuarioComprador.h" />
 		<Unit filename="include/sqlite3.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BD.cpp" />
@@ -47,6 +48,7 @@
 		<Unit filename="src/Cesta.cpp" />
 		<Unit filename="src/Producto.cpp" />
 		<Unit filename="src/Usuario.cpp" />
+		<Unit filename="src/UsuarioComprador.cpp" />
 		<Unit filename="src/sqlite3.c">
 			<Option compilerVar="CC" />
 		</Unit>

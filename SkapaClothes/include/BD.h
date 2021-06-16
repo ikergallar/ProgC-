@@ -31,6 +31,7 @@ public :
     int comprobarLogin(const char *nombre, const char *pass);
     void mostrarUsuarios();
     void borrarUsuario(const Usuario* u);
+    void editarUsuario(const Usuario* u);
     int cantidadUsuario();
     Usuario* seleccionarUsuario(int posicion);
 
