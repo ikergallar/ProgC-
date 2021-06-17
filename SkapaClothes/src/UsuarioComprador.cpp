@@ -15,12 +15,16 @@ UsuarioComprador::UsuarioComprador(char *nombre,char* pass):Usuario(nombre,pass)
 
 }
 
-UsuarioComprador::UsuarioComprador(UsuarioComprador &u):Usuario(u.nombre,u.pass)
+UsuarioComprador::UsuarioComprador(UsuarioComprador &u):Usuario(u)
 {
 
 }
 
 UsuarioComprador::~UsuarioComprador()
 {
-	delete dinero;
+}
+
+void UsuarioComprador::setDinero(float d)
+{
+	this->dinero = d;
 }

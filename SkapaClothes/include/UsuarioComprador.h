@@ -1,5 +1,5 @@
-#ifndef USUARIO_H_INCLUDED
-#define USUARIO_H_INCLUDED
+#ifndef USUARIOCOMPRADOR_H_INCLUDED
+#define USUARIOCOMPRADOR_H_INCLUDED
 
 #include "Usuario.h"
 
@@ -19,4 +19,4 @@ public:
     float getDinero() const {return dinero;}
 	void setDinero(float d);
 };
-#endif // USUARIO_H_INCLUDED
+#endif // USUARIOCOMPRADOR_H_INCLUDED

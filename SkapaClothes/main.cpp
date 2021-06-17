@@ -11,9 +11,11 @@
 using namespace std;
 
 //MENUS
+void menuBienvenida(BD *bd, Usuario* u,Carrito *carrito);
 void menuInicio(BD *bd, Usuario* u,Carrito *carrito);
 void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito);
 void menuAdmin(BD *bd);
+void menuVenta(BD *bd, Usuario* u);
 void cerrarApp(BD *bd, Usuario* u,Carrito *carrito);
 
 //METODOS DE USUARIO
@@ -37,11 +39,54 @@ int main()
     Carrito* carrito = new Carrito();
     bd->crearBD();
     bd->abrirBD();
-    menuInicio(bd, u,carrito);
+    menuBienvenida(bd, u,carrito);
     bd->cerrarBD();
 
     return 0;
 }
+
+void menuBienvenida(BD *bd, Usuario* u,Carrito *carrito)
+{
+	int eleccion;
+
+    cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
+
+	do {
+
+        cout << "------------------------------------------------------"<< endl;
+	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
+	    cout << "1. Comprar productos" << endl;
+	    cout << "2. Vender productos" << endl;
+	    cout << "3. Salir de la aplicacion" << endl;
+		cin >> eleccion;
+
+
+		switch (eleccion)
+		{
+		case 1:
+        {
+		  menuInicio(bd, u,carrito);
+		}
+			break;
+		case 2:
+        {
+
+		}
+			break;
+		case 3:
+        {
+			cerrarApp(bd,u,carrito);
+		}
+			break;
+		default:
+        {
+			cout<<"Seleccion invalida, porfavor introduzca uno de los numeros de la derecha"<< endl;
+		}
+			break;
+		}
+	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 );
+}
+
 
 void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 {
@@ -49,6 +94,7 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 
 	if(contInicio == 0)
     {
+        system("cls");
         cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
     }
 
