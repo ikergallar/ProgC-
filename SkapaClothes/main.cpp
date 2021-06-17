@@ -7,19 +7,25 @@
 #include "Producto.h"
 #include "Cesta.h"
 #include "Carrito.h"
+#include "Comprador.h"
 
 using namespace std;
 
 //MENUS
 void menuBienvenida(BD *bd, Usuario* u,Carrito *carrito);
-void menuInicio(BD *bd, Usuario* u,Carrito *carrito);
+void menuInicioCompra(BD *bd,Carrito *carrito);
+void menuInicioVenta(BD *bd);
 void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito);
 void menuAdmin(BD *bd);
 void menuVenta(BD *bd, Usuario* u);
-void cerrarApp(BD *bd, Usuario* u,Carrito *carrito);
+void cerrarApp(BD *bd,Carrito *carrito);
 
-//METODOS DE USUARIO
-void registrarUsuario(BD *bd, Usuario* u,Carrito *carrito);
+//METODOS DE COMPRADOR
+void registrarComprador(BD *bd,Carrito *carrito);
+void eliminarCuenta(BD *bd,Usuario* u,Carrito *carrito);
+
+//METODOS DE VENDEDOR
+void registrarVendedor(BD *bd);
 void eliminarCuenta(BD *bd,Usuario* u,Carrito *carrito);
 
 //METODOS DE PRODUCTO/CARRITO/CESTA
@@ -65,17 +71,18 @@ void menuBienvenida(BD *bd, Usuario* u,Carrito *carrito)
 		{
 		case 1:
         {
-		  menuInicio(bd, u,carrito);
+		  menuInicioCompra(bd,carrito);
 		}
 			break;
 		case 2:
         {
+            menuInicioVenta(bd);
 
 		}
 			break;
 		case 3:
         {
-			cerrarApp(bd,u,carrito);
+			cerrarApp(bd,carrito);
 		}
 			break;
 		default:
@@ -87,8 +94,7 @@ void menuBienvenida(BD *bd, Usuario* u,Carrito *carrito)
 	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 );
 }
 
-
-void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
+void menuInicioCompra(BD *bd,Carrito *carrito)
 {
 	int eleccion;
 
@@ -127,7 +133,7 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
                 resultado = bd->comprobarLogin(nombre,pass);
                 if(intentos >= 3)
                 {
-                    menuInicio(bd,u,carrito);
+                    menuInicioCompra(bd,carrito);
                 }
                 if(resultado == 0)
                 {
@@ -144,6 +150,7 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
                 }else
                 {
                     cout<<"Sesion iniciada"<<endl;
+                    Usuario *u;
                     menuPrincipal(bd, u,carrito);
                 }
 
@@ -152,12 +159,93 @@ void menuInicio(BD *bd, Usuario* u,Carrito *carrito)
 			break;
 		case 2:
         {
-			registrarUsuario(bd,u,carrito);
+			registrarComprador(bd,carrito);
 		}
 			break;
 		case 3:
         {
-			cerrarApp(bd,u,carrito);
+			cerrarApp(bd,carrito);
+		}
+			break;
+		default:
+        {
+			cout<<"Seleccion invalida, porfavor introduzca uno de los numeros de la derecha"<< endl;
+		}
+			break;
+		}
+	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4);
+}
+
+void menuInicioVenta(BD *bd)
+{
+	int eleccion;
+
+	if(contInicio == 0)
+    {
+        system("cls");
+        cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
+    }
+
+	do {
+
+        cout << "------------------------------------------------------"<< endl;
+	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
+	    cout << "1. Iniciar sesion" << endl;
+	    cout << "2. Registrarme como nuevo usuario" << endl;
+	    cout << "3. Salir de la aplicacion" << endl;
+		cin >> eleccion;
+
+		contInicio++;
+
+		switch (eleccion)
+		{
+		case 1:
+        {
+		    char nombre[20],pass[20];
+		    int intentos = 0, resultado ;
+            do
+            {
+                cout<<"Introduce nombre de usuario: ";
+                cin>> nombre;
+                cout<<"Introduce la contrasenya: ";
+                cin>> pass;
+
+                intentos++;
+
+                resultado = bd->comprobarLogin(nombre,pass);
+                if(intentos >= 3)
+                {
+                    menuInicioVenta(bd);
+                }
+                if(resultado == 0)
+                {
+                    cout<<"El nick no es correcto"<<endl;
+                }else if(resultado==1)
+                {
+                    cout<<"Contrasenya incorrecta"<<endl;
+                }else if(resultado ==3)
+                {
+                    cout<<"ERROR! No existe nadie con ese nombre de usuario"<<endl;
+                }else if(resultado ==4)
+                {
+                    menuAdmin(bd);
+                }else
+                {
+                    cout<<"Sesion iniciada"<<endl;
+                    Usuario *u;
+                    menuVenta(bd, u);
+                }
+
+            }while(resultado!=2 && resultado != 4 && intentos<3);
+		}
+			break;
+		case 2:
+        {
+			registrarVendedor(bd);
+		}
+			break;
+		case 3:
+        {
 		}
 			break;
 		default:
@@ -225,14 +313,11 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
             passActual = new char [strlen(u->getNombre()) + 1];
 	        strcpy(passActual, u->getNombre());
 
-
-                cout<<"Contrasenya actual: "<<passActual<<endl;
-                 cout<<"Nueva contrasenya: "<<endl;
-                 cin>>pass;
-                 cout<<"Confirmar contrasenya: "<<endl;
-                 cin>>confPass;
-
-
+            cout<<"Contrasenya actual: "<<passActual<<endl;
+            cout<<"Nueva contrasenya: "<<endl;
+            cin>>pass;
+            cout<<"Confirmar contrasenya: "<<endl;
+            cin>>confPass;
 
             if(strcmp(pass,confPass) != 0)
             {
@@ -256,12 +341,12 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 			break;
         case 6:
         {
-            menuInicio(bd,u,carrito);
+            menuInicioCompra(bd,carrito);
         }
             break;
         case 7:
         {
-             cerrarApp(bd,u,carrito);
+             cerrarApp(bd,carrito);
         }
 			break;
 		default:
@@ -271,6 +356,66 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 			break;
 		}
 	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 && eleccion != 6 && eleccion != 7);
+}
+
+void menuVenta(BD *bd, Usuario* u)
+{
+	int eleccion;
+
+    cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
+
+	do {
+
+        cout << "------------------------------------------------------"<< endl;
+	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
+	    cout << "1. Ponger un producto a la venta" << endl;
+	    cout << "2. Ver mis productos" << endl;
+        cout << "3. Eliminar un producto de la venta" << endl;
+	    cout << "4. Salir de la aplicacion" << endl;
+		cin >> eleccion;
+
+
+		switch (eleccion)
+		{
+		case 1:
+        {
+            char nombre[15],marca[15],color[15];
+		    float precio;
+            cout<<"Introduzca el nombre del producto: ";
+            cin>>nombre;
+            cout<<"Introduzca la marca del producto: ";
+            cin>>marca;
+            cout<<"Introduzca el color del producto: ";
+            cin>>color;
+            cout<<"Introduzca el precio del producto: ";
+            cin>>precio;
+
+            Producto p(nombre,marca,color,precio);
+
+            bd->insertarProducto(p);
+
+		}
+			break;
+		case 2:
+        {
+
+		}
+			break;
+		case 3:
+        {
+		}
+			break;
+        case 4:
+        {
+		}
+			break;
+		default:
+        {
+			cout<<"Seleccion invalida, porfavor introduzca uno de los numeros de la derecha"<< endl;
+		}
+			break;
+		}
+	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 );
 }
 
 void menuAdmin(BD *bd)
@@ -395,7 +540,7 @@ void menuAdmin(BD *bd)
 	}while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 && eleccion != 6);
 }
 
-void registrarUsuario(BD *bd, Usuario* u, Carrito *carrito)
+void registrarComprador(BD *bd,Carrito *carrito)
 {
     char nombre[20],pass[20],confPass[20];
 
@@ -409,17 +554,48 @@ void registrarUsuario(BD *bd, Usuario* u, Carrito *carrito)
     if(strcmp(pass,confPass) != 0)
     {
         cout<<"Las contraseñas no coinciden: "<<endl;
-        menuInicio(bd,u,carrito);
+        menuInicioCompra(bd,carrito);
 
     }else
     {
 
-	u->setNombre(nombre);
-	u->setPass(pass);
+    Comprador * c = new Comprador();
+	c->setNombre(nombre);
+	c->setPass(pass);
 
-    bd->insertarUsuario(u);
+    bd->insertarComprador(c);
 
-	menuInicio(bd,u,carrito);
+	menuInicioCompra(bd,carrito);
+
+	}
+}
+
+void registrarVendedor(BD *bd)
+{
+    char nombre[20],pass[20],confPass[20];
+
+	cout << "Introduzca su nombre de usuario" << endl;
+	cin >> nombre;
+	cout << "Introduzca su contrasenya" << endl;
+	cin >> pass;
+	cout<<"Confirme la contrasenya: "<< endl;
+    cin>> confPass;
+
+    if(strcmp(pass,confPass) != 0)
+    {
+        cout<<"Las contraseñas no coinciden: "<<endl;
+        menuInicioVenta(bd);
+
+    }else
+    {
+
+    Vendedor *v = new Vendedor();
+	v->setNombre(nombre);
+	v->setPass(pass);
+
+    bd->insertarVendedor(v);
+
+	menuInicioVenta(bd);
 
 	}
 }
@@ -457,7 +633,7 @@ void eliminarCuenta(BD *bd, Usuario* u,Carrito *carrito)
 
 }
 
-void cerrarApp(BD *bd, Usuario* u, Carrito *carrito)
+void cerrarApp(BD *bd, Carrito *carrito)
 {
 	int eleccion;
 
@@ -478,7 +654,7 @@ void cerrarApp(BD *bd, Usuario* u, Carrito *carrito)
 		break;
 		case 2:
         {
-			menuInicio(bd,u,carrito);
+			menuInicioCompra(bd,carrito);
 		}
 		break;
 		default:

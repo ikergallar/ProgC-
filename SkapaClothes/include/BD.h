@@ -9,6 +9,8 @@ extern "C" {
 
 #include "usuario.h"
 #include "Producto.h"
+#include "Comprador.h"
+#include "Vendedor.h"
 
 class BD
 {
@@ -25,6 +27,14 @@ public :
     void cerrarBD();
     virtual ~BD();
 
+
+    int existeComprador(const char *nombre);
+    void insertarComprador(const Comprador* c);
+    int comprobarComprador(const char *nombre, const char *pass);
+
+    int existeVendedor(const char *nombre);
+    void insertarVendedor(const Vendedor* c);
+    int comprobarVendedor(const char *nombre, const char *pass);
 
     int existeUsuario(const char *nombre);
     void insertarUsuario(const Usuario* u);
