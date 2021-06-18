@@ -34,17 +34,17 @@ void BD::crearBD()
 
 	}else
 	{
-		char * tablaUsuario = "CREATE TABLE IF NOT EXISTS Usuario(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) UNIQUE NOT NULL, pass VARCHAR(20) NOT NULL);";
+		char * tablaUsuario = "CREATE TABLE IF NOT EXISTS Usuario(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) UNIQUE NOT NULL, pass VARCHAR(20) NOT NULL,dinero FLOAT);";
 		if(sqlite3_exec(db, tablaUsuario, NULL, NULL, &err)!= SQLITE_OK){
         cout<<"ERROR CREANDO LA TABLA USUARIO "<<err;
 		}
 
-		char * tablaComprador = "CREATE TABLE IF NOT EXISTS Comprador(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) UNIQUE NOT NULL, pass VARCHAR(20) NOT NULL,dinero FLOAT);";
+		char * tablaComprador = "CREATE TABLE IF NOT EXISTS Comprador(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) NOT NULL, pass VARCHAR(20) NOT NULL);";
 		if(sqlite3_exec(db, tablaComprador, NULL, NULL, &err)!= SQLITE_OK){
         cout<<"ERROR CREANDO LA TABLA USUARIO "<<err;
 		}
 
-		char * tablaVendedor = "CREATE TABLE IF NOT EXISTS Vendedor(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) UNIQUE NOT NULL, pass VARCHAR(20) NOT NULL);";
+		char * tablaVendedor = "CREATE TABLE IF NOT EXISTS Vendedor(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) NOT NULL, pass VARCHAR(20) NOT NULL,idProducto INTEGER, FOREIGN KEY(idProducto) REFERENCES Producto(id);";
 		if(sqlite3_exec(db, tablaVendedor, NULL, NULL, &err)!= SQLITE_OK){
         cout<<"ERROR CREANDO LA TABLA USUARIO "<<err;
 		}
@@ -356,7 +356,7 @@ Usuario* BD::seleccionarUsuarioIniciado(char *nombre)
 	int resultado;
 	Usuario *u = new Usuario();
 
-	sprintf(query, "SELECT FROM Usuario WHERE nombre = '%s'");
+	sprintf(query, "SELECT * FROM Usuario WHERE nombre = '%s'",nombre);
 	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
 
 	do
@@ -424,7 +424,7 @@ void BD::insertarProducto(const Producto &p)
 	if(resultado == 0)
 	{
 
-        sprintf(query,"INSERT INTO Producto (nombre,marca,color,precio) VALUES('%s','%s','%s','%f')",p.getNombre(), p.getMarca(), p.getColor(), p.getPrecio());
+        sprintf(query,"INSERT INTO Producto (nombre,marca,color,precio,idVendedor) VALUES('%s','%s','%s','%f','%d')",p.getNombre(), p.getMarca(), p.getColor(), p.getPrecio(),p.getIdVendedor());
 
         sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
         sqlite3_step(stmt);
@@ -492,6 +492,41 @@ Producto* BD::seleccionarProducto(int posicion)
 	int num = 0;
 
 	sprintf(query, "SELECT * FROM Producto");
+	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
+
+	do
+	{
+		resultado = sqlite3_step(stmt);
+		if(resultado == SQLITE_ROW)
+		{
+            int id = sqlite3_column_int(stmt, 0);
+			char *nombre = (char *)sqlite3_column_text(stmt, 1);
+			char *marca = (char *)sqlite3_column_text(stmt, 2);
+			char *color = (char *)sqlite3_column_text(stmt, 3);
+			float precio = (float)sqlite3_column_double(stmt, 4);
+
+			productos[num] = new Producto(id,nombre,marca,color,precio);
+
+			num++;
+
+		}
+	}
+	while(resultado == SQLITE_ROW);
+	sqlite3_finalize(stmt);
+
+	return productos[posicion];
+
+}
+
+Producto* BD::seleccionarProductoDeVendedor(int id)
+{
+	char query[200];
+	int resultado;
+	int numProducto = cantidadProducto();
+	Producto **productos = new Producto*[numProducto];
+	int num = 0;
+
+	sprintf(query, "SELECT * FROM Producto WHERE idVendedor ='%d'",id);
 	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
 
 	do

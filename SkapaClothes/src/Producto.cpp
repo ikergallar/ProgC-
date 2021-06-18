@@ -12,7 +12,7 @@ Producto::Producto()
     precio = 0;
 }
 
-Producto::Producto(const char *nombre, const char *marca, const char *color, const float precio)
+Producto::Producto(const char *nombre, const char *marca, const char *color, const float precio,int id)
 {
 
 	this->nombre = new char [strlen(nombre) + 1];
@@ -25,6 +25,8 @@ Producto::Producto(const char *nombre, const char *marca, const char *color, con
 	strcpy(this->color, color);
 
 	this->precio = precio;
+
+    this->idVendedor = id;
 }
 
 Producto::Producto(int id, const char *nombre, const char *marca, const char *color, const float precio)
@@ -86,6 +88,12 @@ void Producto::setPrecio(float p)
 {
 	this->precio = p;
 }
+
+void Producto::setIdVendedor(int iv)
+{
+	this->idVendedor = iv;
+}
+
 
 Producto::~Producto()
 {

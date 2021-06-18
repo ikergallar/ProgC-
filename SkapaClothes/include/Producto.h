@@ -10,9 +10,10 @@ private:
     char *marca ;
     char *color ;
     float precio;
+    int idVendedor;
 
 public:
-    Producto(const char *nombre, const char *marca, const char *color, const float precio);
+    Producto(const char *nombre, const char *marca, const char *color, const float precio,int id);
     Producto(int id, const char *nombre, const char *marca, const char *color, const float precio);
     Producto();
     Producto(const Producto &p);
@@ -23,11 +24,13 @@ public:
     char * getMarca() const {return marca;}
     char * getColor() const {return color;}
     float getPrecio() const {return precio;}
+    int getIdVendedor() const {return idVendedor;}
 
     void setId(int i);
     void setNombre(char *n);
     void setMarca(char *m);
     void setColor(char *d);
     void setPrecio(float p);
+    void setIdVendedor(int iV);
 };
 #endif /* PRODUCTO_H_ */

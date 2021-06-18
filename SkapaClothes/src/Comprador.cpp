@@ -5,7 +5,6 @@ using namespace std;
 
 Comprador::Comprador():Usuario()
 {
-	this->dinero = 0;
 }
 
 Comprador::Comprador(char *nombre,char* pass):Usuario(nombre,pass)
@@ -23,7 +22,3 @@ Comprador::~Comprador()
 {
 }
 
-void Comprador::setDinero(float d)
-{
-	this->dinero = d;
-}

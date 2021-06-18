@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1624005558 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+1624008112 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
 	<stdio.h>
 	<iostream>
 	<stdlib.h>
@@ -126,19 +126,19 @@
 
 1622125475 c:\users\iker\documents\github\progc-\skapaclothes\producto.h
 
-1623049923 c:\users\iker\documents\github\progc-\skapaclothes\include\usuario.h
+1624006589 c:\users\iker\documents\github\progc-\skapaclothes\include\usuario.h
 
-1623775921 source:c:\users\iker\documents\github\progc-\skapaclothes\src\producto.cpp
+1624007590 source:c:\users\iker\documents\github\progc-\skapaclothes\src\producto.cpp
 	"Producto.h"
 	<string.h>
 
-1623770278 c:\users\iker\documents\github\progc-\skapaclothes\include\producto.h
+1624007566 c:\users\iker\documents\github\progc-\skapaclothes\include\producto.h
 
-1623049923 source:c:\users\iker\documents\github\progc-\skapaclothes\src\usuario.cpp
+1624006625 source:c:\users\iker\documents\github\progc-\skapaclothes\src\usuario.cpp
 	"Usuario.h"
 	<string.h>
 
-1624005516 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
+1624008280 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
 	"sqlite3.h"
 	<stdio.h>
 	<iostream>
@@ -151,7 +151,7 @@
 1623049923 c:\users\iker\documents\github\progc-\skapaclothes\include\sqlite3.h
 	<stdarg.h>
 
-1624005430 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
+1624008273 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
 	"sqlite3.h"
 	"usuario.h"
 	"Producto.h"
@@ -704,14 +704,15 @@
 1623961024 source:c:\users\iker\documents\github\progc-\skapaclothes\src\vendedor.cpp
 	"Vendedor.h"
 
-1623961020 c:\users\iker\documents\github\progc-\skapaclothes\include\vendedor.h
+1624006658 c:\users\iker\documents\github\progc-\skapaclothes\include\vendedor.h
 	"Usuario.h"
 	"Producto.h"
 
-1623960583 source:c:\users\iker\documents\github\progc-\skapaclothes\src\comprador.cpp
+1624006625 source:c:\users\iker\documents\github\progc-\skapaclothes\src\comprador.cpp
 	"Comprador.h"
 	"Usuario.h"
 
-1623960349 c:\users\iker\documents\github\progc-\skapaclothes\include\comprador.h
+1624006774 c:\users\iker\documents\github\progc-\skapaclothes\include\comprador.h
 	"Usuario.h"
+	"Producto.h"
 

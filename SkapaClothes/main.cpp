@@ -46,8 +46,6 @@ int main()
     return 0;
 }
 
-
-
 void menuInicio(BD *bd,Carrito *carrito)
 {
 	int eleccion;
@@ -134,6 +132,7 @@ void menuBienvenida(BD *bd, Usuario* u,Carrito *carrito)
 {
 	int eleccion;
 
+    system("cls");
     cout << "Bienvenido a la aplicacion de Skapa Clothes" << endl;
 
 	do {
@@ -278,17 +277,15 @@ void menuVenta(BD *bd, Usuario* u)
 	int eleccion;
     system("cls");
 
-
 	do {
 
         cout << "------------------------------------------------------"<< endl;
 	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
-	    cout << "1. Ponger un producto a la venta" << endl;
+	    cout << "1. Poner un producto a la venta" << endl;
 	    cout << "2. Ver mis productos" << endl;
         cout << "3. Eliminar un producto de la venta" << endl;
 	    cout << "4. Salir de la aplicacion" << endl;
 		cin >> eleccion;
-
 
 		switch (eleccion)
 		{
@@ -305,9 +302,12 @@ void menuVenta(BD *bd, Usuario* u)
             cout<<"Introduzca el precio del producto: ";
             cin>>precio;
 
-            Producto p(nombre,marca,color,precio);
+            int id = u->getId();
+            Producto p(nombre,marca,color,precio,id);
 
             bd->insertarProducto(p);
+
+            menuVenta(bd,u);
 
 		}
 			break;
@@ -348,11 +348,10 @@ void menuAdmin(BD *bd)
 
         cout << "----------------------------------" << endl;
 		cout << "1. Mostrar los productos disponibles" << endl;
-		cout << "2. Anyadir nuevo producto a la tienda" << endl;
-		cout << "3. Eliminar producto existente" << endl;
-		cout << "4. Editar producto existente" << endl;
-		cout << "5. Eliminar cuenta de usuario" << endl;
-	    cout << "6. Salir" << endl;
+		cout << "2. Eliminar producto existente" << endl;
+		cout << "3. Editar producto existente" << endl;
+		cout << "4. Eliminar cuenta de usuario" << endl;
+	    cout << "5. Salir" << endl;
 		cin >> eleccion;
 
 		contAdmin++;
@@ -370,27 +369,6 @@ void menuAdmin(BD *bd)
 
 		case 2:
         {
-		    char nombre[15],marca[15],color[15];
-		    float precio;
-            cout<<"Introduzca el nombre del producto: ";
-            cin>>nombre;
-            cout<<"Introduzca la marca del producto: ";
-            cin>>marca;
-            cout<<"Introduzca el color del producto: ";
-            cin>>color;
-            cout<<"Introduzca el precio del producto: ";
-            cin>>precio;
-
-            Producto p(nombre,marca,color,precio);
-
-            bd->insertarProducto(p);
-
-            menuAdmin(bd);
-        }
-			break;
-
-		case 3:
-        {
             int resp;
 		    bd->mostrarProductos();
 		    cout << "Introduzca el numero del producto que desea eliminar" << endl;
@@ -403,7 +381,7 @@ void menuAdmin(BD *bd)
         }
 			break;
 
-			case 4:
+        case 3:
         {
             int resp;
 		    bd->mostrarProductos();
@@ -429,7 +407,7 @@ void menuAdmin(BD *bd)
             menuAdmin(bd);
         }
 			break;
-        case 5:
+        case 4:
         {
             int resp;
 		    bd->mostrarUsuarios();
@@ -442,7 +420,7 @@ void menuAdmin(BD *bd)
             menuAdmin(bd);
         }
             break;
-        case 6:
+        case 5:
         {
             exit(0);
         }

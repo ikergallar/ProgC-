@@ -53,6 +53,7 @@ public :
     void borrarProducto(Producto* p);
     void editarProducto(Producto* p);
     Producto* seleccionarProducto(int posicion);
+    Producto* seleccionarProductoDeVendedor(int id);
 };
 #endif
 /* BD_H_ */

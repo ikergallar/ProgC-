@@ -2,12 +2,12 @@
 #define COMPRADOR_H_INCLUDED
 
 #include "Usuario.h"
-
+#include "Producto.h"
 class Comprador : public Usuario
 {
 private:
 
-    float dinero;
+     Producto* p;
 
 public:
 
@@ -16,7 +16,6 @@ public:
 	Comprador(Comprador &u);
     virtual ~Comprador();
 
-    float getDinero() const {return dinero;}
-	void setDinero(float d);
+
 };
 #endif // COMPRADOR_H_INCLUDED

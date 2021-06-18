@@ -7,6 +7,8 @@ Usuario::Usuario()
 {
 	nombre =new char[20];
 	pass = new char[20];
+    this->dinero = 0;
+
 }
 
 Usuario::Usuario(char *nombre,char* pass)
@@ -50,3 +52,9 @@ Usuario::~Usuario()
 	delete[] this->nombre;
 	delete[] this->pass;
 }
+
+void Usuario::setDinero(float d)
+{
+	this->dinero = d;
+}
+
