@@ -5,8 +5,10 @@
 
 class Zapatillas: public Producto
 {
+    int numPie;
     public:
         Zapatillas();
+        Zapatillas(int np);
         virtual ~Zapatillas();
 
     protected:

@@ -18,16 +18,17 @@
 
 1622125475 c:\users\iker\documents\github\progc-\skapaclothes\usuario.h
 
-1620899178 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\main.cpp
+1624028503 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\main.cpp
+	<stdio.h>
 	<iostream>
+	<stdlib.h>
 	<string.h>
+	"BD.h"
 	"Usuario.h"
-	<fstream>
-	<vector>
-	<utility>
-	<stdexcept>
-	<sstream>
-	<bits/stdc++.h>
+	"Producto.h"
+	"Cesta.h"
+	"Carrito.h"
+	"Comprador.h"
 
 1620899725 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\usuario.h
 
@@ -732,5 +733,112 @@
 	"Zapatillas.h"
 
 1624021224 c:\users\iker\documents\github\progc-\skapaclothes\include\zapatillas.h
+	"Producto.h"
+
+1624028503 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\bd.h
+	"sqlite3.h"
+	"usuario.h"
+	"Producto.h"
+	"Comprador.h"
+	"Vendedor.h"
+
+1624028503 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\sqlite3.h
+	<stdarg.h>
+
+1624028503 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\usuario.h
+
+1624028503 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\producto.h
+
+1624028503 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\comprador.h
+	"Usuario.h"
+	"Producto.h"
+
+1624028503 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\vendedor.h
+	"Usuario.h"
+	"Producto.h"
+
+1624028503 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\cesta.h
+	"Producto.h"
+
+1624028503 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\carrito.h
+	"Cesta.h"
+
+1624028504 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\src\pantalon.cpp
+	"Pantalon.h"
+
+1624028503 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\pantalon.h
+	"Producto.h"
+
+1624028504 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\src\producto.cpp
+	"Producto.h"
+	<string.h>
+
+1624028504 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\src\sqlite3.c
+	"config.h"
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	<stdint.h>
+	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<sys/ioctl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	"sqlite_tcl.h"
+	"tcl.h"
+	<ctype.h>
+	"sqlite3rtree.h"
+	<ctype.h>
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+	<math.h>
+
+1624028504 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\src\usuario.cpp
+	"Usuario.h"
+	<string.h>
+
+1624028504 source:c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\src\zapatillas.cpp
+	"Zapatillas.h"
+
+1624028784 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\zapatillas.h
 	"Producto.h"
 

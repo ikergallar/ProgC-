@@ -5,8 +5,11 @@
 
 class Camiseta: public Producto
 {
+    char *tipoManga;
+
     public:
         Camiseta();
+        Camiseta(const char *tm);
         virtual ~Camiseta();
 
     protected:
