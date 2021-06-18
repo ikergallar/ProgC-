@@ -350,6 +350,35 @@ Usuario* BD::seleccionarUsuario(int posicion)
 	return u;
 }
 
+Usuario* BD::seleccionarUsuarioIniciado(char *nombre)
+{
+	char query[100];
+	int resultado;
+	Usuario *u = new Usuario();
+
+	sprintf(query, "SELECT FROM Usuario WHERE nombre = '%s'");
+	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
+
+	do
+	{
+		resultado = sqlite3_step(stmt);
+		if(resultado == SQLITE_ROW)
+		{
+            int id = sqlite3_column_int(stmt, 0);
+			char *nombre = (char *)sqlite3_column_text(stmt, 1);
+			char *pass = (char *)sqlite3_column_text(stmt, 2);
+
+            u->setId(id);
+            u->setNombre(nombre);
+            u->setPass(pass);
+		}
+	}
+	while(resultado == SQLITE_ROW);
+	sqlite3_finalize(stmt);
+
+	return u;
+}
+
 void BD::borrarUsuario(const Usuario* u)
 {
 	char query[100];

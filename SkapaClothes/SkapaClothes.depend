@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1623964048 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+1624005558 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
 	<stdio.h>
 	<iostream>
 	<stdlib.h>
@@ -138,7 +138,7 @@
 	"Usuario.h"
 	<string.h>
 
-1623964207 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
+1624005516 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
 	"sqlite3.h"
 	<stdio.h>
 	<iostream>
@@ -151,7 +151,7 @@
 1623049923 c:\users\iker\documents\github\progc-\skapaclothes\include\sqlite3.h
 	<stdarg.h>
 
-1623964231 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
+1624005430 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
 	"sqlite3.h"
 	"usuario.h"
 	"Producto.h"

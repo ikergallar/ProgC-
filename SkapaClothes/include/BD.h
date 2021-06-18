@@ -44,6 +44,7 @@ public :
     void editarUsuario(const Usuario* u);
     int cantidadUsuario();
     Usuario* seleccionarUsuario(int posicion);
+    Usuario* seleccionarUsuarioIniciado(char *nombre);
 
     int existeProducto(const char *nombre, const char *marca, const char *descripcion, float precio);
     int cantidadProducto();
