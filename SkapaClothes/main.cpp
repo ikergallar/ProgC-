@@ -190,10 +190,11 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 	    cout << "1. Anyadir productos a la cesta" << endl;
 	    cout << "2. Mostrar mi cesta" << endl;
 	    cout << "3. Finalizar compra" << endl;
-        cout << "4. Editar perfil" << endl;
-	    cout << "5. Eliminar cuenta" << endl;
-	    cout << "6. Cerrar Sesion" << endl;
-	    cout << "7. Salir" << endl;
+	    cout << "4. Ingresar dinero" << endl;
+        cout << "5. Editar perfil" << endl;
+	    cout << "6. Eliminar cuenta" << endl;
+	    cout << "7. Cerrar Sesion" << endl;
+	    cout << "8. Salir" << endl;
 
 		cin >> eleccion;
 
@@ -220,6 +221,14 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 			break;
 
         case 4:
+        {
+		    cout<< "Su numero de tarjeta de credito"<<endl;
+		    cout<< "Cvv"<<endl;
+		    cout<<"La cantidad que desea ingresar"<<endl;
+		}
+			break;
+
+        case 5:
         {
             int a = 0;
             char pass[20],confPass[20];
@@ -248,17 +257,17 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 
         }
             break;
-        case 5:
+        case 6:
         {
             eliminarCuenta(bd,u,carrito);
         }
 			break;
-        case 6:
+        case 7:
         {
             menuInicio(bd,carrito);
         }
             break;
-        case 7:
+        case 8:
         {
              cerrarApp(bd,carrito);
         }
@@ -269,12 +278,13 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 		}
 			break;
 		}
-	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 && eleccion != 6 && eleccion != 7);
+	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 && eleccion != 6 && eleccion != 7 && eleccion != 8);
 }
 
 void menuVenta(BD *bd, Usuario* u)
 {
 	int eleccion;
+	char c;
     system("cls");
 
 	do {
@@ -302,8 +312,7 @@ void menuVenta(BD *bd, Usuario* u)
             cout<<"Introduzca el precio del producto: ";
             cin>>precio;
 
-            int id = u->getId();
-            Producto p(nombre,marca,color,precio,id);
+            Producto p(nombre,marca,color,precio,u->getId());
 
             bd->insertarProducto(p);
 
@@ -313,6 +322,10 @@ void menuVenta(BD *bd, Usuario* u)
 			break;
 		case 2:
         {
+            bd->mostrarProductoDeVendedor(u->getId());
+            cout << "Pusla una tecla para continuar..." << endl;
+			cin >> c;
+            menuVenta(bd,u);
 
 		}
 			break;

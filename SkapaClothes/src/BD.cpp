@@ -39,17 +39,7 @@ void BD::crearBD()
         cout<<"ERROR CREANDO LA TABLA USUARIO "<<err;
 		}
 
-		char * tablaComprador = "CREATE TABLE IF NOT EXISTS Comprador(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) NOT NULL, pass VARCHAR(20) NOT NULL);";
-		if(sqlite3_exec(db, tablaComprador, NULL, NULL, &err)!= SQLITE_OK){
-        cout<<"ERROR CREANDO LA TABLA USUARIO "<<err;
-		}
-
-		char * tablaVendedor = "CREATE TABLE IF NOT EXISTS Vendedor(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) NOT NULL, pass VARCHAR(20) NOT NULL,idProducto INTEGER, FOREIGN KEY(idProducto) REFERENCES Producto(id);";
-		if(sqlite3_exec(db, tablaVendedor, NULL, NULL, &err)!= SQLITE_OK){
-        cout<<"ERROR CREANDO LA TABLA USUARIO "<<err;
-		}
-
-		char * tablaProducto = "CREATE TABLE IF NOT EXISTS Producto(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) NOT NULL, marca VARCHAR(20), color VARCHAR(20), precio FLOAT, idVendedor INTEGER, FOREIGN KEY(idVendedor) REFERENCES Vendedor(id));";
+		char * tablaProducto = "CREATE TABLE IF NOT EXISTS Producto(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) NOT NULL, marca VARCHAR(20), color VARCHAR(20), precio FLOAT, idVendedor INTEGER, FOREIGN KEY(idVendedor) REFERENCES Usuario(id));";
 		if(sqlite3_exec(db, tablaProducto, NULL, NULL, &err)!= SQLITE_OK){
         cout<<"ERROR CREANDO LA TABLA PRODUCTO "<<err;
 		}
@@ -73,138 +63,6 @@ void BD::cerrarBD()
     {
         cout<<"Error al intentar cerrar la base de datos"<<endl;
     }
-}
-
-//METODOS DE LA TABLA COMPRADOR
-int BD::existeComprador(const char *nombre)
-{
-	int resultado;
-	char query[100];
-
-	sprintf(query, "SELECT COUNT(*) FROM Comprador WHERE nombre = '%s'", nombre);
-    sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
-    sqlite3_step(stmt);
-	resultado = sqlite3_column_int(stmt, 0);//0 es el numero de la columna del dni.
-    sqlite3_finalize(stmt);
-	return resultado;
-}
-
-void BD::insertarComprador(const Comprador* c)
-{
-	char query[100];
-	int resultado;
-
-	resultado = existeComprador(c->getNombre());
-
-	if(resultado == 0)
-	{
-        sprintf(query,"INSERT INTO Comprador (nombre,pass) VALUES('%s' , '%s')",c->getNombre(), c->getPass());
-        sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-
-        cout << "\n" << endl;
-        cout << "Usuario creado correctamente\n" << endl;
-
-	}else {cout<<"ERROR! Ya existe una persona con ese Nombre de usuario"<<endl;
-	}
-}
-
-int BD::comprobarComprador(const char *nombre, const char *pass)
-{
-    /*Devuelve 0 si el nick es incorrecto
-    Devuelve 1 si el nick es correcto pero la contraseña no
-    Devuelve 2 si nick y contraseña son correctos
-    Devuelve 4 si inicia en modo Administrador*/
-
-    int resultado = 2,r;
-    char query[100];
-
-    if(strcmp(nombre,"admin") == 0 && strcmp(pass,"admin") == 0)
-    {
-        resultado = 4;
-    }else
-    {
-        sprintf(query,"SELECT * FROM Comprador WHERE nombre='%s'",nombre);
-        sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
-        r=sqlite3_step(stmt);
-        if(r == SQLITE_ROW){
-            char* con = (char*) sqlite3_column_text(stmt, 1);
-            if(strcmp(con,pass)!=0){
-                resultado = 1;
-           }
-        }else{
-            resultado = 0;
-        }
-        sqlite3_finalize(stmt);
-    }
-    return resultado;
-}
-
-//METODOS DE LA TABLA VENDEDOR
-int BD::existeVendedor(const char *nombre)
-{
-	int resultado;
-	char query[100];
-
-	sprintf(query, "SELECT COUNT(*) FROM Comprador WHERE nombre = '%s'", nombre);
-    sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
-    sqlite3_step(stmt);
-	resultado = sqlite3_column_int(stmt, 0);//0 es el numero de la columna del dni.
-    sqlite3_finalize(stmt);
-	return resultado;
-}
-
-void BD::insertarVendedor(const Vendedor* v)
-{
-	char query[100];
-	int resultado;
-
-	resultado = existeVendedor(v->getNombre());
-
-	if(resultado == 0)
-	{
-        sprintf(query,"INSERT INTO Vendedor (nombre,pass) VALUES('%s' , '%s')",v->getNombre(), v->getPass());
-        sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-
-        cout << "\n" << endl;
-        cout << "Usuario creado correctamente\n" << endl;
-
-	}else {cout<<"ERROR! Ya existe una persona con ese Nombre de usuario"<<endl;
-	}
-}
-
-int BD::comprobarVendedor(const char *nombre, const char *pass)
-{
-    /*Devuelve 0 si el nick es incorrecto
-    Devuelve 1 si el nick es correcto pero la contraseña no
-    Devuelve 2 si nick y contraseña son correctos
-    Devuelve 4 si inicia en modo Administrador*/
-
-    int resultado = 2,r;
-    char query[100];
-
-    if(strcmp(nombre,"admin") == 0 && strcmp(pass,"admin") == 0)
-    {
-        resultado = 4;
-    }else
-    {
-        sprintf(query,"SELECT * FROM Vendedor WHERE nombre='%s'",nombre);
-        sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
-        r=sqlite3_step(stmt);
-        if(r == SQLITE_ROW){
-            char* con = (char*) sqlite3_column_text(stmt, 1);
-            if(strcmp(con,pass)!=0){
-                resultado = 1;
-           }
-        }else{
-            resultado = 0;
-        }
-        sqlite3_finalize(stmt);
-    }
-    return resultado;
 }
 
 //METODOS DE LA TABLA USUARIO
@@ -518,12 +376,11 @@ Producto* BD::seleccionarProducto(int posicion)
 
 }
 
-Producto* BD::seleccionarProductoDeVendedor(int id)
+void BD::mostrarProductoDeVendedor(int id)
 {
 	char query[200];
 	int resultado;
-	int numProducto = cantidadProducto();
-	Producto **productos = new Producto*[numProducto];
+
 	int num = 0;
 
 	sprintf(query, "SELECT * FROM Producto WHERE idVendedor ='%d'",id);
@@ -534,22 +391,18 @@ Producto* BD::seleccionarProductoDeVendedor(int id)
 		resultado = sqlite3_step(stmt);
 		if(resultado == SQLITE_ROW)
 		{
-            int id = sqlite3_column_int(stmt, 0);
 			char *nombre = (char *)sqlite3_column_text(stmt, 1);
 			char *marca = (char *)sqlite3_column_text(stmt, 2);
 			char *color = (char *)sqlite3_column_text(stmt, 3);
 			float precio = (float)sqlite3_column_double(stmt, 4);
 
-			productos[num] = new Producto(id,nombre,marca,color,precio);
-
-			num++;
+			cout<<num<< ". "<<nombre<<", "<<marca<<", "<<color<<", "<<precio<<endl;
+            num++;
 
 		}
 	}
 	while(resultado == SQLITE_ROW);
 	sqlite3_finalize(stmt);
-
-	return productos[posicion];
 
 }
 

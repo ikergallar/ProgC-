@@ -36,22 +36,23 @@
 		</Compiler>
 		<Unit filename="Skaa.db" />
 		<Unit filename="include/BD.h" />
+		<Unit filename="include/Camiseta.h" />
 		<Unit filename="include/Carrito.h" />
 		<Unit filename="include/Cesta.h" />
-		<Unit filename="include/Comprador.h" />
+		<Unit filename="include/Pantalon.h" />
 		<Unit filename="include/Producto.h" />
 		<Unit filename="include/Usuario.h" />
-		<Unit filename="include/Vendedor.h" />
+		<Unit filename="include/Zapatillas.h" />
 		<Unit filename="include/sqlite3.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BD.cpp" />
+		<Unit filename="src/Camiseta.cpp" />
 		<Unit filename="src/Carrito.cpp" />
 		<Unit filename="src/Cesta.cpp" />
-		<Unit filename="src/Comprador.cpp" />
+		<Unit filename="src/Pantalon.cpp" />
 		<Unit filename="src/Producto.cpp" />
 		<Unit filename="src/Usuario.cpp" />
-		<Unit filename="src/Vendedor.cpp" />
-		<Unit filename="src/gestionProductos.cpp" />
+		<Unit filename="src/Zapatillas.cpp" />
 		<Unit filename="src/sqlite3.c">
 			<Option compilerVar="CC" />
 		</Unit>
