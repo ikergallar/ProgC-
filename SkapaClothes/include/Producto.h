@@ -32,5 +32,7 @@ public:
     void setColor(char *d);
     void setPrecio(float p);
     void setIdVendedor(int iV);
+
+    virtual void imprimir();
 };
 #endif /* PRODUCTO_H_ */

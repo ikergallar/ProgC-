@@ -1,5 +1,6 @@
 #include "Producto.h"
 #include <string.h>
+#include <iostream>
 
 using namespace std;
 
@@ -94,6 +95,10 @@ void Producto::setIdVendedor(int iv)
 	this->idVendedor = iv;
 }
 
+void Producto::imprimir()
+{
+    cout<<this->nombre<<", Marca: "<<this->marca<<", Color: "<<this->color<<", Precio:  "<<this->precio;
+}
 
 Producto::~Producto()
 {

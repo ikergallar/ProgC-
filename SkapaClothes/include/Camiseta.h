@@ -5,16 +5,23 @@
 
 class Camiseta: public Producto
 {
-    char *tipoManga;
+
+    private:
+
+        char *tipoManga;
 
     public:
         Camiseta();
-        Camiseta(const char *tm);
+        Camiseta(const char *nombre, const char *marca, const char *color, const float precio,int id, char *);
+        Camiseta(const Camiseta &c);
         virtual ~Camiseta();
 
-    protected:
+        char * getTipoManga() const {return tipoManga;}
 
-    private:
+        void setTipoManga(char *);
+
+        virtual void imprimir();
+
 };
 
 #endif // CAMISETA_H
