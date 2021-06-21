@@ -658,79 +658,46 @@ void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta *cesta,Usuario* u)
     }while (s != 1 && s!= 2);
 }
 
-
-/*void imprimirRecibo (Carrito * carrito)
-{
-	system("cls");
-
-	cout << "RECIBO DEL PEDIDO" << endl;
-	cout << "_________________________________" << endl;
-
-	float total = 0.0;
-	int cant;
-
-	for (int i = 0; i < carrito->getCantProductos(); i++)
-    {
-		float costoP;
-		costoP = carrito->getCesta()[i].getProducto()->getPrecio();
-
-		cant = carrito->getCesta()[i].getCant();
-
-		total = total + (cant * costoP);
-
-		cout << carrito->getCesta()[i].getProducto()->getNombre();
-		cout << "    " << costoP  << " Euros";
-		cout << "   x" << carrito->getCesta()[i].getCant() << endl;
-	}
-	carrito->setImporte(total);
-
-	cout << "__________________________________" << endl;
-	cout << "TOTAL: " << total << "  Euros" << endl;
-}
-
-void terminarPedido(BD *bd,Carrito * carrito)
+void terminarPedido(BD *bd,Carrito * carrito,Cesta *cesta)
 {
 	system ("cls");
+	carrito->setCesta(cesta);
 
-	if (carrito->getCantProductos() == 0)
+	if (cesta->getNumProductos() == 0)
     {
 		cout << "¡¡¡ NINGUN PRODUCTO EN SU CARRITO !!!" << endl;
-
 	}else
 	{
 		int opcion;
 		char direccion[100];
-
 		cout << "Ingrese la direccion a la que desea que se entregue el pedido " << endl;
 		cout <<	"Introduzca su direccion: " << endl;
 		cin >> direccion;
 		cout << "------------------------------------------" << endl;
-		mostrarCesta(bd,carrito);
+		cesta->imprimir();
 		cout << "Esta seguro que desea realizar su pedido?" << endl;
 		cout << "1. Si" << endl;
 		cout << "2. NO" << endl;
 		cin >> opcion;
-
 		switch (opcion)
 		{
 		case 1:
 			cout <<"Su pedido se ha realizado correctamente" <<endl << endl;
-			imprimirRecibo(carrito);
+			carrito->imprimirRecibo();
 			cout << endl;
 			cout << "Gracias por su compra, lo esperamos de vuelta :)" << endl;
 			break;
 		case 2:
 			cout <<"Su pedido se ha cancelado" <<endl;
 			break;
-
 		default:
 			cout << "Esa respuesta no es válida" <<endl;
 			break;
-
 		}
 	}
 	int o;
 	cout << "Introduce un numero para continuar..." << endl;
 	cin >> o;
 }
-*/
+
+

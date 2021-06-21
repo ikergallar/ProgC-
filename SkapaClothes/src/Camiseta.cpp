@@ -30,7 +30,7 @@ void Camiseta::setTipoManga(char *tM)
 void Camiseta::imprimir()
 {
     Producto::imprimir();
-    cout<<"Manga:  "<<this->tipoManga;
+    cout<<" Manga:  "<<this->tipoManga<<endl;
 }
 
 Camiseta::~Camiseta()

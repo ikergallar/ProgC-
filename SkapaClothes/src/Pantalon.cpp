@@ -30,7 +30,7 @@ void Pantalon::setTipoPantalon(char *tP)
 void Pantalon::imprimir()
 {
     Producto::imprimir();
-    cout<<"Tipo de pantalon:  "<<this->tipoPantalon;
+    cout<<" Tipo de pantalon: "<<this->tipoPantalon<<endl;
 }
 
 Pantalon::~Pantalon()

@@ -28,7 +28,7 @@ void Zapatillas::setNumPie(int nP)
 void Zapatillas::imprimir()
 {
     Producto::imprimir();
-    cout<<"Numero de pie:  "<<this->numPie;
+    cout<<" Numero de pie: "<<this->numPie<<endl;
 }
 
 Zapatillas::~Zapatillas()

@@ -4,28 +4,22 @@
 
 using namespace std;
 
-Carrito::Carrito(Cesta *cesta, int fecha, float importe)
+Carrito::Carrito(Cesta *cesta)
 {
 	this->cesta = cesta;
-	this->fecha = fecha;
-	this->importe = importe;
-	this->cantProductos = 0;
+	this->importe = 0;
 }
 
 Carrito::Carrito()
 {
 	this->cesta = NULL;
-	this->fecha = 0.0;
 	this->importe = 0.0;
-	this->cantProductos = 0;
 }
 
 Carrito::Carrito(Carrito & p)
 {
 	this->cesta = p.cesta;
-	this->fecha = p.fecha;
 	this->importe = p.importe;
-	this->cantProductos = p.cantProductos;
 }
 
 Carrito::~Carrito()
@@ -38,17 +32,36 @@ void Carrito::setCesta (Cesta *c)
 	this->cesta = c;
 }
 
-void Carrito::setFecha (int f)
-{
-	this->fecha = f;
-}
-
 void Carrito::setImporte (float i)
 {
 	this->importe = i;
 }
 
-void Carrito::setCantProductos (int cP)
+void Carrito::imprimirRecibo()
 {
-	this->cantProductos = cP;
+    system("cls");
+
+	cout << "RECIBO DEL PEDIDO" << endl;
+	cout << "_________________________________" << endl;
+
+	float total = 0.0;
+	int cant;
+
+	for (int i = 0; i < this->cesta->getNumProductos(); i++)
+    {
+		float costoP;
+		costoP = this->cesta->getProducto()[i]->getPrecio();
+
+		cant = this->cesta->getCant();
+
+		total = total + (cant * costoP);
+
+		cout << this->cesta->getProducto()[i]->getNombre();
+		cout << "    " << costoP  << " Euros";
+		cout << "   x" << this->cesta->getCant() << endl;
+	}
+	setImporte(total);
+
+	cout << "__________________________________" << endl;
+	cout << "TOTAL: " << total << "  Euros" << endl;
 }

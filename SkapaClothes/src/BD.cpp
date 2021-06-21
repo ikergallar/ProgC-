@@ -474,9 +474,6 @@ void BD::insertarCamiseta(const Camiseta &c)
 
         insertarProducto(c);
 
-        cout << "\n" << endl;
-        cout << "Producto anyadido correctamente\n" << endl;
-
 	}else {
 	    cout<<"ERROR! El producto introducido ya existe"<<endl;
 	}
@@ -513,9 +510,6 @@ void BD::insertarPantalon(const Pantalon &p)
 
         insertarProducto(p);
 
-        cout << "\n" << endl;
-        cout << "Producto anyadido correctamente\n" << endl;
-
 	}else {
 	    cout<<"ERROR! El producto introducido ya existe"<<endl;
 	}
@@ -551,9 +545,6 @@ void BD::insertarZapatillas(const Zapatillas &z)
         sqlite3_finalize(stmt);
 
         insertarProducto(z);
-
-        cout << "\n" << endl;
-        cout << "Producto anyadido correctamente\n" << endl;
 
 	}else {
 	    cout<<"ERROR! El producto introducido ya existe"<<endl;

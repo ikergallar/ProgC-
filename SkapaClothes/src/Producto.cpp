@@ -97,7 +97,7 @@ void Producto::setIdVendedor(int iv)
 
 void Producto::imprimir()
 {
-    cout<<this->nombre<<", Marca: "<<this->marca<<", Color: "<<this->color<<", Precio:  "<<this->precio;
+    cout<<"INFO: "<<this->nombre<<", Marca: "<<this->marca<<", Color: "<<this->color<<", Precio:  "<<this->precio;
 }
 
 Producto::~Producto()

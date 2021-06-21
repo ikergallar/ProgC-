@@ -25,8 +25,8 @@ Cesta::~Cesta(){
 	delete []this->productos;
 }
 
-void Cesta::setProductos(Producto** p){
-	this->productos = p;
+void Cesta::setProductos(Producto* p){
+	this->productos[this->numProductos] = p;
 }
 
 void Cesta::setNumProductos(int numProductos){
@@ -81,4 +81,3 @@ void Cesta::imprimir()
 	cin >> o;
 
 }
-

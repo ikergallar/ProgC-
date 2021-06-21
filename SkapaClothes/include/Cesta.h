@@ -19,11 +19,11 @@ public:
     int getNumProductos ()const{return numProductos;}
     int getCant ()const{return cant;}
 
-    void setProductos(Producto** p);
+    void setProductos(Producto* p);
     void setNumProductos(int numProductos);
     void setCant(int c);
 
-    void anadirProducto(Producto* p, int c);
+    void anadirProducto(Producto* p, int cant);
     void imprimir();
 
 };

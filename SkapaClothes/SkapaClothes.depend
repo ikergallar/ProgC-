@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1624271534 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+1624295671 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
 	<stdio.h>
 	<iostream>
 	<stdlib.h>
@@ -129,7 +129,7 @@
 
 1624006589 c:\users\iker\documents\github\progc-\skapaclothes\include\usuario.h
 
-1624222207 source:c:\users\iker\documents\github\progc-\skapaclothes\src\producto.cpp
+1624292971 source:c:\users\iker\documents\github\progc-\skapaclothes\src\producto.cpp
 	"Producto.h"
 	<string.h>
 	<iostream>
@@ -140,7 +140,7 @@
 	"Usuario.h"
 	<string.h>
 
-1624270626 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
+1624287480 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
 	"sqlite3.h"
 	<stdio.h>
 	<iostream>
@@ -556,18 +556,18 @@
 1622386458 c:\users\ikerg\documents\github\progc-\skapaclothes\include\cesta.h
 	"Producto.h"
 
-1624268939 c:\users\iker\documents\github\progc-\skapaclothes\include\cesta.h
+1624294818 c:\users\iker\documents\github\progc-\skapaclothes\include\cesta.h
 	"Producto.h"
 
-1623049923 c:\users\iker\documents\github\progc-\skapaclothes\include\carrito.h
+1624290037 c:\users\iker\documents\github\progc-\skapaclothes\include\carrito.h
 	"Cesta.h"
 
-1623049923 source:c:\users\iker\documents\github\progc-\skapaclothes\src\carrito.cpp
+1624294827 source:c:\users\iker\documents\github\progc-\skapaclothes\src\carrito.cpp
 	"iostream"
 	<stdlib.h>
 	"Carrito.h"
 
-1624268930 source:c:\users\iker\documents\github\progc-\skapaclothes\src\cesta.cpp
+1624295441 source:c:\users\iker\documents\github\progc-\skapaclothes\src\cesta.cpp
 	"Cesta.h"
 	<iostream>
 	<string.h>
@@ -721,7 +721,7 @@
 	"Usuario.h"
 	"Producto.h"
 
-1624222483 source:c:\users\iker\documents\github\progc-\skapaclothes\src\camiseta.cpp
+1624292971 source:c:\users\iker\documents\github\progc-\skapaclothes\src\camiseta.cpp
 	"Camiseta.h"
 	"string.h"
 	<iostream>
@@ -729,7 +729,7 @@
 1624222378 c:\users\iker\documents\github\progc-\skapaclothes\include\camiseta.h
 	"Producto.h"
 
-1624222631 source:c:\users\iker\documents\github\progc-\skapaclothes\src\pantalon.cpp
+1624292984 source:c:\users\iker\documents\github\progc-\skapaclothes\src\pantalon.cpp
 	"Pantalon.h"
 	"string.h"
 	<iostream>
@@ -737,7 +737,7 @@
 1624222378 c:\users\iker\documents\github\progc-\skapaclothes\include\pantalon.h
 	"Producto.h"
 
-1624222607 source:c:\users\iker\documents\github\progc-\skapaclothes\src\zapatillas.cpp
+1624292995 source:c:\users\iker\documents\github\progc-\skapaclothes\src\zapatillas.cpp
 	"Zapatillas.h"
 	"string.h"
 	<iostream>
