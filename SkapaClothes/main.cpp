@@ -157,16 +157,20 @@ void menuBienvenida(BD *bd, Usuario* u,Carrito *carrito)
             cin>>pass;
             cout<<"Confirmar contrasenya: "<<endl;
             cin>>confPass;
-            if(strcmp(pass,confPass) != 0)
-            {
-                cout<<"Las contraseñas no coinciden: "<<endl;
-                a = 0;
-            }else
-            a = 1;
-	            u->setPass(pass);
-                bd->editarUsuario(u);
-		        menuBienvenida(bd,u,carrito);
 
+            if(strcmp(pass,confPass) == 0)
+            {
+                u->setPass(pass);
+                bd->editarUsuario(u);
+               // menuBienvenida(bd,u,carrito);
+
+            }else
+
+                cout<<"Las contraseñas no coinciden "<<endl;
+                int o;
+                cout << "Introduce un numero para continuar..." << endl;
+                cin >> o;
+                menuBienvenida(bd,u,carrito);
         }
             break;
 
@@ -437,6 +441,27 @@ void menuVenta(BD *bd, Usuario* u)
 			break;
 		case 3:
         {
+             bd->mostrarProductoDeVendedor(u->getId());
+             int eleccion,r;
+	         cout << "NUMERO del producto: ";
+	         cin >> eleccion;
+             Producto *p = bd->seleccionarProductoDeVendedor(eleccion,u->getId());
+             cout << "¿Esta seguro que desea retirarlo de la venta?"<<endl;
+             cout << "1. SI"<<endl;
+             cout << "2. NO"<<endl;
+             cin>>r;
+
+             if(r = 1)
+             {
+                 bd->borrarProducto(p);
+                 menuVenta(bd,u);
+
+             }
+             else
+             {
+                menuVenta(bd,u);
+             }
+
 		}
 			break;
         case 4:
@@ -573,7 +598,7 @@ void eliminarCuenta(BD *bd, Usuario* u,Carrito *carrito)
 		break;
 		case 2:
         {
-			menuBienvenida(bd, u,carrito);
+			menuBienvenida(bd,u,carrito);
 		}
 		break;
 		default:

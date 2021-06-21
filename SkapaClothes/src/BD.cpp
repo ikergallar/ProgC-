@@ -267,7 +267,7 @@ void BD::borrarUsuario(const Usuario* u)
 void BD::editarUsuario(const Usuario* u)
 {
 	char query[100];
-    sprintf(query,"UPDATE Usuario SET pass='%s' WHERE nombre = %d",u->getPass(),u->getNombre());
+    sprintf(query,"UPDATE Usuario SET pass='%s' WHERE nombre = '%s'",u->getPass(),u->getNombre());
 	sqlite3_prepare_v2(db, query,strlen(query)+ 1, &stmt, NULL);
 	sqlite3_step(stmt);
 	sqlite3_finalize(stmt);
@@ -420,6 +420,42 @@ void BD::mostrarProductoDeVendedor(int id)
 	sqlite3_finalize(stmt);
 
 }
+
+Producto* BD::seleccionarProductoDeVendedor(int posicion,int id)
+{
+	char query[200];
+	int resultado;
+	int numProducto = cantidadProducto();
+	Producto **productos = new Producto*[numProducto];
+	int num = 0;
+
+	sprintf(query, "SELECT * FROM Producto WHERE idVendedor ='%d'",id);
+	sqlite3_prepare_v2(db, query, strlen(query)+ 1, &stmt, NULL);
+
+	do
+	{
+		resultado = sqlite3_step(stmt);
+		if(resultado == SQLITE_ROW)
+		{
+            int id = sqlite3_column_int(stmt, 0);
+			char *nombre = (char *)sqlite3_column_text(stmt, 1);
+			char *marca = (char *)sqlite3_column_text(stmt, 2);
+			char *color = (char *)sqlite3_column_text(stmt, 3);
+			float precio = (float)sqlite3_column_double(stmt, 4);
+
+			productos[num] = new Producto(id,nombre,marca,color,precio);
+
+			num++;
+
+		}
+	}
+	while(resultado == SQLITE_ROW);
+	sqlite3_finalize(stmt);
+
+	return productos[posicion];
+
+}
+
 
 void BD::borrarProducto(Producto* p)
 {

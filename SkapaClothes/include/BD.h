@@ -58,6 +58,7 @@ public :
     void editarProducto(Producto* p);
     Producto* seleccionarProducto(int posicion);
     void mostrarProductoDeVendedor(int id);
+    Producto* seleccionarProductoDeVendedor(int posicion,int id);
 
     int existeCamiseta(const char *nombre, const char *marca,const char *color, const float precio, const char *manga);
     void insertarCamiseta(const Camiseta &c);
