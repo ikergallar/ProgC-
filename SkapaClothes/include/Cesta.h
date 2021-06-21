@@ -5,20 +5,26 @@
 class Cesta{
 
 private:
-    Producto* p;
+    Producto** productos;
+    int numProductos;
     int cant;
 
 public:
     Cesta();
-    Cesta(Producto *p, int cant);
+    Cesta(Producto* productos, int cant);
     Cesta(Cesta &c);
     virtual ~Cesta();
 
-    Producto* getProducto () const{return p;}
+    Producto** getProducto () const{return productos;}
+    int getNumProductos ()const{return numProductos;}
     int getCant ()const{return cant;}
 
-    void setProducto (Producto* p);
-    void setCant (int cant);
+    void setProductos(Producto** p);
+    void setNumProductos(int numProductos);
+    void setCant(int c);
+
+    void anadirProducto(Producto* p, int c);
+    void imprimir();
 
 };
 #endif // CESTA_H_INCLUDED

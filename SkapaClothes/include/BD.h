@@ -11,6 +11,10 @@ extern "C" {
 #include "Producto.h"
 #include "Comprador.h"
 #include "Vendedor.h"
+#include "Camiseta.h"
+#include "Pantalon.h"
+#include "Zapatillas.h"
+
 
 class BD
 {
@@ -54,6 +58,15 @@ public :
     void editarProducto(Producto* p);
     Producto* seleccionarProducto(int posicion);
     void mostrarProductoDeVendedor(int id);
+
+    int existeCamiseta(const char *nombre, const char *marca,const char *color, const float precio, const char *manga);
+    void insertarCamiseta(const Camiseta &c);
+
+    int existePantalon(const char *nombre, const char *marca,const char *color, const float precio, const char *tipo);
+    void insertarPantalon(const Pantalon &p);
+
+    int existeZapatillas(const char *nombre, const char *marca,const char *color, const float precio, const int numPie);
+    void insertarZapatillas(const Zapatillas &z);
 };
 #endif
 /* BD_H_ */

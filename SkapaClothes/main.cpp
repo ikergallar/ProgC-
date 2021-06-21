@@ -14,14 +14,14 @@ using namespace std;
 //MENUS
 void menuBienvenida(BD *bd, Usuario* u,Carrito *carrito);
 void menuInicio(BD *bd,Carrito *carrito);
-void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito);
+void menuPrincipal(BD *bd, Usuario* u,Cesta *cesta,Carrito *carrito);
 void menuAdmin(BD *bd);
 void menuVenta(BD *bd, Usuario* u);
 void cerrarApp(BD *bd,Carrito *carrito);
 
 //METODOS DE USUARIO
 void registrarUsuario(BD *bd,Carrito *carrito);
-void eliminarCuenta(BD *bd,Usuario* u,Carrito *carrito);
+void eliminarCuenta(BD *bd,Usuario* u,Cesta *cesta,Carrito *carrito);
 
 //METODOS DE PRODUCTO/CARRITO/CESTA
 void anyadirProductosCesta (BD *bd, Carrito *carrito,Cesta *cesta,Usuario* u);
@@ -148,7 +148,8 @@ void menuBienvenida(BD *bd, Usuario* u,Carrito *carrito)
 		{
 		case 1:
         {
-		  menuPrincipal(bd,u,carrito);
+            Cesta* cesta = new Cesta();
+		    menuPrincipal(bd,u,cesta,carrito);
 		}
 			break;
 		case 2:
@@ -171,10 +172,8 @@ void menuBienvenida(BD *bd, Usuario* u,Carrito *carrito)
 	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 );
 }
 
-void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
+void menuPrincipal(BD *bd, Usuario* u,Cesta * cesta,Carrito *carrito)
 {
-    Cesta * cesta = new Cesta();
-
 	int eleccion;
 
 	if(contPrincipal == 0)
@@ -210,13 +209,14 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 			break;
 		case 2:
         {
-		    mostrarCesta(bd,carrito);
-		    menuPrincipal(bd, u, carrito);
+            system("cls");
+            cesta->imprimir();
+		    menuPrincipal(bd,u,cesta,carrito);
 		}
 			break;
 		case 3:
         {
-		    terminarPedido(bd,carrito);
+		    //terminarPedido(bd,carrito);
 		}
 			break;
 
@@ -253,13 +253,13 @@ void menuPrincipal(BD *bd, Usuario* u,Carrito *carrito)
 
 	            u->setPass(pass);
                 bd->editarUsuario(u);
-		        menuPrincipal(bd, u, carrito);
+		        menuPrincipal(bd, u,cesta,carrito);
 
         }
             break;
         case 6:
         {
-            eliminarCuenta(bd,u,carrito);
+            eliminarCuenta(bd,u,cesta,carrito);
         }
 			break;
         case 7:
@@ -301,22 +301,93 @@ void menuVenta(BD *bd, Usuario* u)
 		{
 		case 1:
         {
-            char nombre[15],marca[15],color[15];
-		    float precio;
-            cout<<"Introduzca el nombre del producto: ";
-            cin>>nombre;
-            cout<<"Introduzca la marca del producto: ";
-            cin>>marca;
-            cout<<"Introduzca el color del producto: ";
-            cin>>color;
-            cout<<"Introduzca el precio del producto: ";
-            cin>>precio;
+            int e;
+            cout<<"Que tipo de producto desea poner a la venta?: "<<endl;
+            cout<<"1. Camiseta "<<endl;
+            cout<<"2. Pantalon "<<endl;
+            cout<<"3. Zapatillas "<<endl;
+            cin>>e;
 
-            Producto p(nombre,marca,color,precio,u->getId());
+            switch (e)
+            {
+            case 1:
+            {
 
-            bd->insertarProducto(p);
+                 char nombre[15],marca[15],color[15],manga[15];
+		         float precio;
+                 cout<<"Introduzca la marca de la camiseta: ";
+                 cin>>marca;
+                 cout<<"Introduzca el color de la camiseta: ";
+                 cin>>color;
+                 cout<<"Introduzca el precio de la camiseta: ";
+                 cin>>precio;
+                 cout<<"Introduzca el tipo de manga de la camiseta: ";
+                 cin>>manga;
 
-            menuVenta(bd,u);
+                 strcpy(nombre, "Camiseta");
+
+                 Camiseta c(nombre,marca,color,precio,u->getId(),manga);
+
+                 bd->insertarCamiseta(c);
+
+                 menuVenta(bd,u);
+
+            }
+
+                 break;
+
+            case 2:
+            {
+
+                 char nombre[15],marca[15],color[15],tipo[15];
+		         float precio;
+                 cout<<"Introduzca la marca del pantalon: ";
+                 cin>>marca;
+                 cout<<"Introduzca el color del pantalon: ";
+                 cin>>color;
+                 cout<<"Introduzca el precio del pantalon: ";
+                 cin>>precio;
+                 cout<<"Introduzca el tipo de pantalon: ";
+                 cin>>tipo;
+
+                 strcpy(nombre, "Pantalon");
+
+                 Pantalon p(nombre,marca,color,precio,u->getId(),tipo);
+
+                 bd->insertarPantalon(p);
+
+                 menuVenta(bd,u);
+
+              }
+                 break;
+
+            case 3:
+            {
+
+                 char nombre[15],marca[15],color[15];
+		         float precio;
+		         int pie;
+                 cout<<"Introduzca la marca de las zapatillas: ";
+                 cin>>marca;
+                 cout<<"Introduzca el color de las zapatillas: ";
+                 cin>>color;
+                 cout<<"Introduzca el precio de las zapatillas: ";
+                 cin>>precio;
+                 cout<<"Introduzca el numero de pie de las zapatillas: ";
+                 cin>>pie;
+
+                 strcpy(nombre, "Zapatillas");
+
+                 Zapatillas z(nombre,marca,color,precio,u->getId(),pie);
+
+                 bd->insertarZapatillas(z);
+
+                 menuVenta(bd,u);
+
+              }
+                 break;
+
+            } while (e != 1 && e != 2 && e != 3  );
 
 		}
 			break;
@@ -477,7 +548,7 @@ void registrarUsuario(BD *bd,Carrito *carrito)
 }
 
 
-void eliminarCuenta(BD *bd, Usuario* u,Carrito *carrito)
+void eliminarCuenta(BD *bd, Usuario* u,Cesta *cesta,Carrito *carrito)
 {
     int eleccion;
 
@@ -497,7 +568,7 @@ void eliminarCuenta(BD *bd, Usuario* u,Carrito *carrito)
 		break;
 		case 2:
         {
-			menuPrincipal(bd, u,carrito);
+			menuPrincipal(bd, u,cesta,carrito);
 		}
 		break;
 		default:
@@ -571,14 +642,10 @@ void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta *cesta,Usuario* u)
 
         if (s == 1)
         {
-            Cesta *c = new Cesta(p,cant);
-
-            cesta[carrito->getCantProductos()] = *c;
-            carrito->setCesta(cesta);
-            carrito->setCantProductos(carrito->getCantProductos() +1);
+            cesta->anadirProducto(p,cant);
 
             cout << "Producto agregado correctamente" << endl;
-            menuPrincipal(bd,u,carrito);
+            menuPrincipal(bd,u,cesta,carrito);
 
         }else if (s == 2)
         {
@@ -591,45 +658,8 @@ void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta *cesta,Usuario* u)
     }while (s != 1 && s!= 2);
 }
 
-void mostrarCesta(BD *bd, Carrito *carrito)
-{
-	system ("cls");
 
-	if (carrito->getCantProductos() == 0)
-    {
-		cout << "¡NINGUN PRODUCTO EN SU CESTA!" << endl;
-
-	}else
-	{
-		cout << "MI CESTA" << endl;
-		cout << "_____________" << endl;
-
-		int num = 1;
-		float total = 0.0;
-
-		for (int i = 0; i < carrito->getCantProductos(); i++)
-        {
-			cout << num << ". " << carrito->getCesta()[i].getProducto()->getNombre() <<
-					 "    x " << carrito->getCesta()[i].getCant() << endl;
-			num++;
-
-			int cantPr = carrito->getCesta()->getCant();
-			float valorPr = carrito->getCesta()->getProducto()->getPrecio();
-
-
-			total = total + (cantPr * valorPr);
-		}
-
-		cout <<"_______________________________________" << endl;
-		cout << "TOTAL:         " << total  << " Euros"<< endl;
-	}
-
-	int o;
-	cout << "Introduce un numero para continuar..." << endl;
-	cin >> o;
-}
-
-void imprimirRecibo (Carrito * carrito)
+/*void imprimirRecibo (Carrito * carrito)
 {
 	system("cls");
 
@@ -703,3 +733,4 @@ void terminarPedido(BD *bd,Carrito * carrito)
 	cout << "Introduce un numero para continuar..." << endl;
 	cin >> o;
 }
+*/

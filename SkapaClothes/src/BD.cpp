@@ -44,6 +44,21 @@ void BD::crearBD()
         cout<<"ERROR CREANDO LA TABLA PRODUCTO "<<err;
 		}
 
+		char * tablaCamiseta = "CREATE TABLE IF NOT EXISTS Camiseta(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) NOT NULL, marca VARCHAR(20), color VARCHAR(20), precio FLOAT, idVendedor INTEGER, FOREIGN KEY(idVendedor) REFERENCES Usuario(id), manga VARCHAR(20);";
+		if(sqlite3_exec(db, tablaCamiseta, NULL, NULL, &err)!= SQLITE_OK){
+        cout<<"ERROR CREANDO LA TABLA PRODUCTO "<<err;
+		}
+
+		char * tablaPantalon = "CREATE TABLE IF NOT EXISTS Pantalon(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) NOT NULL, marca VARCHAR(20), color VARCHAR(20), precio FLOAT, idVendedor INTEGER, FOREIGN KEY(idVendedor) REFERENCES Usuario(id), tipo VARCHAR(20);";
+		if(sqlite3_exec(db, tablaPantalon, NULL, NULL, &err)!= SQLITE_OK){
+        cout<<"ERROR CREANDO LA TABLA PRODUCTO "<<err;
+		}
+
+		char * tablaZapatillas = "CREATE TABLE IF NOT EXISTS Zapatillas(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR(20) NOT NULL, marca VARCHAR(20), color VARCHAR(20), precio FLOAT, idVendedor INTEGER, FOREIGN KEY(idVendedor) REFERENCES Usuario(id), pie INTEGER);";
+		if(sqlite3_exec(db, tablaZapatillas, NULL, NULL, &err)!= SQLITE_OK){
+        cout<<"ERROR CREANDO LA TABLA PRODUCTO "<<err;
+		}
+
 	}
 }
 
@@ -427,5 +442,121 @@ void BD::editarProducto(Producto* p)
     sqlite3_finalize(stmt);
     cout << "\n" << endl;
     cout << "El producto ha sido editado correctamente correctamente\n" << endl;
+
+}
+
+//METODOS DE LA TABLA CAMISETA
+int BD::existeCamiseta(const char *nombre, const char *marca,const char *color, const float precio, const char *manga)
+{
+	char query[200];
+
+	sprintf(query, "SELECT COUNT(*) FROM Camiseta WHERE nombre = '%s' and marca= '%s' and color = '%s' and precio = '%f' and manga ='%s'", nombre,marca,color,precio,manga);
+    sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+    sqlite3_step(stmt);
+	int resultado = sqlite3_column_int(stmt, 0);//0 es el numero de la columna.
+    sqlite3_finalize(stmt);
+	return resultado;
+}
+
+void BD::insertarCamiseta(const Camiseta &c)
+{
+	char query[200];
+	int resultado = existeCamiseta(c.getNombre(),c.getMarca(),c.getColor(),c.getPrecio(),c.getTipoManga());
+
+	if(resultado == 0)
+	{
+
+        sprintf(query,"INSERT INTO Camiseta (nombre,marca,color,precio,idVendedor,manga) VALUES('%s','%s','%s','%f','%d','%s')",c.getNombre(),c.getMarca(),c.getColor(),c.getPrecio(),c.getIdVendedor(),c.getTipoManga());
+        sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+        sqlite3_step(stmt);
+
+        sqlite3_finalize(stmt);
+
+        insertarProducto(c);
+
+        cout << "\n" << endl;
+        cout << "Producto anyadido correctamente\n" << endl;
+
+	}else {
+	    cout<<"ERROR! El producto introducido ya existe"<<endl;
+	}
+
+}
+
+//METODOS DE LA TABLA PANTALON
+int BD::existePantalon(const char *nombre, const char *marca,const char *color, const float precio, const char *tipo)
+{
+	char query[200];
+
+	sprintf(query, "SELECT COUNT(*) FROM Producto WHERE nombre = '%s' and marca= '%s' and color = '%s' and precio = '%f' and tipo", nombre,marca,color,precio,tipo);
+    sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+    sqlite3_step(stmt);
+	int resultado = sqlite3_column_int(stmt, 0);//0 es el numero de la columna.
+    sqlite3_finalize(stmt);
+	return resultado;
+}
+
+void BD::insertarPantalon(const Pantalon &p)
+{
+	char query[200];
+	int resultado = existePantalon(p.getNombre(),p.getMarca(),p.getColor(),p.getPrecio(),p.getTipoPantalon());
+
+	if(resultado == 0)
+	{
+
+        sprintf(query,"INSERT INTO Pantalon (nombre,marca,color,precio,idVendedor,tipo) VALUES('%s','%s','%s','%f','%d','%s')",p.getNombre(), p.getMarca(), p.getColor(), p.getPrecio(),p.getIdVendedor(),p.getTipoPantalon());
+
+        sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+        sqlite3_step(stmt);
+
+        sqlite3_finalize(stmt);
+
+        insertarProducto(p);
+
+        cout << "\n" << endl;
+        cout << "Producto anyadido correctamente\n" << endl;
+
+	}else {
+	    cout<<"ERROR! El producto introducido ya existe"<<endl;
+	}
+
+}
+
+//METODOS DE LA TABLA ZAPATILLAS
+int BD::existeZapatillas(const char *nombre, const char *marca,const char *color, const float precio,const int pie)
+{
+	char query[200];
+
+	sprintf(query, "SELECT COUNT(*) FROM Zapatillas WHERE nombre = '%s' and marca= '%s' and color = '%s' and precio = '%f' and pie = '%d'", nombre,marca,color,precio,pie);
+    sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+    sqlite3_step(stmt);
+	int resultado = sqlite3_column_int(stmt, 0);//0 es el numero de la columna.
+    sqlite3_finalize(stmt);
+	return resultado;
+}
+
+void BD::insertarZapatillas(const Zapatillas &z)
+{
+	char query[200];
+	int resultado = existeZapatillas(z.getNombre(),z.getMarca(),z.getColor(),z.getPrecio(),z.getNumPie());
+
+	if(resultado == 0)
+	{
+
+        sprintf(query,"INSERT INTO Zapatillas (nombre,marca,color,precio,idVendedor,pie) VALUES('%s','%s','%s','%f','%d','%d')",z.getNombre(), z.getMarca(), z.getColor(), z.getPrecio(),z.getIdVendedor(),z.getNumPie());
+
+        sqlite3_prepare_v2(db, query, strlen(query) + 1, &stmt, NULL);
+        sqlite3_step(stmt);
+
+        sqlite3_finalize(stmt);
+
+        insertarProducto(z);
+
+        cout << "\n" << endl;
+        cout << "Producto anyadido correctamente\n" << endl;
+
+	}else {
+	    cout<<"ERROR! El producto introducido ya existe"<<endl;
+	}
 
 }
