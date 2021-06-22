@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "EnC/FuncionFicheros.h"
+#include "EnC/Factura.h"
+#include "EnC/Config.h"
 
 void clearIfNeeded(char *str, int max_line) {
 	// Limpia los caracteres de más introducidos
@@ -20,4 +22,11 @@ char* strcopySinBarraN(char *strOrigen, int max_line) {
 			}
 	strcpy(stringFinal, strOrigen);
 	return stringFinal;
+}
+
+FILE *InizializarArchivo()
+{
+    FILE *fichero;
+
+    return fichero;
 }

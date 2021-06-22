@@ -35,10 +35,6 @@ Factura *leerFactura(int *numFacturas)
         ptr = strtok(NULL, "#");
         sscanf(ptr, "%d", &f.idUsuario);
 
-        ptr = strtok(NULL, "#");
-        f.nombreUsuario = malloc((strlen(ptr) + 1) * sizeof(char));
-        sscanf(ptr, "%[^\t\n]", f.nombreUsuario);
-
         facturas[contador] = f;
         contador++;
         clearIfNeeded(str, MAX_LINE_FACTURAS);
@@ -55,10 +51,12 @@ void escribirFactura(Factura *facturas, int numFacturas)
 {
 	FILE *fichero;
 	fichero = fopen(FICHERO_FACTURA, "w");
-	fprintf(fichero, "%d\n", numFacturas);
+
 	for (int i=0; i<numFacturas; i++)
     {
-		fprintf(fichero, "%d#%d#%s\n", facturas[i].idProducto, facturas[i].idUsuario, facturas[i].nombreUsuario);
+		fprintf(fichero, "Resumen de compra--->Id del Producto: %d Id del Usuario: %d\n", facturas[i].idProducto, facturas[i].idUsuario);
+		fflush(stdout);
+
 	}
 
 	fclose(fichero);

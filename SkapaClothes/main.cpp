@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <iostream>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
 #include "BD.h"
 #include "Usuario.h"
 #include "Producto.h"
@@ -11,6 +11,7 @@
 #ifdef __cplusplus
 extern "C" {
 #include "EnC/Factura.h"
+#include "EnC/Config.h"
 }
 #endif
 
@@ -213,9 +214,8 @@ void menuPrincipal(BD *bd, Usuario* u,Cesta *cesta,Carrito *carrito)
 	    cout << "1. Anyadir productos a la cesta" << endl;
 	    cout << "2. Mostrar mi cesta" << endl;
 	    cout << "3. Finalizar compra" << endl;
-        cout << "4. Ingresar dinero" << endl;
-	    cout << "5. Cerrar Sesion" << endl;
-	    cout << "6. Salir" << endl;
+	    cout << "4. Cerrar Sesion" << endl;
+	    cout << "5. Salir" << endl;
 
 		cin >> eleccion;
 
@@ -239,22 +239,13 @@ void menuPrincipal(BD *bd, Usuario* u,Cesta *cesta,Carrito *carrito)
 		    terminarPedido(bd,carrito,cesta,u);
 		}
 			break;
-
         case 4:
-        {
-		    cout<< "Su numero de tarjeta de credito"<<endl;
-		    cout<< "Cvv"<<endl;
-		    cout<<"La cantidad que desea ingresar"<<endl;
-		}
-			break;
-
-        case 5:
         {
             menuInicio(bd,carrito);
         }
             break;
 
-        case 6:
+        case 5:
         {
              cerrarApp(bd,carrito);
         }
@@ -265,7 +256,7 @@ void menuPrincipal(BD *bd, Usuario* u,Cesta *cesta,Carrito *carrito)
 		}
 			break;
 		}
-	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 && eleccion != 6 && eleccion != 7 && eleccion != 8);
+	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 );
 }
 
 void menuVenta(BD *bd, Usuario* u)
@@ -702,12 +693,14 @@ void terminarPedido(BD *bd,Carrito * carrito,Cesta *cesta,Usuario* u)
 		{
 		case 1:
 		    Factura f;
+
 			for(int i = 0; i < cesta->getNumProductos(); i++)
             {
                 f.idProducto = cesta->getProducto()[i]->getId();
                 f.idUsuario = u->getId();
-                strcpy(f.nombreUsuario,u->getNombre());
-                escribirFactura(&f,i);
+
+                escribirFactura(&f,cesta->getNumProductos());
+
             }
 			cout <<"Su pedido se ha realizado correctamente" <<endl << endl;
 			carrito->imprimirRecibo();
@@ -722,7 +715,4 @@ void terminarPedido(BD *bd,Carrito * carrito,Cesta *cesta,Usuario* u)
 			break;
 		}
 	}
-	int o;
-	cout << "Introduce un numero para continuar..." << endl;
-	cin >> o;
 }

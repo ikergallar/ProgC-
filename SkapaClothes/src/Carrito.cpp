@@ -60,7 +60,7 @@ void Carrito::imprimirRecibo()
 		cout << "    " << costoP  << " Euros";
 		cout << "   x" << this->cesta->getCant() << endl;
 	}
-	setImporte(total);
+	this->setImporte(total);
 
 	cout << "__________________________________" << endl;
 	cout << "TOTAL: " << total << "  Euros" << endl;

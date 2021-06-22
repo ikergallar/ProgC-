@@ -40,9 +40,35 @@ void Cesta::setCant(int c){
 void Cesta::anadirProducto(Producto* p,int cant)
 {
 
-	this->productos[this->numProductos] = p;
-	this->cant = cant;
-	this->numProductos++;
+     if(this->numProductos==0)
+    {
+        this->productos = new Producto*[1];
+        this->productos[0] = p;
+        this->cant = cant;
+        this->numProductos++;
+    }else
+    {
+        //En un array auxiliar copiamos la información que había en el array de productos
+        Producto **aux = new Producto*[this->numProductos];
+        for(int i=0;i<this->numProductos;i++)
+        {
+            aux[i] = this->productos[i];
+        }
+
+        delete [] this->productos;
+        this->productos = new Producto*[this->numProductos+1];
+        for(int i=0;i<this->numProductos;i++)
+        {
+            this->productos[i] = aux[i];
+            this->productos[this->numProductos] = p;
+
+        }
+        this->cant = cant;
+        this->numProductos++;
+
+        delete [] aux;
+    }
+
 }
 
 void Cesta::imprimir()

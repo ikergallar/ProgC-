@@ -1,12 +1,11 @@
 #ifndef FACTURA_H_INCLUDED
 #define FACTURA_H_INCLUDED
 
-#define MAX_LINE_FACTURAS 50
+#define MAX_LINE_FACTURAS 100
 
 typedef struct{
 	int idProducto;
 	int idUsuario;
-	char *nombreUsuario;
 }Factura;
 
 Factura *leerFactura(int *numFacturas);
