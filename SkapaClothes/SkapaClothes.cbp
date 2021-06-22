@@ -34,11 +34,15 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="FicherosEnC/Facturas.txt" />
 		<Unit filename="Skaa.db" />
 		<Unit filename="include/BD.h" />
 		<Unit filename="include/Camiseta.h" />
 		<Unit filename="include/Carrito.h" />
 		<Unit filename="include/Cesta.h" />
+		<Unit filename="include/EnC/Config.h" />
+		<Unit filename="include/EnC/Factura.h" />
+		<Unit filename="include/EnC/FuncionFicheros.h" />
 		<Unit filename="include/Pantalon.h" />
 		<Unit filename="include/Producto.h" />
 		<Unit filename="include/Usuario.h" />
@@ -49,6 +53,12 @@
 		<Unit filename="src/Camiseta.cpp" />
 		<Unit filename="src/Carrito.cpp" />
 		<Unit filename="src/Cesta.cpp" />
+		<Unit filename="src/EnC/Factura.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/EnC/FuncionFicheros.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/Pantalon.cpp" />
 		<Unit filename="src/Producto.cpp" />
 		<Unit filename="src/Usuario.cpp" />

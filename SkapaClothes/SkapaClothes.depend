@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1624304453 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+1624382520 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
 	<stdio.h>
 	<iostream>
 	<stdlib.h>
@@ -10,6 +10,7 @@
 	"Cesta.h"
 	"Carrito.h"
 	"Comprador.h"
+	"EnC/Factura.h"
 
 1622125475 source:c:\users\iker\documents\github\progc-\skapaclothes\usuario.cpp
 	"Usuario.h"
@@ -140,7 +141,7 @@
 	"Usuario.h"
 	<string.h>
 
-1624304022 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
+1624381844 source:c:\users\iker\documents\github\progc-\skapaclothes\src\bd.cpp
 	"sqlite3.h"
 	<stdio.h>
 	<iostream>
@@ -153,7 +154,7 @@
 1624297822 c:\users\iker\documents\github\progc-\skapaclothes\include\sqlite3.h
 	<stdarg.h>
 
-1624304016 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
+1624381844 c:\users\iker\documents\github\progc-\skapaclothes\include\bd.h
 	"sqlite3.h"
 	"usuario.h"
 	"Producto.h"
@@ -567,7 +568,7 @@
 	<stdlib.h>
 	"Carrito.h"
 
-1624297822 source:c:\users\iker\documents\github\progc-\skapaclothes\src\cesta.cpp
+1624382243 source:c:\users\iker\documents\github\progc-\skapaclothes\src\cesta.cpp
 	"Cesta.h"
 	<iostream>
 	<string.h>
@@ -851,4 +852,24 @@
 
 1624028784 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\zapatillas.h
 	"Producto.h"
+
+1624380625 source:c:\users\iker\documents\github\progc-\skapaclothes\src\enc\factura.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"EnC/Factura.h"
+	"EnC/Config.h"
+	"EnC/FuncionFicheros.h"
+
+1624379310 c:\users\iker\documents\github\progc-\skapaclothes\include\enc\factura.h
+
+1624379214 c:\users\iker\documents\github\progc-\skapaclothes\include\enc\config.h
+
+1624380508 source:c:\users\iker\documents\github\progc-\skapaclothes\src\enc\funcionficheros.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"EnC/FuncionFicheros.h"
+
+1624382346 c:\users\iker\documents\github\progc-\skapaclothes\include\enc\funcionficheros.h
 

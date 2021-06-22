@@ -15,7 +15,6 @@ extern "C" {
 #include "Pantalon.h"
 #include "Zapatillas.h"
 
-
 class BD
 {
 private:

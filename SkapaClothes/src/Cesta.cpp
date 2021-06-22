@@ -37,11 +37,11 @@ void Cesta::setCant(int c){
 	this->cant = c;
 }
 
-void Cesta::anadirProducto(Producto* p, int c)
+void Cesta::anadirProducto(Producto* p,int cant)
 {
 
 	this->productos[this->numProductos] = p;
-	this->cant = c;
+	this->cant = cant;
 	this->numProductos++;
 }
 

@@ -8,6 +8,11 @@
 #include "Cesta.h"
 #include "Carrito.h"
 #include "Comprador.h"
+#ifdef __cplusplus
+extern "C" {
+#include "EnC/Factura.h"
+}
+#endif
 
 using namespace std;
 
@@ -22,11 +27,11 @@ void cerrarApp(BD *bd,Carrito *carrito);
 //METODOS DE USUARIO
 void registrarUsuario(BD *bd,Carrito *carrito);
 void eliminarCuenta(BD *bd,Usuario* u,Carrito *carrito);
-//METODOS DE PRODUCTO/CARRITO/CESTA
 
+//METODOS DE PRODUCTO/CARRITO/CESTA
 void anyadirProductosCesta (BD *bd, Carrito *carrito,Cesta *cesta,Usuario* u);
 void mostrarCesta(BD *bd, Carrito *carrito);
-void terminarPedido(BD *bd,Carrito *carrito,Cesta *cesta);
+void terminarPedido(BD *bd,Carrito *carrito,Cesta *cesta,Usuario* u);
 
 //VARIABLES
 int contInicio = 0;
@@ -231,7 +236,7 @@ void menuPrincipal(BD *bd, Usuario* u,Cesta *cesta,Carrito *carrito)
 			break;
 		case 3:
         {
-		    terminarPedido(bd,carrito,cesta);
+		    terminarPedido(bd,carrito,cesta,u);
 		}
 			break;
 
@@ -672,7 +677,7 @@ void anyadirProductosCesta(BD *bd, Carrito *carrito,Cesta *cesta,Usuario* u)
     }while (s != 1 && s!= 2);
 }
 
-void terminarPedido(BD *bd,Carrito * carrito,Cesta *cesta)
+void terminarPedido(BD *bd,Carrito * carrito,Cesta *cesta,Usuario* u)
 {
 	system ("cls");
 	carrito->setCesta(cesta);
@@ -696,6 +701,14 @@ void terminarPedido(BD *bd,Carrito * carrito,Cesta *cesta)
 		switch (opcion)
 		{
 		case 1:
+		    Factura f;
+			for(int i = 0; i < cesta->getNumProductos(); i++)
+            {
+                f.idProducto = cesta->getProducto()[i]->getId();
+                f.idUsuario = u->getId();
+                strcpy(f.nombreUsuario,u->getNombre());
+                escribirFactura(&f,i);
+            }
 			cout <<"Su pedido se ha realizado correctamente" <<endl << endl;
 			carrito->imprimirRecibo();
 			cout << endl;
