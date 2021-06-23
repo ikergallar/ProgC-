@@ -1,1 +1,4 @@
-Resumen de compra--->Id del Producto: 4 Id del Usuario: 1 Precio: 0
+ULTIMA COMPRA REALIZADA
+Resumen de compra--->Id del Producto: 5, Id del Usuario: 1
+Resumen de compra--->Id del Producto: 1, Id del Usuario: 1
+PRECIO TOTAL DEL PEDIDO: 125.000000

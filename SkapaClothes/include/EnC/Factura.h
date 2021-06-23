@@ -6,9 +6,12 @@
 typedef struct{
 	int idProducto;
 	int idUsuario;
+	float precio;
+	int numFacturas;
 }Factura;
 
 Factura *leerFactura(int *numFacturas);
 void escribirFactura(Factura *facturas, int numFacturas);
+void imprimirFactura();
 
 #endif // FACTURA_H_INCLUDED

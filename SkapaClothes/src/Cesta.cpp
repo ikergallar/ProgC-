@@ -4,32 +4,39 @@
 
 using namespace std;
 
-Cesta::Cesta(){
+Cesta::Cesta()
+{
 	this->numProductos = 0;
     this->cant = 0;
 }
 
-Cesta::Cesta(Producto* p, int cant){
+Cesta::Cesta(Producto* p, int cant)
+{
 	this->productos[this->numProductos] = p;
 	this->cant[this->numProductos] = cant;
 	this->numProductos = 0;
 }
 
-Cesta::Cesta(Cesta & c){
+Cesta::Cesta(Cesta & c)
+{
 	this->productos = c.productos;
     this->cant = c.cant;
 	this->numProductos = 0;
 }
 
-Cesta::~Cesta(){
+Cesta::~Cesta()
+{
 	delete []this->productos;
+	delete []this->cant;
 }
 
-void Cesta::setProductos(Producto* p){
+void Cesta::setProductos(Producto* p)
+{
 	this->productos[this->numProductos] = p;
 }
 
-void Cesta::setNumProductos(int numProductos){
+void Cesta::setNumProductos(int numProductos)
+{
 	this->numProductos = numProductos;
 }
 
@@ -75,13 +82,15 @@ void Cesta::anadirProducto(Producto* p,int c)
 
         delete [] aux;
         delete [] auxInt;
-
     }
 
 }
 
 void Cesta::imprimir()
 {
+
+    float total = 0.0;
+
     if (this->numProductos == 0)
     {
 		cout << "¡NINGUN PRODUCTO EN SU CESTA!" << endl;
@@ -92,7 +101,7 @@ void Cesta::imprimir()
 		cout << "_____________" << endl;
 
 		int num = 1;
-		float total = 0.0;
+
 
 		for (int i = 0; i < this->numProductos; i++)
         {
@@ -114,5 +123,4 @@ void Cesta::imprimir()
 	int o;
 	cout << "Introduce un numero para continuar..." << endl;
 	cin >> o;
-
 }

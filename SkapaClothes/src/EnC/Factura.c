@@ -51,15 +51,22 @@ void escribirFactura(Factura *facturas, int numFacturas)
 {
 	FILE *fichero;
 	fichero = fopen(FICHERO_FACTURA, "w");
+	fprintf(fichero, "SU FACTURA\n");
 
 	for (int i=0; i<numFacturas; i++)
     {
-		fprintf(fichero, "Resumen de compra--->Id del Producto: %d Id del Usuario: %d\n", facturas[i].idProducto, facturas[i].idUsuario);
+		fprintf(fichero, "Resumen de compra--->Id del Producto: %d, Id del Usuario: %d\n", facturas[i].idProducto, facturas[i].idUsuario);
 		fflush(stdout);
 
 	}
+	fprintf(fichero, "PRECIO TOTAL DEL PEDIDO: %f",facturas->precio);
 
 	fclose(fichero);
+}
+
+void imprimirFactura(Factura *factura)
+{
+    printf("Id del producto comprado: %d", factura->idProducto);
 }
 
 
