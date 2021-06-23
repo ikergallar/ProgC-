@@ -94,7 +94,18 @@ void Producto::setIdVendedor(int iv)
 {
 	this->idVendedor = iv;
 }
+void Producto::editarProducto(const char *marca, const char *color, const float precio)
+{
 
+	this->marca = new char [strlen(marca) + 1];
+	strcpy(this->marca, marca);
+
+	this->color = new char [strlen(color) + 1];
+	strcpy(this->color, color);
+
+	this->precio = precio;
+
+}
 void Producto::imprimir()
 {
     cout<<"INFO: "<<this->nombre<<", Marca: "<<this->marca<<", Color: "<<this->color<<", Precio:  "<<this->precio;

@@ -274,6 +274,8 @@ void BD::editarUsuario(const Usuario* u)
     cout << "\n" << endl;
     cout << "La cuenta ha sido editada correctamente\n" << endl;
 
+    cerrarBD();
+    abrirBD();
 }
 
 //METODOS DE LA TABLA PRODUCTO
@@ -478,6 +480,9 @@ void BD::editarProducto(Producto* p)
     sqlite3_finalize(stmt);
     cout << "\n" << endl;
     cout << "El producto ha sido editado correctamente correctamente\n" << endl;
+
+    cerrarBD();
+    abrirBD();
 
 }
 

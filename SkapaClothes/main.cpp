@@ -46,7 +46,6 @@ int main()
     bd->crearBD();
     bd->abrirBD();
     menuInicio(bd);
-    bd->cerrarBD();
     return 0;
 }
 void menuInicio(BD *bd)
@@ -155,10 +154,7 @@ void menuBienvenida(BD *bd, Usuario* u)
         {
             int a = 0;
             char pass[20],confPass[20];
-            char *passActual;
-            passActual = new char [strlen(u->getNombre()) + 1];
-	        strcpy(passActual, u->getNombre());
-            cout<<"Contrasenya actual: "<<passActual<<endl;
+            cout<<"Contrasenya actual: "<<u->getPass()<<endl;
             cout<<"Nueva contrasenya: "<<endl;
             cin>>pass;
             cout<<"Confirmar contrasenya: "<<endl;
@@ -273,8 +269,9 @@ void menuVenta(BD *bd, Usuario* u)
 	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
 	    cout << "1. Poner un producto a la venta" << endl;
 	    cout << "2. Ver mis productos" << endl;
-        cout << "3. Eliminar un producto de la venta" << endl;
-	    cout << "4. Salir de la aplicacion" << endl;
+        cout << "3. Editar uno de mis productos productos" << endl;
+        cout << "4. Eliminar un producto de la venta" << endl;
+	    cout << "5. Salir de la aplicacion" << endl;
 		cin >> eleccion;
 
 		switch (eleccion)
@@ -436,7 +433,31 @@ void menuVenta(BD *bd, Usuario* u)
 
 		}
 			break;
-		case 3:
+
+        case 3:
+        {
+            bd->mostrarProductoDeVendedor(u->getId());
+            int eleccion;
+            cout << "NUMERO del producto: ";
+            cin >> eleccion;
+            Producto *p = bd->seleccionarProductoDeVendedor(eleccion,u->getId());
+
+            char marca[15],color[15];
+		    float precio;
+            cout<<"Introduzca la marca del producto: ";
+            cin>>marca;
+            cout<<"Introduzca el color del producto: ";
+            cin>>color;
+            cout<<"Introduzca el precio del producto: ";
+            cin>>precio;
+            p->editarProducto(marca,color,precio);
+            bd->editarProducto(p);
+
+            menuVenta(bd,u);
+
+		}
+			break;
+		case 4:
         {
              bd->mostrarProductoDeVendedor(u->getId());
              int eleccion,r;
@@ -461,7 +482,7 @@ void menuVenta(BD *bd, Usuario* u)
 
 		}
 			break;
-        case 4:
+        case 5:
         {
 		}
 			break;
@@ -471,7 +492,7 @@ void menuVenta(BD *bd, Usuario* u)
 		}
 			break;
 		}
-	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 );
+	} while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 );
 }
 void menuAdmin(BD *bd)
 {
@@ -486,10 +507,8 @@ void menuAdmin(BD *bd)
         cout << "----------------------------------" << endl;
 		cout << "1. Mostrar los productos disponibles" << endl;
 		cout << "2. Eliminar producto existente" << endl;
-		cout << "3. Editar producto existente" << endl;
-		cout << "4. Eliminar cuenta de usuario" << endl;
-        cout << "5. Visualizar datos de la ultima compra realizada" << endl;
-	    cout << "6. Salir" << endl;
+		cout << "3. Eliminar cuenta de usuario" << endl;
+	    cout << "4. Salir" << endl;
 		cin >> eleccion;
 		contAdmin++;
 		switch (eleccion)
@@ -502,6 +521,7 @@ void menuAdmin(BD *bd)
 			menuAdmin(bd);
         }
 			break;
+
 		case 2:
         {
             int resp;
@@ -513,30 +533,8 @@ void menuAdmin(BD *bd)
             menuAdmin(bd);
         }
 			break;
+
         case 3:
-        {
-            int resp;
-		    bd->mostrarProductos();
-		    cout << "Introduzca el numero del producto que desea editar" << endl;
-            cin>>resp;
-            Producto *p = bd->seleccionarProducto(resp);
-            char nombre[15],marca[15],color[15];
-		    float precio;
-            cout<<"Introduzca el nombre del producto: ";
-            cin>>nombre;
-            cout<<"Introduzca la marca del producto: ";
-            cin>>marca;
-            cout<<"Introduzca el color del producto: ";
-            cin>>color;
-            cout<<"Introduzca el precio del producto: ";
-            cin>>precio;
-            int id = p->getId();
-            p = new Producto(id,nombre,marca,color,precio);
-            bd->editarProducto(p);
-            menuAdmin(bd);
-        }
-			break;
-        case 4:
         {
             int resp;
 		    bd->mostrarUsuarios();
@@ -548,12 +546,7 @@ void menuAdmin(BD *bd)
         }
             break;
 
-        case 5:
-        {
-            menuAdmin(bd);
-        }
-            break;
-        case 6:
+        case 4:
         {
             exit(0);
         }
@@ -561,7 +554,7 @@ void menuAdmin(BD *bd)
 			cout << "Opcion seleccionada incorrecta" << endl;
 			break;
 		}
-	}while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4 && eleccion != 5 && eleccion != 6);
+	}while (eleccion != 1 && eleccion != 2 && eleccion != 3 && eleccion != 4);
 }
 void registrarUsuario(BD *bd)
 {

@@ -33,6 +33,7 @@ public:
     void setPrecio(float p);
     void setIdVendedor(int iV);
 
+    void editarProducto(const char *marca, const char *color, const float precio);
     virtual void imprimir();
 };
 #endif /* PRODUCTO_H_ */

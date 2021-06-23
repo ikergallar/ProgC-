@@ -8,7 +8,6 @@ private:
     int id;
 	char *nombre;
 	char *pass;
-	float dinero;
 
 public:
 
@@ -24,8 +23,5 @@ public:
     void setId(int i);
 	void setNombre(char *n);
 	void setPass(char *c);
-
-	    float getDinero() const {return dinero;}
-	void setDinero(float d);
 };
 #endif // USUARIO_H_INCLUDED
