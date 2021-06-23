@@ -52,13 +52,13 @@ void Carrito::imprimirRecibo()
 		float costoP;
 		costoP = this->cesta->getProducto()[i]->getPrecio();
 
-		cant = this->cesta->getCant();
+		cant = this->cesta->getCant()[i];
 
 		total = total + (cant * costoP);
 
 		cout << this->cesta->getProducto()[i]->getNombre();
 		cout << "    " << costoP  << " Euros";
-		cout << "   x" << this->cesta->getCant() << endl;
+		cout << "   x" << this->cesta->getCant()[i] << endl;
 	}
 	this->setImporte(total);
 

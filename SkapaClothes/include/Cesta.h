@@ -7,7 +7,7 @@ class Cesta{
 private:
     Producto** productos;
     int numProductos;
-    int cant;
+    int *cant;
 
 public:
     Cesta();
@@ -17,7 +17,7 @@ public:
 
     Producto** getProducto () const{return productos;}
     int getNumProductos ()const{return numProductos;}
-    int getCant ()const{return cant;}
+    int *getCant ()const{return cant;}
 
     void setProductos(Producto* p);
     void setNumProductos(int numProductos);

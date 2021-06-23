@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1624404718 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+1624405708 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -558,18 +558,18 @@
 1622386458 c:\users\ikerg\documents\github\progc-\skapaclothes\include\cesta.h
 	"Producto.h"
 
-1624297822 c:\users\iker\documents\github\progc-\skapaclothes\include\cesta.h
+1624443270 c:\users\iker\documents\github\progc-\skapaclothes\include\cesta.h
 	"Producto.h"
 
 1624297822 c:\users\iker\documents\github\progc-\skapaclothes\include\carrito.h
 	"Cesta.h"
 
-1624405459 source:c:\users\iker\documents\github\progc-\skapaclothes\src\carrito.cpp
+1624443364 source:c:\users\iker\documents\github\progc-\skapaclothes\src\carrito.cpp
 	"iostream"
 	<stdlib.h>
 	"Carrito.h"
 
-1624398718 source:c:\users\iker\documents\github\progc-\skapaclothes\src\cesta.cpp
+1624443605 source:c:\users\iker\documents\github\progc-\skapaclothes\src\cesta.cpp
 	"Cesta.h"
 	<iostream>
 	<string.h>
