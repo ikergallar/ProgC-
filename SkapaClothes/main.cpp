@@ -686,13 +686,13 @@ void terminarPedido(BD *bd,Cesta *cesta,Usuario* u,Carrito *carrito)
 		cout << "¡¡¡ NINGUN PRODUCTO EN SU CARRITO !!!" << endl;
 	}else
 	{
-		int opcion;
+		int opcion,ans;
 		char direccion[100];
 		cout << "Ingrese la direccion a la que desea que se entregue el pedido " << endl;
 		cout <<	"Introduzca su direccion: " << endl;
 		cin >> direccion;
 		cout << "------------------------------------------" << endl;
-		cesta->imprimir();
+		float precioTotal = cesta->imprimir();
 		cout << "Esta seguro que desea realizar su pedido?" << endl;
 		cout << "1. Si" << endl;
 		cout << "2. NO" << endl;
@@ -701,21 +701,31 @@ void terminarPedido(BD *bd,Cesta *cesta,Usuario* u,Carrito *carrito)
 		{
 		case 1:
 		    Factura f;
+		    f.numFacturas = 0;
 
 			for(int i = 0; i < cesta->getNumProductos(); i++)
             {
-                f.idProducto = cesta->getProducto()[i]->getId();
-                f.idUsuario = u->getId();
-                f.precio = f.precio + cesta->getProducto()[i]->getPrecio();
-                f.numFacturas = cesta->getNumProductos();
-
-                escribirFactura(&f,cesta->getNumProductos());
-
+                f.nomProducto = cesta->getProducto()[i]->getNombre();
+                f.precio = cesta->getProducto()[i]->getPrecio();
+                f.numFacturas++;
             }
+
+            f.precioTotal = precioTotal;
+            escribirFactura(&f);
+
 			cout <<"Su pedido se ha realizado correctamente" <<endl << endl;
 			carrito->imprimirRecibo();
 			cout << endl;
 			cout<<"¿Desea visualizar la factura de su compra?"<<endl;
+            cout<<"1.SI"<<endl;
+			cout<<"2.NO"<<endl;
+			cin>>ans;
+
+			if(ans == 1)
+            {
+                imprimirFactura(leerFactura());
+            }
+
 			cout << "Gracias por su compra, lo esperamos de vuelta :)" << endl;
 			break;
 		case 2:

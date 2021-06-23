@@ -7,11 +7,13 @@ typedef struct{
 	int idProducto;
 	int idUsuario;
 	float precio;
+    float precioTotal;
 	int numFacturas;
+	char *nomProducto;
 }Factura;
 
-Factura *leerFactura(int *numFacturas);
-void escribirFactura(Factura *facturas, int numFacturas);
-void imprimirFactura();
+Factura *leerFactura();
+void escribirFactura(Factura *facturas);
+void imprimirFactura(Factura *facturas);
 
 #endif // FACTURA_H_INCLUDED

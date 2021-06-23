@@ -86,7 +86,7 @@ void Cesta::anadirProducto(Producto* p,int c)
 
 }
 
-void Cesta::imprimir()
+float Cesta::imprimir()
 {
 
     float total = 0.0;
@@ -123,4 +123,6 @@ void Cesta::imprimir()
 	int o;
 	cout << "Introduce un numero para continuar..." << endl;
 	cin >> o;
+
+	return total;
 }

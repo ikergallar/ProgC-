@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1624456209 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
+1624461206 source:c:\users\iker\documents\github\progc-\skapaclothes\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -558,7 +558,7 @@
 1622386458 c:\users\ikerg\documents\github\progc-\skapaclothes\include\cesta.h
 	"Producto.h"
 
-1624445087 c:\users\iker\documents\github\progc-\skapaclothes\include\cesta.h
+1624461148 c:\users\iker\documents\github\progc-\skapaclothes\include\cesta.h
 	"Producto.h"
 
 1624297822 c:\users\iker\documents\github\progc-\skapaclothes\include\carrito.h
@@ -569,7 +569,7 @@
 	<stdlib.h>
 	"Carrito.h"
 
-1624445064 source:c:\users\iker\documents\github\progc-\skapaclothes\src\cesta.cpp
+1624461148 source:c:\users\iker\documents\github\progc-\skapaclothes\src\cesta.cpp
 	"Cesta.h"
 	<iostream>
 	<string.h>
@@ -854,7 +854,7 @@
 1624028784 c:\users\mikel\onedrive\documentos\github\progc-\skapaclothes\include\zapatillas.h
 	"Producto.h"
 
-1624456426 source:c:\users\iker\documents\github\progc-\skapaclothes\src\enc\factura.c
+1624460467 source:c:\users\iker\documents\github\progc-\skapaclothes\src\enc\factura.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -862,7 +862,7 @@
 	"EnC/Config.h"
 	"EnC/FuncionFicheros.h"
 
-1624454997 c:\users\iker\documents\github\progc-\skapaclothes\include\enc\factura.h
+1624460345 c:\users\iker\documents\github\progc-\skapaclothes\include\enc\factura.h
 
 1624399947 c:\users\iker\documents\github\progc-\skapaclothes\include\enc\config.h
 

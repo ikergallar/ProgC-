@@ -5,14 +5,15 @@
 #include "EnC/Config.h"
 #include "EnC/FuncionFicheros.h"
 
-Factura *leerFactura(int *numFacturas)
+Factura *leerFactura()
 {
+    int numFacturas = 100;
 	FILE *fichero;
     fichero = fopen(FICHERO_FACTURA, "r");
     char c = fgetc(fichero);
     if (c == EOF)
     {
-        *numFacturas = 0;
+        numFacturas = 0;
     }else
     {
         ungetc(c, fichero);
@@ -24,16 +25,16 @@ Factura *leerFactura(int *numFacturas)
     sscanf(str, "%i", numFacturas);
     clearIfNeeded(str, MAX_LINE_FACTURAS);
 
-    Factura *facturas = malloc(*numFacturas * sizeof(Factura));
+    Factura *facturas = malloc(numFacturas * sizeof(Factura));
     int contador = 0;
     while (fgets(str, MAX_LINE_FACTURAS, fichero))
     {
         Factura f;
         char *ptr = strtok(str, "#");
-        sscanf(ptr, "%d", &f.idProducto);
+        sscanf(ptr, "%s", &f.nomProducto);
 
         ptr = strtok(NULL, "#");
-        sscanf(ptr, "%d", &f.idUsuario);
+        sscanf(ptr, "%f", &f.precio);
 
         facturas[contador] = f;
         contador++;
@@ -41,32 +42,36 @@ Factura *leerFactura(int *numFacturas)
     }
 
     Factura *facturasDeProducto = realloc(facturas, ((contador) * sizeof(Factura)));
-    *numFacturas = contador;
+    numFacturas = contador;
 
     fclose(fichero);
     return facturasDeProducto;
 }
 
-void escribirFactura(Factura *facturas, int numFacturas)
+void escribirFactura(Factura *facturas)
 {
 	FILE *fichero;
 	fichero = fopen(FICHERO_FACTURA, "w");
-	fprintf(fichero, "SU FACTURA\n");
 
-	for (int i=0; i<numFacturas; i++)
+	for (int i=0; i<facturas->numFacturas; i++)
     {
-		fprintf(fichero, "Resumen de compra--->Id del Producto: %d, Id del Usuario: %d\n", facturas[i].idProducto, facturas[i].idUsuario);
+		fprintf(fichero, "#%s#%f\n", facturas[i].nomProducto,facturas[i].precio);
 		fflush(stdout);
 
 	}
-	fprintf(fichero, "PRECIO TOTAL DEL PEDIDO: %f",facturas->precio);
-
+	fprintf(fichero, "#%f\n",facturas->precioTotal);
 	fclose(fichero);
 }
 
-void imprimirFactura(Factura *factura)
+void imprimirFactura(Factura *facturas)
 {
-    printf("Id del producto comprado: %d", factura->idProducto);
+    for (int i=0; i<facturas->numFacturas; i++)
+    {
+		printf("Producto:%s, Precio:%f\n", facturas[i].nomProducto,facturas[i].precio);
+
+	}
+    printf("------------------\n");
+	printf("PRECIO TOTAL:%f\n",facturas->precioTotal);
 }
 
 

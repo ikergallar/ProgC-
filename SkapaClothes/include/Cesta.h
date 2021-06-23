@@ -24,7 +24,7 @@ public:
     void setCant(int c);
 
     void anadirProducto(Producto* p, int cant);
-    void imprimir();
+    float imprimir();
 
 };
 #endif // CESTA_H_INCLUDED
