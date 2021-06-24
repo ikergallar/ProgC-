@@ -484,6 +484,7 @@ void menuVenta(BD *bd, Usuario* u)
 			break;
         case 5:
         {
+            cerrarApp(bd);
 		}
 			break;
 		default:
@@ -548,7 +549,7 @@ void menuAdmin(BD *bd)
 
         case 4:
         {
-            exit(0);
+            cerrarApp(bd);
         }
 		default:
 			cout << "Opcion seleccionada incorrecta" << endl;
@@ -619,6 +620,7 @@ void cerrarApp(BD *bd)
 		case 1:
         {
 			cout << "La aplicación ha sido cerrada correctamente" << endl;
+            bd->cerrarBD();
 			exit(0);
 		}
 		break;
@@ -720,6 +722,7 @@ void terminarPedido(BD *bd,Cesta *cesta,Usuario* u,Carrito *carrito)
             }
 
 			cout << "Gracias por su compra, lo esperamos de vuelta :)" << endl;
+			bd->cerrarBD();
 			break;
 		case 2:
 			cout <<"Su pedido se ha cancelado" <<endl;
