@@ -6,10 +6,10 @@
 typedef struct{
 	int idProducto;
 	int idUsuario;
-	float precio;
+	float *precio;
     float precioTotal;
 	int numFacturas;
-	char *nomProducto;
+	char **nomProducto;
 }Factura;
 
 Factura *leerFactura();

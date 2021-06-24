@@ -55,7 +55,7 @@ void escribirFactura(Factura *facturas)
 
 	for (int i=0; i<facturas->numFacturas; i++)
     {
-		fprintf(fichero, "#%s#%f\n", facturas[i].nomProducto,facturas[i].precio);
+		fprintf(fichero, "#%s#%f\n", facturas->nomProducto[i],facturas->precio[i]);
 		fflush(stdout);
 
 	}
@@ -67,7 +67,7 @@ void imprimirFactura(Factura *facturas)
 {
     for (int i=0; i<facturas->numFacturas; i++)
     {
-		printf("Producto:%s, Precio:%f\n", facturas[i].nomProducto,facturas[i].precio);
+		printf("Producto:%s, Precio:%f\n", facturas->nomProducto[i],facturas->precio[i]);
 
 	}
     printf("------------------\n");

@@ -697,15 +697,19 @@ void terminarPedido(BD *bd,Cesta *cesta,Usuario* u,Carrito *carrito)
 		case 1:
 		    Factura f;
 		    f.numFacturas = 0;
-
+            f.nomProducto = new char*[cesta->getNumProductos()];
+            f.precio = new float[cesta->getNumProductos()];
 			for(int i = 0; i < cesta->getNumProductos(); i++)
             {
-                f.nomProducto = cesta->getProducto()[i]->getNombre();
-                f.precio = cesta->getProducto()[i]->getPrecio();
+                //f.nomProducto = cesta->getProducto()[i]->getNombre();
+                f.nomProducto[i] = new char[strlen(cesta->getProducto()[i]->getNombre())+1];
+                strcpy(f.nomProducto[i],cesta->getProducto()[i]->getNombre());
+                f.precio[i] = cesta->getProducto()[i]->getPrecio();
+                f.precioTotal = f.precioTotal + cesta->getProducto()[i]->getPrecio();
                 f.numFacturas++;
             }
 
-            f.precioTotal = precioTotal;
+
             escribirFactura(&f);
 
 			cout <<"Su pedido se ha realizado correctamente" <<endl << endl;
@@ -718,7 +722,7 @@ void terminarPedido(BD *bd,Cesta *cesta,Usuario* u,Carrito *carrito)
 
 			if(ans == 1)
             {
-                imprimirFactura(leerFactura());
+                imprimirFactura(&f);
             }
 
 			cout << "Gracias por su compra, lo esperamos de vuelta :)" << endl;
