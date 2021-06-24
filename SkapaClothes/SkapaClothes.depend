@@ -93,7 +93,7 @@
 	<iostream>
 	<string.h>
 
-1624536882 source:c:\users\gaizka\documents\github\progc-\skapaclothes\main.cpp
+1624555250 source:c:\users\gaizka\documents\github\progc-\skapaclothes\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -905,7 +905,7 @@
 1624536882 c:\users\gaizka\documents\github\progc-\skapaclothes\include\zapatillas.h
 	"Producto.h"
 
-1624545358 c:\users\gaizka\documents\github\progc-\skapaclothes\include\enc\factura.h
+1624558339 c:\users\gaizka\documents\github\progc-\skapaclothes\include\enc\factura.h
 
 1624536882 c:\users\gaizka\documents\github\progc-\skapaclothes\include\enc\config.h
 
@@ -914,13 +914,12 @@
 	"string.h"
 	<iostream>
 
-1624545502 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\enc\factura.c
+1624558504 source:c:\users\gaizka\documents\github\progc-\skapaclothes\src\enc\factura.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"EnC/Factura.h"
 	"EnC/Config.h"
-	"EnC/FuncionFicheros.h"
 
 1624536882 c:\users\gaizka\documents\github\progc-\skapaclothes\include\enc\funcionficheros.h
 	<stdio.h>

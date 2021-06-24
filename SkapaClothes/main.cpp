@@ -269,7 +269,7 @@ void menuVenta(BD *bd, Usuario* u)
 	    cout << "Elija una opcion e introduzca el numero que se encuentre a la izquierda"<< endl;
 	    cout << "1. Poner un producto a la venta" << endl;
 	    cout << "2. Ver mis productos" << endl;
-        cout << "3. Editar uno de mis productos productos" << endl;
+        cout << "3. Editar uno de mis productos" << endl;
         cout << "4. Eliminar un producto de la venta" << endl;
 	    cout << "5. Salir de la aplicacion" << endl;
 		cin >> eleccion;

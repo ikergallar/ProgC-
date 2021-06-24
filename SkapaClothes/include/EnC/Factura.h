@@ -4,15 +4,12 @@
 #define MAX_LINE_FACTURAS 100
 
 typedef struct{
-	int idProducto;
-	int idUsuario;
 	float *precio;
     float precioTotal;
 	int numFacturas;
 	char **nomProducto;
 }Factura;
 
-Factura *leerFactura();
 void escribirFactura(Factura *facturas);
 void imprimirFactura(Factura *facturas);
 
